@@ -90,12 +90,17 @@ However, as this project is relatively short we will probably have to limit our 
 
 To begin with we will use a very simple model of a completely homogeneous material in wich plane EM-waves propogate. Then the link between temporal frequency and wavelengths will be the speed of propogation, a simple conversion facctor.
 We will then write and prove a version of the Heisenberg inequality which can be applied to this specific case and plug in the actual numbers, how big bandwidth does one need to focus for one centimeter? 
-Pherhaps all that is needed is a bandwidth of a few kHz and then the NB approach is perfectly justifiable. More likely however our results will show that a good focus would require a large band of frequencies, pherhaps even larger than the microwave spectra. 
-\todo[inline]{Why doesn't Heisenberg work}
+Pherhaps all that is needed is a bandwidth of a few kHz and the NB approach is perfectly justifiable. Or our results will show that a good focus would require a large band of frequencies, pherhaps even larger than the microwave spectra. 
+From early estimates the latter is what we expect which however would contradict results from earlier numerical studies. There are several possible explanations which in this case we will investigate.
+
+1. The field could have a periodic pattern and therefore not be highly localized. However if the wavelength of the pattern is greater than that of the head we could still achieve local hotspots only in the tumour.
+
+2. The transition from one material to another plays a significal role for the focus of the EM-field and the homogeneous model is too simple. To investigate this the model will be extended to include material transitions, at first step by introducing a sphere of a different material in our previous homogeneous material. This is described more in detail in the following section.
+\todo[inline]{Why doesn't Heisenberg work, klart?}
 
 
-\todo[inline]{Study 600-610MHz vs 0-10MHz} 
-
+\todo[inline]{Study  vs } 
+Another interesting point is that from what we understand so far the variable in Heisenberg's inequality is the bandwidth of the wavelengths and not their actual value. Thus EM-waves with wavelengths of 9-10 meters would be able to produce focus as exact as those with wavelengths of 0-1 meters.
 
 
 
@@ -104,7 +109,7 @@ Pherhaps all that is needed is a bandwidth of a few kHz and then the NB approach
 \subsubsection{A simple theoretical model} %focusing effect of head geometry}
 Here we will build a simple model to study the microwave-head interaction theoretically. Our hopes are that this model can give some theoretical insight in how some specific (NB) frequencies manages to create a localized focus inside the head. 
 
-The model concists of a plane wave incident on a homogeneous sphere, with $\epsilon>1$ and $\sigma\neq0$. With this model we hope to find the behaviour of the wave inside the sphere. Of special interest here is the relation beween the wavelengths used and the radius of the sphere. Here these two will be of comparable length scales.
+The model concists of a plane wave incident on a homogeneous sphere, with $\epsilon>1$ and $\sigma\neq0$. With this model we hope to find the behaviour of the wave inside the sphere. Of special interest here is the relation beween the wavelengths used and the radius of the sphere. Here these two will be of comparable length scales. \todo[]{De behöver inte vara jämförbara, behandlingen görs med microvågor, 400-800MHz som har en viss våglängd och utförs på huvud/näsa med en viss längdskala}
 
 This is motivated by an idea that a head or a sphere, which are both convex, might have some lensing effect. The plane wave together with a sphere is the most simple non-trivial model conceivable, and might be analytically solvable. To the very least we should be able to find some integral formula which then can be calculated numerically.
 
