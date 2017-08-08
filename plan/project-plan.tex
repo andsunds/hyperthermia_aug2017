@@ -18,7 +18,7 @@ english, swedish %% Make sure to put the main language last!
 \usepackage[%disable  %%this will hide all notes
 ]{todonotes} 
 
-%% Cange the margin in the documents
+%% Change the margin in the documents
 \usepackage[
 %            top    = 3cm,              %% top margin
 %            bottom = 3cm,              %% bottom margin
@@ -36,9 +36,6 @@ english, swedish %% Make sure to put the main language last!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%% If you want to use an external file for the title page
-%\input{titlepages.tex}
-
 
 %%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
 %\begin{titlepage}
@@ -48,18 +45,6 @@ english, swedish %% Make sure to put the main language last!
 
 \maketitle
 
-%% Page numbering:
-\pagenumbering{roman} %% roman pagenumbering
-%\thispagestyle{empty} \pagestyle{empty} %% no page numbers 
-
-%% The abstract of the document
-% \begin{abstract} 
-% \end{abstract}
-% \newpage
-%\tableofcontents
-%\end{titlepage}
-
-
 %%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
 %% If you want a list of all todos
 %\todolist
@@ -67,40 +52,86 @@ english, swedish %% Make sure to put the main language last!
 
 
 \section{Introduction}
-\todo[inline]{General intro to hyopthermia and freq dep.}
+%\todo[inline]{General intro to hyopthermia and freq dep.}
 
-This project will study the study the efficacy of
-ultra-wideband (UWB) treatmants in comparison to narrowband (NB).
-Previously, such comparisons have been conducted using numerical or
-experimantal methods. In this project we intend to
-investigate this subject from a more theoretical and mathematical
-stand point. 
+This project will study the efficacy of ultra-wideband (UWB) treatmants in comparison to narrowband (NB). Previous studies have moslty been conducted using numerical or experimantal methods. In this project however, we intend to investigate this subject from a more theoretical and mathematical stand point. 
 
-Where as prior studies have found indications that an UWB approach
-does not significantly improve performance. This project aims to find 
-theoretical grounds for this claim. 
+Prior studies have found indications that an UWB approach does not significantly improve performance over NB. This project aims to find some theoretical grounds for this hypothesis. Of special interest is the apparent problem of focusing the NB radiation, arising from the Fourier version of the Heissenberg uncertainty principle. The goal of this project will be to explain why the Heissenberg inequality breaks down in a scenario like hyperthermia treatment. 
 
 
-\section{Method}
+\subsection{Theoretical background for Frequency decomposition}
+Any function in space can be divided into a linear combination of plane waves with different wave-vectors.%wavelengths and directions of propagations. 
+One can speak of different representations in the space domain and the frequency domain respectively, with the Fourier transform as the link between them.
+
+Heisenberg's inequality states that if a function is highly localised in one domain it must be very spread out in the other. In the case of hyperthermia we wish to concentrate the radiation in space, and thus a wide band of frequencies should therefore be prefered to a narrow one. This however seems to be contradicted in previous studies. 
+To understand why this can be one must ''put the words into numbers'' and clarify what Heisenberg's inequality actually says. 
+
+First of all, frequencies and wavelengths although often mixed, are not the same thing. Frequencies speak of oscillations in time while wavelengths of oscillations in space. 
+In non-dispersive (frequency-indepenent) materials however, the temporal frequency is related to the wavelength via the simple dispersion relation $\lambda=vf$, where $\lambda$ is the wavelength, $v$ is the speed of propagation and $f$ is the frequency. 
+
+%The frequency of the signal is not the same thing as the wavelength of the EM-waves produced. Frequencies speak of oscillations in time while wavelengths of oscillations in space. 
+
+%To begin with we will make the simplification that the antennas transmits plane EM-waves and just look at the propagation in a homogenous material. In this case the link is the speed of light and will appear as a simple conversation factor. However there might still be difficulties due to traveling wave.
 
 
-\begin{enumerate}
-\item Heisenberg: What is it exactly and how does it affect UWB vs NB?
-- Implementation with EM-waves.
-\item Investigate focusing effect of head geometry. -Explanation to
-why some specific frequency is the best.
-\item Solve details regarding frequency components and interference
-(Fourier) and the step to amplitudes. 
-\end{enumerate}
-\todo{clarify}
 
-\section{Time allocation}
-Finish this!
 
-Our plan is to finish points 1 and 2 on the 16th. Point 3 is more
-vague, and no final time plan can be set up. 
 
-\section{Continuation}
+\section{Method and limitations}
+As there have been litte to no previous theoretical studies on the subject of the nature of focusing microwaves inside tissue, this study will have to start with a fairly simple theoretical model -- concisting of simple homogeneuos regions with only one or two transitions.  
+%From this we hope that future work will have firmer theoretical grounds when studying more complex systems;
+
+Ideally the results from this study will be aplicable to a more realistic model of the head and neck region.
+However, as this project is relatively short we will probably have to limit our analysis to the simple models presented below.  
+
+\subsection{\textit{Part 1}}
+\todo[inline]{Part 1 is simple models, explain how}
+\subsubsection{Understanding the Heisenberg inequality}
+
+To begin with we will use a very simple model of a completely homogeneous material in wich plane EM-waves propogate. Then the link between temporal frequency and wavelengths will be the speed of propogation, a simple conversion facctor.
+We will then write and prove a version of the Heisenberg inequality which can be applied to this specific case and plug in the actual numbers, how big bandwidth does one need to focus for one centimeter? 
+Pherhaps all that is needed is a bandwidth of a few kHz and then the NB approach is perfectly justifiable. More likely however our results will show that a good focus would require a large band of frequencies, pherhaps even larger than the microwave spectra. 
+\todo[inline]{Why doesn't Heisenberg work}
+
+
+\todo[inline]{Study 600-610MHz vs 0-10MHz} 
+
+
+
+
+
+
+\subsubsection{A simple theoretical model} %focusing effect of head geometry}
+Here we will build a simple model to study the microwave-head interaction theoretically. Our hopes are that this model can give some theoretical insight in how some specific (NB) frequencies manages to create a localized focus inside the head. 
+
+The model concists of a plane wave incident on a homogeneous sphere, with $\epsilon>1$ and $\sigma\neq0$. With this model we hope to find the behaviour of the wave inside the sphere. Of special interest here is the relation beween the wavelengths used and the radius of the sphere. Here these two will be of comparable length scales.
+
+This is motivated by an idea that a head or a sphere, which are both convex, might have some lensing effect. The plane wave together with a sphere is the most simple non-trivial model conceivable, and might be analytically solvable. To the very least we should be able to find some integral formula which then can be calculated numerically.
+
+Once \emph{one} plane wave has been solved, it should not be very hard to find the behavior from a superposition of plane waves incident from different directions -- but with the same temporal frequency. Hopefully this can give some focusing effect. 
+
+If all of this works, then the same method might be applicable to more complex geometries. However, that will probably involve some integral formula over the geometry.
+
+
+
+\subsection{\textit{Part 2}}
+\todo[inline]{Explain part 2 - Amplitudes not just E-field, complex material transitions}
+
+
+
+
+
+\section{Time line}
+\todo[inline]{Tomorrow: finalize this document}
+
+
+16th: have the theoretical work for "part 1" finished; decide whether or not to continue with \todo{Clarify what the two "parts" are.}"part 2".
+
+17--21st: Hopefully we can have part 1 typed up during these days.
+
+
+%\section{Further development}
+
 
 
 
@@ -112,52 +143,13 @@ vague, and no final time plan can be set up.
 %%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\newpage
 %% This bibliography ueses BibTeX
-\bibliographystyle{ieeetr}
-\bibliography{references}%requires a file named 'references.bib'
+%\bibliographystyle{ieeetr}
+%\bibliography{references}%requires a file named 'references.bib'
 %% Citations are as usual: \cite{example_article}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage %% on a new page 
-\appendix  %% This will change the page numbering to A1, A2, A3, ...;
-           %% and also change the sections to A, A.1, ...; B, B.1, ...
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
-%%%%  Some (useful) templates
-
-
-%% På svenska ska citattecknet vara samma i både början och slut.
-%% Använd två apostrofer: ''.
-
-
-%% Including PDF-documents
-\includepdf[pages={1-}]{filnamn.pdf} % NO blank spaces in the file name
-
-%% Figures (pdf, png, jpg, ...)
-\begin{figure}\centering
-\centerline{ % centers figures larges than 1\textwidth
-\includegraphics[width=.8\textwidth]{file_name.pdf}
-}
-\caption{}
-\label{fig:}
-\end{figure}
-
-%% Figures from xfig's "Combined PDF/LaTeX"
-\begin{figure}\centering
-\resizebox{.8\textwidth}{!}{\input{file_name.pdf_t}}
-\caption{}
-\label{fig:}
-\end{figure}
-
-
-%% If you want to add something to the ToC
-%% (Without having an actual header in the text.)
-\stepcounter{section} %For example a 'section'
-\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
 
