@@ -10,7 +10,7 @@
 *.log
 *.out
 *.toc
-#<namn>.pdf
+project-plan.pdf
 
 *-eps-converted-to.pdf
 
