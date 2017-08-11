@@ -31,15 +31,19 @@ english, swedish %% Make sure to put the main language last!
 
 
 
+\newcommand{\std}{\ensuremath\text{std}}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 %%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
 %\begin{titlepage}
-\title{Project plan -- \texttt{project lambda}}
+\title{Project plan\\
+      {\Large \texttt{Project lambda}}}
 \author{Nilkas Renström \and Andréas Sundström}
 \date{\today}
 
@@ -54,20 +58,29 @@ english, swedish %% Make sure to put the main language last!
 \section{Introduction}
 %\todo[inline]{General intro to hyopthermia and freq dep.}
 
-This project will study the efficacy of ultra-wideband (UWB) treatmants in comparison to narrowband (NB). Previous studies have moslty been conducted using numerical or experimantal methods. In this project however, we intend to investigate this subject from a more theoretical and mathematical stand point. 
+This project will study the efficacy of ultra-wideband (UWB) hyperthermia treatmants in comparison to narrowband (NB). Previous studies have moslty been conducted using numerical or experimantal methods. In this project however, we intend to investigate this subject from a more theoretical and mathematical stand point. 
 
-Prior studies have found indications that an UWB approach does not significantly improve performance over NB. This project aims to find some theoretical grounds for this hypothesis. Of special interest is the apparent problem of focusing the NB radiation, arising from the Fourier version of the Heissenberg uncertainty principle. The goal of this project will be to explain why the Heissenberg inequality breaks down in a scenario like hyperthermia treatment. 
+Prior studies have found indications that an UWB approach does not significantly improve performance over NB. This project aims to find some theoretical grounds for this hypothesis. Of special interest is the apparent problem of focusing the NB radiation arising from the Fourier version of the Heissenberg uncertainty principle. The goal of this project will be to explain why the Heissenberg inequality breaks down in a scenario like hyperthermia treatment, and to offer some theoretical understanding as to how some NB frequencies still can be focused.
 
 
 \subsection{Theoretical background for Frequency decomposition}
-Any function in space can be divided into a linear combination of plane waves with different wave-vectors.%wavelengths and directions of propagations. 
-One can speak of different representations in the space domain and the frequency domain respectively, with the Fourier transform as the link between them.
+Any function in space can be divided into a linear combination of plane waves 
+\begin{equation*}
+\widetilde{\vb*E} = \widetilde{\vb*{E}}_0\,\ee^{\ii( \vb*k\vdot\vb*x - \omega t)}
+\end{equation*}
+with different wave-vectors $\vb*k$. %wavelengths and directions of propagations. 
+One can speak of different representations in the space ($\vb*r$) domain and the spacial frequency ($\vb*k$) domain respectively, with the Fourier transform as the link between them.
 
-Heisenberg's inequality states that if a function is highly localised in one domain it must be very spread out in the other. In the case of hyperthermia we wish to concentrate the radiation in space, and thus a wide band of frequencies should therefore be prefered to a narrow one. This however seems to be contradicted in previous studies. 
-To understand why this can be one must ''put the words into numbers'' and clarify what Heisenberg's inequality actually says. 
+Heisenberg's inequality states that if a function is highly localised in one domain it must be very spread out in the other.
+%\begin{equation*}
+%\std_{\vb*x}\,\std_{\vb*k} \ge \frac{1}{4}.
+%\end{equation*}
+In the case of hyperthermia we wish to concentrate the radiation in space, and thus a wide band of frequencies should be prefered over a narrow one. This however seems to be contradicted in previous studies. 
+To understand why this can be one must ``put the words into numbers'' and clarify what Heisenberg's inequality actually says and how it can be applied to this specific case. 
 
-First of all, frequencies and wavelengths although often mixed, are not the same thing. Frequencies speak of oscillations in time while wavelengths of oscillations in space. 
-In non-dispersive (frequency-indepenent) materials however, the temporal frequency is related to the wavelength via the simple dispersion relation $\lambda=vf$, where $\lambda$ is the wavelength, $v$ is the speed of propagation and $f$ is the frequency. 
+One litte, but important, note is to remember the difference between temporal and spatial frequencies. Or in other words between frequency and wavelength. Although often used interchangeably, they are not the same thing. 
+In non-dispersive (frequency-indepenent) materials, the temporal frequency is related to the wavelength via the simple dispersion relation $\lambda=vf$, where $\lambda$ is the wavelength, $v$ is the speed of propagation and $f$ is the frequency. Although intuitive, the concept of frequency and wavelength is not very useful in theoretical studies; instead angular\footnotemark{} frequency $\omega=2\pi f$ and wavenumber $k=\abs{\vb*k}=2\pi/\lambda$ are used, and the dispersion relation becomes $vk=\omega$.
+\footnotetext{In theoretical works ``angular'' is often omitted, and $\omega$ is then just called ``frequency''.}
 
 %The frequency of the signal is not the same thing as the wavelength of the EM-waves produced. Frequencies speak of oscillations in time while wavelengths of oscillations in space. 
 
@@ -78,40 +91,40 @@ In non-dispersive (frequency-indepenent) materials however, the temporal frequen
 
 
 \section{Method and limitations}
-As there have been litte to no previous theoretical studies on the subject of the nature of focusing microwaves inside tissue, this study will have to start with a fairly simple theoretical model -- concisting of simple homogeneuos regions with only one or two transitions.  
-%From this we hope that future work will have firmer theoretical grounds when studying more complex systems;
+As there have been litte to no previous theoretical studies on the subject of the nature of focusing microwaves inside tissue, this study will have to start with a fairly simple theoretical model -- concisting of simple homogeneuos regions with only one or two transitions. This will be the first part of the project.
 
-Ideally the results from this study will be aplicable to a more realistic model of the head and neck region.
-However, as this project is relatively short we will probably have to limit our analysis to the simple models presented below.  
+If time allows it we will continue with a second part of the project where we further develop the model to contain more material transitions to better resemble the actual human head. We will also look into what happens when one goes from the E-field to the absorbed power, SAR, which is a better indicator for rsising temperatures.
 
-\subsection{\textit{Part 1}}
-\todo[inline]{Part 1 is simple models, explain how}
+\subsection{Part 1}
+In this part we aim to find an explanation as to why the Heissenberg inequality doesn't hold in scenarios like hyperthermia treatment, and to present a simple theoretical model for microwave radiation inside the head.
+
+
 \subsubsection{Understanding the Heisenberg inequality}
+To begin with we will use a very simple model of a completely homogeneous material in wich plane E-waves propogate. The link between temporal frequency and wavelengths will then be the speed of propogation, a simple conversion facctor.
+We will then write and prove a version of the Heisenberg inequality which can be applied to this specific case and plug in the actual numbers -- how large bandwidth does one need to focus the radiation to e.g. one centimeter? 
+Pherhaps all that is needed is a bandwidth of a few kHz and the NB approach is perfectly justifiable. Or our results will show that a good focus requires a wide band of frequencies, pherhaps even larger than the frequency spectra used today. 
 
-To begin with we will use a very simple model of a completely homogeneous material in wich plane EM-waves propogate. Then the link between temporal frequency and wavelengths will be the speed of propogation, a simple conversion facctor.
-We will then write and prove a version of the Heisenberg inequality which can be applied to this specific case and plug in the actual numbers, how big bandwidth does one need to focus for one centimeter? 
-Pherhaps all that is needed is a bandwidth of a few kHz and the NB approach is perfectly justifiable. Or our results will show that a good focus would require a large band of frequencies, pherhaps even larger than the microwave spectra. 
-From early estimates the latter is what we expect which however would contradict results from earlier numerical studies. There are several possible explanations which in this case we will investigate.
+From early estimates the latter is what we expect which would contradict the results from earlier numerical studies. There are some possible explanations to investigate:
+\begin{itemize}
+\item 
+The field could have a periodic pattern and therefore not be highly localized. However if the wavelength of the pattern is greater than that of the head we could still achieve local hotspots only in the tumour.
+\item
+If the model contains more than one material Heisenberg's inequality in its standard form does no longer hold. It is possible that the main requirements for some form of inequality still holds and by studying the details of the original proofs we will try to develop another form of the inequality which will hold.
+\end{itemize}
 
-1. The field could have a periodic pattern and therefore not be highly localized. However if the wavelength of the pattern is greater than that of the head we could still achieve local hotspots only in the tumour.
+%We will also look at what actually happens to the field when material transitions are present. At first by introducing a sphere of a different material in our previous homogeneous material and then studying the development of plane waves incident on this surface. This is described more in detail in the following section.
 
-2. The transition from one material to another plays a significal role for the focus of the EM-field and the homogeneous model is too simple. To investigate this the model will be extended to include material transitions, at first step by introducing a sphere of a different material in our previous homogeneous material. This is described more in detail in the following section.
-\todo[inline]{Why doesn't Heisenberg work, klart?}
-
-
-\todo[inline]{Study  vs } 
-Another interesting point is that from what we understand so far the variable in Heisenberg's inequality is the bandwidth of the wavelengths and not their actual value. Thus EM-waves with wavelengths of 9-10 meters would be able to produce focus as exact as those with wavelengths of 0-1 meters.
-
-
+Another interesting point is that the variable in Heisenberg's inequality is the bandwidth of the wavelengths and not their actual value. Thus EM-waves with wavelengths of 9--10\,m could be as focused as those with wavelengths of 0-1\,m which is highly unintuitive since the longer waves all have similar characteristics while the shorter waves ranges from very fine to coarse detail. Hopefully all these details will sort themselves out when we do the math, it could be a simple change of reference systems, but it is something to keep in mind.
 
 
 
 \subsubsection{A simple theoretical model} %focusing effect of head geometry}
-Here we will build a simple model to study the microwave-head interaction theoretically. Our hopes are that this model can give some theoretical insight in how some specific (NB) frequencies manages to create a localized focus inside the head. 
+Here we will build a simple model to study the microwave-head interaction theoretically. Our hopes are that this model can give some theoretical insight in how some specific frequencies manages to create a localized focus inside the head. 
 
-The model concists of a plane wave incident on a homogeneous sphere, with $\epsilon>1$ and $\sigma\neq0$. With this model we hope to find the behaviour of the wave inside the sphere. Of special interest here is the relation beween the wavelengths used and the radius of the sphere. Here these two will be of comparable length scales. \todo[]{De behöver inte vara jämförbara, behandlingen görs med microvågor, 400-800MHz som har en viss våglängd och utförs på huvud/näsa med en viss längdskala}
+The model consists of a plane wave incident on a homogeneous sphere, with $\epsilon>1$ and $\sigma\neq0$. With this model we hope to find the behaviour of the wave inside the sphere. Of special interest here is the relation beween the wavelengths used and the radius of the sphere. Here, the wavelengths and sphere will be of comparable length scales, as a consequence of the microwave frequencies used in hyperthermia treatmant. This is also something which is not treated in ususal "school book examples".
 
-This is motivated by an idea that a head or a sphere, which are both convex, might have some lensing effect. The plane wave together with a sphere is the most simple non-trivial model conceivable, and might be analytically solvable. To the very least we should be able to find some integral formula which then can be calculated numerically.
+
+This model is motivated by an idea that a head or a sphere, which are both convex, might have some lensing effect. The plane wave together with a sphere is the most simple non-trivial model conceivable, and might be analytically solvable. To the very least we should be able to find some integral formula which then can be calculated numerically.
 
 Once \emph{one} plane wave has been solved, it should not be very hard to find the behavior from a superposition of plane waves incident from different directions -- but with the same temporal frequency. Hopefully this can give some focusing effect. 
 
@@ -119,21 +132,45 @@ If all of this works, then the same method might be applicable to more complex g
 
 
 
-\subsection{\textit{Part 2}}
-\todo[inline]{Explain part 2 - Amplitudes not just E-field, complex material transitions}
+\subsection{Part 2}
+In the first part of the project we will look at some very simple models to get a grasp on the subject and be able to develop some analytical results. If we have time we would like to increase our model complexity to get a more realistic view. In this section, we outline some possible ways to continue on the work in part 1.
+
+
+\subsubsection{Continuations of the simple model}
+There are two main possible outcomes from the simple model: either it's successful and shows a focusing effect, or no significant focusing occurs. These two outcomes will dictate how to continue the work on this model. 
+
+If a focusing effect arises, we could start studying geometries which are more akin to an actual human head. This will probably have to rely more on numerical methods due to the higher complexity in such models. 
+
+If on the other hand no focusing effect is found from the simple model in part 1, then a more suitable development would be to try and continue the theoretical work with perhaps more complex incdent waves -- like a nearby point source, or several different incident waves.
+
+
+\subsubsection{SAR, not the E-field}
+In hyperthermia treatment the interesting parameter is the temperature increase in the tissues. Negliging heat transfers, the body's cooling functions and heat capacities, this can be captured by the Specific Absorbation Rate [W/kg], in short SAR. SAR is a measurement of how much energy is locally absorbed and can be derived from the EM-field in the following way:
+\begin{equation*}
+    \text{SAR}(\vb*{x}) =  \ev{\frac{\vb*{J}(\vb*{x}, t) \vdot \vb*{E}(\vb*{x}, t)}{\rho(\vb*{x})}}_t,
+\end{equation*}
+where $\rho(\vb*{x})$ is the density of the tissue, $\vb*{E}(\vb*{x},t)$ is the E-field at point $\vb*{x}$ and time $t$, $\vb*{J}(\vb*{x},t)$ is the current-density, and where $\ev{\cdot}_t$ denotes time-average. 
+With Ohm's law $\vb*J = \sigma \vb*E$, SAR is really only composed of the E-field amplitude squared with a weighting factor $\sigma(\vb*x)/\rho(\vb*x)$. This is the reason why we've previously studied the E-field, if the plain field behaves in one way the squared amplitude should behave in a similar way.
+
+However, due to the time-averaging it is not exactly the same. In the squared amplitude, which can be seen as a scalar product of the E-field with itself, there will appear mixed terms between different frequencies. When time-averaging these will cancel out and in the end one will be left with a sum of the squared amplitudes of each frequency. Since a squared amplitude is always positive this means that different frequencies can't negatively interfer and cancel each other out.
+
+If time allows we will investigate how this affects the focusing. 
+%Specifically how different frequency components can be studied in this manner. 
 
 
 
 
 
-\section{Time line}
-\todo[inline]{Tomorrow: finalize this document}
 
 
-16th: have the theoretical work for "part 1" finished; decide whether or not to continue with \todo{Clarify what the two "parts" are.}"part 2".
+\section{Timeline}
+This project started on the 8th of August 2017, and during the first two days we have written this project plan.
 
-17--21st: Hopefully we can have part 1 typed up during these days.
+As a time plan, we intend to have the theoretical work for "part 1" finished by the 16th of August. At that point we also have to decide whether or not to continue with part 2 or if part 1 needs more time.
 
+Niklas will be away 17--21st of August. During that time we will hopefully have part 1 typed up, as a relatively fine draft for the final report.
+
+After this period, we will have to be more vague with how to spend our time. However this project ends on Friday the 1st of September; by then we have to be finished with the final report.
 
 %\section{Further development}
 
