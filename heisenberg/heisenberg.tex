@@ -57,7 +57,7 @@ english, swedish %% Make sure to put the main language last!
 \section{Heisenberg's inequality and its signifance for Electromagnetic waves}
 The Fourier theory states that any function in space can be divided into a linear combination of plane waves 
 \begin{equation*}
- f(\vb*x) = \int_{\vb*k}d\vb*k \widetilde{f}(\vb*k) \ee^{\ii( \vb*k\vdot\vb*x - \omega t)}
+ f(\vb*x) = \int_{\vb*k}d\vb*k \tilde{f}(\vb*k) \ee^{\ii( \vb*k\vdot\vb*x - \omega t)}
 \end{equation*}
 with different wave-vectors $\vb*k$. %wavelengths and directions of propagations. 
 One can speak of different representations in the space ($\vb*x$) domain and the spacial frequency ($\vb*k$) domain respectively, with the Fourier transform as the link between them.
@@ -95,18 +95,18 @@ where the amplitude $\vb*A(\vb*k)$ now represents the amplitude of each wavecomp
 As a nice function in space one can of course also expand it with its Fourier Transform
 \begin{equation}
   \label{eq:f_exp}
-  \vb*E(\vb*x)=\frac{1}{\2\pi}\int_{\vb*k} \widetilde{\vb*E}(\vb*k) \ee^{\ii(\vb*k\cdot\vb*x - \omega t)}\id^3k.
+  \vb*E(\vb*x)=\frac{1}{\2\pi}\int_{\vb*k} \tilde{\vb*E}(\vb*k) \ee^{\ii(\vb*k\cdot\vb*x - \omega t)}\id^3k.
 \end{equation}
 
 
-Comparing the Fourier expansion (\ref{eq:f_exp}), an integral over the whole $\vb*k$-space, with the general solution (\ref{eq:gen_sol}), an integral only over the subspace where $\abs{\vb*k}=\frac{\omega}{v}$ one can identify an expression for the Fourier transform $\widetilde{\vb*E}(\vb*k)$ as
+Comparing the Fourier expansion (\ref{eq:f_exp}), an integral over the whole $\vb*k$-space, with the general solution (\ref{eq:gen_sol}), an integral only over the subspace where $\abs{\vb*k}=\frac{\omega}{v}$ one can identify an expression for the Fourier transform $\tilde{\vb*E}(\vb*k)$ as
 
 \begin{equation}
   \label{eq:f-transf}
-  \widetilde{\vb*E}(\vb*k)=2\pi\vb*A(\vb*k)\delta(\abs{\vb*k}-\frac{\omega}{v})=2\pi\vb*A(\theta,\phi)\delta(\abs{\vb*k}-\frac{\omega}{v}).
+  \tilde{\vb*E}(\vb*k)=2\pi\vb*A(\vb*k)\delta(\abs{\vb*k}-\frac{\omega}{v})=2\pi\vb*A(\theta,\phi)\delta(\abs{\vb*k}-\frac{\omega}{v}).
 \end{equation}
 
-Here a $\delta(\abs{\vb*k}-\frac{\omega}{v})$-term has been introduced to display the fact that the Fourier transform $\widetilde{\vb*E}(\vb*k)$ vanishes where $\abs{\vb*k} \neq\frac{\omega}{v}$ which is the consequence of the wave-equation \ref{eq:wave-free}.
+Here a $\delta(\abs{\vb*k}-\frac{\omega}{v})$-term has been introduced to display the fact that the Fourier transform $\tilde{\vb*E}(\vb*k)$ vanishes where $\abs{\vb*k} \neq\frac{\omega}{v}$ which is the consequence of the wave-equation \ref{eq:wave-free}.
 This is further emphasized in the last step where one sees the amplitude $\vb*A$ not as a function of the wavevector $\vb*k$ but as a function of the angles in the $\vb*k$-space $\theta$ and $\phi$.
 
 In short, for each frequency $\omega$ the Fourier transform of the EM-field is concentrated to a sphere shell with radius $\abs{\vb*k}=\frac{\omega}{v}$ and vanishes elsewhere.
@@ -114,7 +114,7 @@ In short, for each frequency $\omega$ the Fourier transform of the EM-field is c
 \subsection{Heisenberg's inequality}
 The common version of Heisenberg's uncertainty principle used in quantum mechanics states that the product of the variance of two observables must be greater than the expected value of their commutator. With the correct interpretations this can be reduced to the following form about vector fields and their Fourier transform, 
 \begin{equation}
-\Delta_{\vb*a}f \Delta_{\vb*\alpha} \widetilde{f} \geq \frac{9}{4}, \quad \forall \vb*a, \vb*\alpha, \forall f \in \Lsq[\infty].
+\Delta_{\vb*a}f \Delta_{\vb*\alpha} \tilde{f} \geq \frac{9}{4}, \quad \forall \vb*a, \vb*\alpha, \forall f \in \Lsq[\infty].
 \end{equation}
 
 $\Delta_af$ is a measure of how spread out $\f$ is around a point $\vb*a$;
@@ -128,10 +128,10 @@ It achieves its minimum when $\vb*a$ is the center of mass of $f$ and is then di
 This implies that the EM-field can only be as localized as the inverse of the spread for its Fourier transform
 \begin{equation}
   \label{eq:ineq_final}
-  \Delta_{\vb*a}\vb*E\geq \frac{9}{4} \frac{1}{\mathrm{Min}_\alpha\Delta_{\vb*\alpha}\widetilde{\vb*E}}, \quad \forall \vb*a.
+  \Delta_{\vb*a}\vb*E\geq \frac{9}{4} \frac{1}{\mathrm{Min}_\alpha\Delta_{\vb*\alpha}\tilde{\vb*E}}, \quad \forall \vb*a.
 \end{equation}
 Since the fourier transform of the EM-field is concentrated on a sphere shell we achieve the minimum spread for $\alpha=0$ and using equations \ref{eq:spread_def} one gets
-$\mathrm{Min}_\alpha\Delta_{\vb*\alpha}\widetilde{\vb*E}=\frac{\omega^2}{v^2}$ and \ref{eq:ineq_final} becomes
+$\mathrm{Min}_\alpha\Delta_{\vb*\alpha}\tilde{\vb*E}=\frac{\omega^2}{v^2}$ and \ref{eq:ineq_final} becomes
 \begin{equation}
  \Delta_{\vb*a}\vb*E\geq \frac{9v^2}{4\omega^2}=\frac{9\lambda^2}{16\pi^2}=\frac{9}{16\pi^2\epsilon\mu\nu^2}.
  \end{equation}
@@ -151,17 +151,37 @@ In what follows we will show the broad strokes for developing the theory from wh
 A square-integrable function $f$ of $D$ variables is said to be $\Omega$-limited if it can be represented as a Fourier integral over the bounded region $\Omega$,
 
 \begin{equation}
-  f(\id*x)=\qty(\frac{1}{2\pi})^D\int_\Omega \widetilde{f}(\id*k)\ee^{\ii(\id*k \cdot \id*x)} \id^Dk,
+  f(\vb*x)=\qty(\frac{1}{2\pi})^D\int_\Omega \tilde{f}(\vb*k)\ee^{\ii(\vb*k \cdot \vb*x)} \id^Dk,
 \end{equation}
 that is, it only contains frequencies in the area $\Omega$.
 We define the energy of a function to be
 \begin{equation*}
-A=\int_{R^D}\abs{f(\id*x)}^2\id^3x.
+A=\int_{R^D}\abs{f(\vb*x)}^2\id^3x.
 \end{equation*}
 By Parseval's theorem we get that
 \begin{equation*}
-
-  \end{equation*}
+A=\int_{R^D}\abs{f(\vb*x)}^2\id^3x=\qty(\frac{1}{2\pi})^D \int_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk.
+\end{equation*}
+In a bounded region $S$ of the space $R^D$ one gets the total energy
+\begin{equation*}
+A_S=\int_S\abs{f(\vb*x)}^2\id^Dx=\int_S\id^Dx \qty(\frac{1}{2\pi})^{2D}\int_\Omega \tilde{f}(\vb*k)\ee^{\ii\vb*k\cdot \vb*x}\id^Dk \int_\Omega \tilde{f}^*(\vb*\kappa)\ee^{-\ii\vb*\kappa\cdot \vb*x}\id^D\kappa=\qty (\frac{1}{2\pi})^D \int_\Omega\id^3k\int_\Omega\tilde{f}(\vb*k)\tilde{f}^*(\vb*\kappa)K_s(\vb*k-\vb*\kappa)\id^D\kappa,
+\end{equation*}
+with the kernel
+\begin{equation*}
+K_s(\vb*k-\vb*\kappa)=\frac{1}{2\pi}^D\int_S\ee^^{\ii\vb*x \cdot(\vb*k-\vb*\kappa)}.
+\end{equation*}
+With this kernel one can define an integraloperator $I_{\Omega S}$ such that;
+\begin{equation}
+\qty[I_{\Omega S}\phi](\vb*k)=\int_\Omega K_S(\vb*k-\vb*\kappa)\phi(\vb*\kappa)\id^D\kappa.
+  \end{equation}
+The fraction of energy that an $\Omega$-limited function $f$ can have in a region $S$ can therefore be described by
+\begin{equation}
+\frac{A_s}{A}=\frac{\int_\Omega\tilde{f}(\vb*k)\qty[I\tilde{f}^*](\vb*k)\id^Dk}{\int_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk}.
+\end{equation}
+The maximum of this fraction can be shown to be the largest eigenvalue to the integral equation
+\begin{equation}
+\qty[I\psi](\vb*k)=\lambda \psi(\vb*k).
+  \end{equation}
 
 
 
