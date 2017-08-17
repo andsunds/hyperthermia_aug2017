@@ -88,14 +88,14 @@ where the speed of propagation $v=\frac{1}{\sqrt{\mu \epsilon}}$ has been inrodu
 a plane wave were the wavevector $\vb*k$ is any vector such that $\abs{\vb*k}^2=$. Again, since Maxwell's equations are linear, any sum of such solutions is also a solution and the general solution can be written as
 \begin{equation}
   \label{eq:gen_sol}
-  \vb*E(\vb*x)=\int_{\abs{\vb*k}=\frac{\omega}{v}}\vb*A(\vb*k)\ee^{i\vb*k\cdot\vb*x}\id^3k,
+  \vb*E(\vb*x)=\int_{\abs{\vb*k}=\frac{\omega}{v}}\vb*A(\vb*k)\ee^{\ii\vb*k\cdot\vb*x}\id^3k,
 \end{equation}
 where the amplitude $\vb*A(\vb*k)$ now represents the amplitude of each wavecomponent $\ee^{\ii\vb*k \cdot \vb*x}$.
 
 As a nice function in space one can of course also expand it with its Fourier Transform
 \begin{equation}
   \label{eq:f_exp}
-  \vb*E(\vb*x)=\frac{1}{\2\pi}\int_{\vb*k} \tilde{\vb*E}(\vb*k) \ee^{\ii(\vb*k\cdot\vb*x - \omega t)}\id^3k.
+  \vb*E(\vb*x)=\frac{1}{2\pi}\int_{\vb*k} \tilde{\vb*E}(\vb*k) \ee^{\ii(\vb*k\cdot\vb*x - \omega t)}\id^3k.
 \end{equation}
 
 
@@ -117,7 +117,7 @@ The common version of Heisenberg's uncertainty principle used in quantum mechani
 \Delta_{\vb*a}f \Delta_{\vb*\alpha} \tilde{f} \geq \frac{9}{4}, \quad \forall \vb*a, \vb*\alpha, \forall f \in \Lsq[\infty].
 \end{equation}
 
-$\Delta_af$ is a measure of how spread out $\f$ is around a point $\vb*a$;
+$\Delta_af$ is a measure of how spread out $f$ is around a point $\vb*a$;
 \begin{equation}
   \label{eq:spread_def}
 \Delta_{\vb*a}f=\frac{\int_{\vb*x}\id^3x\abs{\vb*x-\vb*a}^2\abs{f(\vb*x)}}{\int_{\vb*x}\id^3x\abs{f(\vb*x)}}.
@@ -163,25 +163,68 @@ By Parseval's theorem we get that
 A=\int_{R^D}\abs{f(\vb*x)}^2\id^3x=\qty(\frac{1}{2\pi})^D \int_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk.
 \end{equation*}
 In a bounded region $S$ of the space $R^D$ one gets the total energy
-\begin{equation*}
-A_S=\int_S\abs{f(\vb*x)}^2\id^Dx=\int_S\id^Dx \qty(\frac{1}{2\pi})^{2D}\int_\Omega \tilde{f}(\vb*k)\ee^{\ii\vb*k\cdot \vb*x}\id^Dk \int_\Omega \tilde{f}^*(\vb*\kappa)\ee^{-\ii\vb*\kappa\cdot \vb*x}\id^D\kappa=\qty (\frac{1}{2\pi})^D \int_\Omega\id^3k\int_\Omega\tilde{f}(\vb*k)\tilde{f}^*(\vb*\kappa)K_s(\vb*k-\vb*\kappa)\id^D\kappa,
-\end{equation*}
+\begin{align*}
+  A_S=\int_S\abs{f(\vb*x)}^2\id^Dx&=\int_S\id^Dx \qty(\frac{1}{2\pi})^{2D}\int_\Omega \tilde{f}(\vb*k)\ee^{\ii\vb*k\cdot \vb*x}\id^Dk \int_\Omega \tilde{f}^*(\vb*\kappa)\ee^{-\ii\vb*\kappa\cdot \vb*x}\id^D\kappa\\
+ & =\qty (\frac{1}{2\pi})^D \int_\Omega\id^3k\int_\Omega\tilde{f}(\vb*k)\tilde{f}^*(\vb*\kappa)K_s(\vb*k-\vb*\kappa)\id^D\kappa,
+\end{align*}
 with the kernel
-\begin{equation*}
-K_s(\vb*k-\vb*\kappa)=\frac{1}{2\pi}^D\int_S\ee^^{\ii\vb*x \cdot(\vb*k-\vb*\kappa)}.
-\end{equation*}
+\begin{equation}
+  \label{eq:kernel}
+K_s(\vb*k-\vb*\kappa)=\frac{1}{2\pi}^D\int_S\ee^{\ii\vb*x \cdot(\vb*k-\vb*\kappa)}.
+\end{equation}
 With this kernel one can define an integraloperator $I_{\Omega S}$ such that;
 \begin{equation}
-\qty[I_{\Omega S}\phi](\vb*k)=\int_\Omega K_S(\vb*k-\vb*\kappa)\phi(\vb*\kappa)\id^D\kappa.
-  \end{equation}
-The fraction of energy that an $\Omega$-limited function $f$ can have in a region $S$ can therefore be described by
-\begin{equation}
-\frac{A_s}{A}=\frac{\int_\Omega\tilde{f}(\vb*k)\qty[I\tilde{f}^*](\vb*k)\id^Dk}{\int_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk}.
+  \label{eq:int_op}
+\qty[I_{\Omega S}\phi](\vb*\kappa)=\int_\Omega K_S(\vb*k-\vb*\kappa)\phi(\vb*k)\id^Dk.
 \end{equation}
-The maximum of this fraction can be shown to be the largest eigenvalue to the integral equation
+Further we define an inner product on the $\Omega$-space by
 \begin{equation}
-\qty[I\psi](\vb*k)=\lambda \psi(\vb*k).
-  \end{equation}
+  \label{eq:in_prod}
+   \langle f,g\rangle =\int_\Omega f(\vb*k)g^*(\vb*k)\id^3k.
+\end{equation}
+With this notation the fraction of energy that an $\Omega$-limited function $f$ can have in a region $S$ can be described as
+\begin{equation}
+  \label{eq:energy_frac_final}
+\frac{A_s}{A}=\frac{\int_\Omega\qty[I\tilde{f}](\vb*k)\tilde{f}^*(\vb*k)\id^Dk}{\int_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk}=\frac{ \langle I\tilde{f}, \tilde{f}\rangle}{\langle \tilde{f}, \tilde{f} \rangle}.
+\end{equation}
+
+Since the regions $S$ and $\Omega$ are bounded the kernel \eqref{eq:kernel} is squareintegrable in $\Omega$ ($K_S \in \Lsq{\Omega}$), with such a kernel the integral operator \eqref{eq:int_op} becomes compact and similar operators are refered to as Hilbert-Schmidt operators in the litterature. Since the kernel is also complex symmetric with in its arguments $K_s(\vb*k-\vb*\kappa)=K_s^*(\vb*\kappa-\vb*k)$, the operator is a self-adjoint or symmetric operator with respect to the inner product \eqref{eq:in_prod}. It follows from the Spectral theorem that the functions fullfilling the eigenvalue equation
+\begin{equation}
+  \label{eq:eigen}
+\qty[I\psi](\vb*k)=\int_\Omega K_s(\vb*\kappa)\psi(\vb*\kappa) \id^D\kappa=\lambda \psi(\vb*k)
+\end{equation}
+form an orthogonal base for the space $\Omega$ and thus their inverse Fourier transform a base for the space of $\Omega$-limited functions in $R^D$. It also follows that the maximum of equation \eqref{eq:energy_fracc_final}, the maximum fraction of energy, equals the largest eigenvalue $\lambda_o$ of equation \eqref{eq:eigen} and the function fulfilling this is the inverse Fourier transform of the coresponding eigenfunction $\psi_0$.
+
+This $\lambda_0$ will be dependent on the size and shape of the areas $S$ and $\Omega$ and will form the base for our inequalities, by varying the shapes of $S$ and $\Omega$ we will have different maximi of the fraction of energy a function frequency-limited to $\Omega$ can maintain if it is also limited in space to $S$. In the following sections we will calculate these limits for some simple geometries as well as provide ideas for how it can be extended to more complex regions.
+
+\subsubsection{The disk and the ball}
+By some beautiful symmetry arguments Slepian shows in, cite, that if $\Omega$ and $S$ are both disks with $S$ being a scaled version of $\Omega$ with $S=c\Omega$, then equation \eqref{eq:eigen} has the solutions
+\begin{align}
+ &\psi_{0,n}(k,\theta)=\frac{\phi_{0,n}(k)}{\sqrt{k}}, \quad &\lambda_{0,n}= ...\gamma \\
+  &\psi_{N,n}(k, \theta)=\frac{\phi_{N,n}(k)}{\sqrt{k}}\mqty{\sin(N\theta)\\ \cos(N\theta)} , \quad &\lambda_{N,n}= ... \gamma\\
+  &N,n=0,1,\ldots
+\end{align}
+Here $\phi$ and $\gamma$ are solutions to the eigenvalue equation
+\begin{equation}
+  \label{eq:Bessel_int}
+\gamma\phi(k)=\int_0^1 J_N(ckk')\sqrt{ckk'}\phi(k')\id k', \quad 0\leq k' \leq 1.
+\end{equation}
+Further he shows that these $\phi$ also satisfy the differential equation
+\begin{equation}
+  \label{eq:Bessel_diff}
+(1-k^2)\dv[2]{\phi}{k}-2k\dv{\phi}{k} +\qty(\frac{\frac{1}{4}-N^2}{k^2}+\xi)=0.
+\end{equation}
+
+Using surface harmonics he then continues to show that similiar formulas hold in higher dimensions D>2
+\begin{align}
+  &\psi_{0,n}(k,\theta)=k^{-(D-1)/2}\phi_{0,n}(k)S_N^l, \quad \lambda_{0,n}= ...\gamma \\
+  &l= 1,2, \ldots , h(N,D), \quad N,n=0,1, \ldots,
+\end{align}
+where $\phi$ and $\gamma$ are solutions to an equation identical to \eqref{eq:Bessel_int} except that $N$ has to be replaced by $N+\frac{D-2}{2}$. An analog to the differential equation \eqref{eq:Bessel_diff} also holds for $\phi$.
+
+By working with the differential equation \eqref{eq:Bessel_diff} Slepian managed to numerically calculate values for $\lambda$ and $\psi$ for different values of $c$. Blessed with the advances made in computer science the last 55 years we however chose to work directly with the integral equations \eqref{eq:eigen} and \eqref{eq:Bessel_int} which also yields themselves better to generalizations.
+  
+
 
 
 
