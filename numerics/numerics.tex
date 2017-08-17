@@ -1,0 +1,165 @@
+\documentclass[11pt,a4paper, 
+swedish, english %% Make sure to put the main language last!
+]{article}
+\pdfoutput=1
+
+%% Andréas's custom package 
+%% (Will work for most purposes, but is mainly focused on physics.)
+\usepackage{../custom_as}
+
+%% Figures can now be put in a folder: 
+\graphicspath{ {figures/} %{some_folder_name/}
+}
+
+%% If you want to change the margins for just the captions
+\usepackage[margin=10 pt]{caption}
+
+%% To add todo-notes in the pdf
+\usepackage[%disable  %%this will hide all notes
+]{todonotes} 
+
+%% Cange the margin in the documents
+\usepackage[
+%            top    = 3cm,              %% top margin
+%            bottom = 3cm,              %% bottom margin
+%            left   = 3cm, right  = 3cm %% left and right margins
+]{geometry}
+
+
+%% If you want to chage the formating of the section headers
+%\renewcommand{\thesection}{...}
+
+\swapcommands{\Lambda}{\varLambda}
+\swapcommands{\Omega}{\varOmega}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\section{Numerical implementation of the Landau-Pollack-Slepian
+  Theory}
+\newcommand{\varD}{\ensuremath{\mathcal{D}}}
+
+In the previous section, we saw that the teoretical limit, to how much
+of the energy in a function bandlimited to the frequency region
+$\Omega$ can be conentrated in the real space region \varD, is set by
+an integral equation of the form 
+\begin{equation} \label{eq:int-eig}
+\lambda \Psi(\kappa) 
+= \oldint_{\Omega} \rd{k}\, K_\varD(\kappa, k) \Psi(k)
+\qcomma \kappa\in\Omega.
+\end{equation}
+This section will provide a method to solve this type of integral
+eigenvalue equation numerically.
+
+\subsection{Discretization of the integral equation}
+The integral is discretized by
+\begin{equation} \label{eq:inttosum}
+\begin{aligned}
+\oldint_\Omega\rd{k} &\to \sum_{n=1}^N\Delta{k}
+=\frac{\abs{\Omega}}{N} \sum_{n=1}^N,\\
+\Psi(k) \to \Psi_n = \Psi(k_n) &\qcomma
+K_\varD(\kappa, k) \to K_{m, n} = K_\varD(k_m, k_n).
+\end{aligned}
+\end{equation}
+where $\abs{\Omega}$ is the size of the region $\Omega$.
+%Next, $\Psi$ and $K_\varD$ are discretized via
+Note that $\kappa \to k_m$ (and not $\kappa_m$) since both 
+$k, \kappa\in\Omega$, and thus they are both discretized in the same
+way. 
+With these discretizations, \eqref{eq:int-eig} discretizes to
+\begin{equation}
+\lambda\Psi_m = \frac{1}{N} \sum_{n=1}^N K_{m, n} \Psi_n
+\end{equation}
+which is just a matrix eigenvalue equation
+\begin{equation} \label{eq:mtx-eig}
+\Lambda \Psi = \mathsf{K}\Psi,
+\end{equation}
+where $\Lambda = N\lambda$ and $\mathsf{K}$ is the $N\times N$ matrix
+whose element $(m, n)$ is $K_{m, n}$. From here, there are many high
+performance linear algebra libraries to find the eigenvalues and
+eigenvector to \eqref{eq:mtx-eig} numerically. 
+
+\subsubsection{Physical interpretation}
+\todo[inline]{Delta functions...}
+
+\subsubsection{Improving this method using Simpson's rule}
+\todo[inline]{\url{https://math.stackexchange.com/questions/898087/discretization-of-an-integral}\\
+Will this even work?}
+The main bottle neck in the numerical solution of \eqref{eq:int-eig}
+is the eigenvalue and eigenvector calculation. It would therefore be
+desirable to keep $N$ small. On the other hand, to accurately
+approximate the integral using \eqref{eq:inttosum}, $N$ has to be
+large. 
+%This problem can be handled by changing the discretization method of
+%the integral. 
+The simple Riemann sum approximation, \eqref{eq:inttosum}, is one of
+the most rudimentary integral discretizations. A good way to improve
+numerical accuracy without sacrificing computation time in the
+eigenvalue calculations, would be to use a better discretization
+method. 
+
+One such method is Simpson's rule (some times also refered to as
+Simpson's $\nicefrac13$ rule)
+\begin{equation}
+\int_{k_{n-1}}^{k_{n+1}}f(k)\id{k} \approx 
+\frac{\Delta{k}}{3} \Big[f(k_{n-1}) + 4f(k_n) + f(k_{n+1})\Big].
+\end{equation}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%% This bibliography ueses BibTeX
+\bibliographystyle{ieeetr}
+\bibliography{references}%requires a file named 'references.bib'
+%% Citations are as usual: \cite{example_article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%  Some (useful) templates
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer: ''.
+
+
+%% Including PDF-documents
+\includepdf[pages={1-}]{filnamn.pdf} % NO blank spaces in the file name
+
+%% Figures (pdf, png, jpg, ...)
+\begin{figure}\centering
+\centerline{ % centers figures larges than 1\textwidth
+\includegraphics[width=.8\textwidth]{file_name.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figures from xfig's "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{file_name.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+
+%% If you want to add something to the ToC
+%% (Without having an actual header in the text.)
+\stepcounter{section} %For example a 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
