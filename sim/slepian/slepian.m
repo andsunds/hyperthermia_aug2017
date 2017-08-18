@@ -78,7 +78,7 @@ Ks=besselj(N,c*X.*Y).*Y;    %kernel
 %Ks(isnan(Ks))=W/pi;        %sin(W*(x-y))/(pi*(x-y)) -> W/pi when (x-y)->0
 %Ks
 tic
-[V,D]=eig(Ks);  %eigenfunctions and eigenvalues
+[V,D]=eigs(Ks,6,'LM');  %eigenfunctions and eigenvalues
 D=diag(D)/L;    %vector form, and normalizing
 toc
 
@@ -95,19 +95,23 @@ plot(x,V(:,i));                                       %plots correspoding eigenf
 clc;clear all; clf
 %Once again, modifying to get an EVEN kernel saves around a factor 10 (!)
 
-L=1000;                  %prec of int approx
-eps=.1/L;               %can't have y=0
+L=10;                  %prec of int approx
+eps=1/L;               %can't have y=0
+% For some reason 1/L seems to be the sweet spot. If eps < 1/L the
+% eigenvalues get too small (comparison with Sleipan), and if eps>1/L the 
+% eigenvalues they become too large (greater than 1, which is theoretically
+% impossible).
 x=linspace(eps,1,L)';   %the free time variable of kernel
 y=linspace(eps,1,L)';   %integrated freq variable in the kernel
 [Y,X]=meshgrid(x,y);    %combine x and y into mesh (note order: [Y,X])
 
-c=8;                        % c = \Omega T
+c=1;                        % c = \Omega T
 N=0;
 Ks=besselj(N,c*X.*Y).*sqrt(c*Y.*X);    %kernel
 %Ks(isnan(Ks))=W/pi;        %sin(W*(x-y))/(pi*(x-y)) -> W/pi when (x-y)->0
 %Ks
 tic
-[V,D]=eig(Ks);  %eigenfunctions and eigenvalues
+[V,D]=eigs(Ks,6,'LM',optimset('maxit',300));  %eigenfunctions and eigenvalues
 D=diag(D)/L;    %vector form, and normalizing
 toc
 
@@ -115,29 +119,95 @@ d=2;                            %dimensions
 DD=(c/2/pi)^d.*abs(2*pi*D).^2/c;  %have to change normalization to get the wanted eigenvalues
 i=find(DD>1e-4);                %finds the largest eigenvlaues
 
-fprintf('DD = %1.4d,\t\n',sort(DD(i),1,'descend')); %displays those eigenvalues
+fprintf('DD = %1.7d,\t\n',sort(DD(i),1,'descend')); %displays those eigenvalues
 plot(x, V(:,i)./repmat(sqrt(x),1,length(i)));                                       %plots correspoding eigenfunctions
 
 
 
+%% D=2, p=0, even kernel, c loop
+clc;clear all; clf
+%Once again, modifying to get an EVEN kernel saves around a factor 10 (!)
+
+L=1000;                  %prec of int approx
+eps=1/L;               %can't have y=0
+% For some reason 1/L seems to be the sweet spot. If eps < 1/L the
+% eigenvalues get too small (comparison with Sleipan), and if eps>1/L the 
+% eigenvalues they become too large (greater than 1, which is theoretically
+% impossible).
+x=linspace(eps,1,L)';   %the free time variable of kernel
+y=linspace(eps,1,L)';   %integrated freq variable in the kernel
+[Y,X]=meshgrid(x,y);    %combine x and y into mesh (note order: [Y,X])
+
+n=100;
+data=zeros(n,1);
+C=linspace(0.1,10,n);                        % c = \Omega T
+for j=1:n
+    c=C(j);
+    N=0;
+    Ks=besselj(N,c*X.*Y).*sqrt(c*Y.*X);    %kernel
+
+    [V,D]=eigs(Ks,6,'LM',optimset('maxit',1000));  %eigenfunctions and eigenvalues
+    D=diag(D)/L;    %vector form, and normalizing
+
+    d=2;                            %dimensions
+    DD=(c/2/pi)^d.*abs(2*pi*D).^2/c;  %have to change normalization to get the wanted eigenvalues
+    i=find(DD>1e-4);                %finds the largest eigenvlaues
+
+    data(j)=max(DD(i));
+end
+plot(C,1-data)
+
+%% plots and symptotics
+% Here we do see some numerical error in the eigenvalue calculation since
+% they are not following the asymptotic formula given by Slepian (IV).
+
+clf;clc;clear all
+
+C=linspace(0.1,16,100); 
+data=load('lambda_c0.1-16.tsv','-ascii');
+plot(C,1-data)
+hold on
+
+%I=(20:50).';
+%A=[C(I)', ones(size(I))]\log(1-data(I));
+%plot(C, exp(A(2)+A(1)*C))
+
+plot(C,pi*8*C.*exp(-2*C))% asymptotic formula
+
+set(gca,'xlim',[0,10],'yscale','log')
 
 
 
 
+%% D=2, not the full disc
+%In the problem of finding the optimal frequency distribution in a circle
+%ring of finite thickness for maximum energy in a circle in real space, we
+%need to find the largest eigenvalue of
+%   \lambda b_m(k) 
+%   = R^2\int_{q\Gamma}^{\Gamma} \rd\kappa a_m(k,\kappa)b_m(\kappa).
+
+clc;clear
+
+R=2;
+Gamma=1;
+q=.1;
+
+L=30;
+
+x=Gamma*linspace(q,1,L)';   
+y=Gamma*linspace(q,1,L)';   
+[Y,X]=meshgrid(x,y);    
+
+
+A = F_coef_mtrx(R, X, Y );
+
+D=eigs(A.*Y,1)*R^2*Gamma*(1-q)/L
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+%TODO:
+%See if Simpson's method helps here
+%then do a c loop (maybe also a q loop).
 
 
 
