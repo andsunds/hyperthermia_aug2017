@@ -1,4 +1,4 @@
-function [ DD, V ] = disc2D_sym( L, c, rot_order, n_eigs  )
+function [ DD, V ] = disc2D_sym( L, c, rot_order, n_eigs )
 % Calculates the largest eigenvalue for discs.
 %Modified to get a SYMMETRIC kernel according to Slepian IV (1964) eqn. 
 %(19) and (20).
@@ -24,7 +24,7 @@ x=linspace(eps,1,L)';   %the free time variable of kernel
 % 0 to 1, and since the kernel is symmetric.
 XY=x*x'; %This creates a matrix whose element (i,j) is x(i)*y(j)
 
-Ks=besselj(rot_order,c* XY ).*sqrt(c*YX); %sym. kernel according to (20)
+Ks=besselj(rot_order,c* XY ).*sqrt(c*XY); %sym. kernel according to (20)
 
 [V,D]=eigs(Ks,n_eigs,'LM');  %eigenfunctions and eigenvalues
 D=diag(D)/L;                 %vector form, and normalizing
