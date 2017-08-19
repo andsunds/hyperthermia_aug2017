@@ -29,6 +29,7 @@ Ks=besselj(rot_order,c* XY ).*sqrt(c*XY); %sym. kernel according to (20)
 
 if nargout >1
     [V,D]=eigs(Ks,n_eigs,'LM');  %eigenfunction(s) and eigenvalue(s)
+    V=V./repmat(sqrt(x),1,n_eigs); %Normalizing the V to the eigenfunctions of the original problem
 else
     D    =eigs(Ks,n_eigs,'LM');  %only eigenvalue(s)
 end
@@ -37,7 +38,7 @@ D=diag(D)/L;                 %vector form, and normalizing
 d=2; %2 dimensional disc
 D=(c/2/pi)^d.*abs(2*pi*D).^2/c; %normalizing D to get the eigenvalues of the original problem
 
-V=V./repmat(sqrt(x),1,n_eigs); %Normalizing the V to the eigenfunctions of the original problem
+
 
 end
 
