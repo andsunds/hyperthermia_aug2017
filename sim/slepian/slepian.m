@@ -113,52 +113,6 @@ fprintf('DD = %1.7d,\t\n',sort(DD,1,'descend')); %displays those eigenvalues
 
 
 
-%% D=2, even kernel, c loop
-clc;clear all; clf
-% Same code as above but now running i a loop over different c values.
-
-L=500; %prec of int approx
-
-n=8;
-data=zeros(n,1);
-C=[.1 .5 1 1.5 2 3 5 10]; % c = \Omega T
-
-rot_order = 0;   % rotational order of full eigenfunction (just use 0)
-n_eigs    = 2;   % # of eigenvalues to be calc'ed for this rot order
-
-tic
-parfor j=1:n
-    c=C(j);
-    DD = disc2D_sym( L, c, rot_order, n_eigs );
-    data(j)=max(DD);
-end
-toc
-for j=1:n
-    fprintf('c = %3.1f \t\tDD = %1.8e\n',C(j),data(j))
-end
-
-
-%% plots and asymptotics   (needs more love)
-% Here we do see some numerical error in the eigenvalue calculation since
-% they are not following the asymptotic formula given by Slepian IV (1964).
-
-
-clf;clc;clear all
-
-C=linspace(0.1,16,100); 
-data=load('lambda_c0.1-16.tsv','-ascii');
-plot(C,1-data)
-hold on
-
-%I=(20:50).';
-%A=[C(I)', ones(size(I))]\log(1-data(I));
-%plot(C, exp(A(2)+A(1)*C))
-
-plot(C,pi*8*C.*exp(-2*C))%asymptotic formula eqn. (93) of Slepian IV (1964) 
-
-set(gca,'xlim',[0,10],'yscale','log')
-
-
 
 
 %% D=2, not the full disc
@@ -182,57 +136,14 @@ x=Gamma*linspace(q,1,L)';
 Y=repmat(x',L,1);
 
 tic
-A = PAR_F_coef_mtrx(R, x);
+A = PAR_F_coef_mtrx(R, x, 0);
 %A = F_coef_mtrx(R, X, Y); %non-parallellized
 toc
 
 tic
-D=eigs(A.*Y,1)*R^2*Gamma*(1-q)/L;
+D=eigs(A.*Y,1)*R^2*Gamma*(1-q)/L
 toc
 
-
-
-%% D=2, not the full disc, c-loop 
-%In the problem of finding the optimal frequency distribution in a circle
-%ring of finite thickness for maximum energy in a circle in real space, we
-%need to find the largest eigenvalue of
-%   \lambda b_m(k) 
-%   = R^2\int_{q\Gamma}^{\Gamma} \rd\kappa a_m(k,\kappa)b_m(\kappa).
-
-clc;clear
-L=1000;
-q=1/L; %q determins the inner radius of the ring (1/L means the full disc)
-
-n=8;
-C=[.1 .5 1 1.5 2 3 5 10];
-
-R=1;
-A=cell(n,1);     %init
-Gamma=cell(n,1); %init
-x=cell(n,1);     %init
-
-
-tic
-for i=1:n
-    c=C(i);
-    Gamma{i}=c/R;
-    x{i}=Gamma{i}*linspace(q,1,L)';   
-
-    A{i} = PAR_F_coef_mtrx(R, x{i}, 0);
-end
-toc
-
-tic
-data=zeros(n,1); %init
-parfor j=1:n
-    Y=repmat(x{j}',L,1);
-    data(j)=eigs(A{j}.*Y,1)*R^2*Gamma{j}*(1-q)/L;
-end
-toc
-
-for j=1:n
-    fprintf('c = %3.1f \t\tDD = %1.8e\n',C(j),data(j))
-end
 
 
 
