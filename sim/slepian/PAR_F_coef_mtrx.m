@@ -9,6 +9,9 @@ function [ A ] = PAR_F_coef_mtrx( R, x, rot_order )
 %This function calculates a_0(k,\kappa). We only need to calculate m=0
 %since that's the optimal case. 
 %
+% R:         size of the disc in real space (corresponds to c)
+% x:         vector of discretized k values
+% rot_order: rotational order (0 for largest eigenvalue)
 
 L=size(x,1); %We get the discretization size from x.
 
@@ -54,7 +57,7 @@ A=A+A.'-diag(diag(A));
 end
 
 
-function [ a ] = F_coef( R, k1, k2, m )
+function [ a ] = F_coef( R, k1, k2, rot_order )
 %   Numerically calculates the Fourier coefficients a_m(k1, k2).
 %This is used in each loop iteration above.
 
@@ -65,7 +68,7 @@ function [ a ] = F_coef( R, k1, k2, m )
 
 z = @(t) R*sqrt(k1^2 + k2^2 - 2*k1*k2*cos(t));
 
-a = 1/(4*pi)*integral(@(t) exp(-1i*m*t).*...
+a = 1/(4*pi)*integral(@(t) exp(-1i*rot_order*t).*...
                            (besselj(0,z(t)) + besselj(2,z(t))), 0, 2*pi);
 
 end
