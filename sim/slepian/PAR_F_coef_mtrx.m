@@ -1,6 +1,8 @@
 function [ A ] = PAR_F_coef_mtrx( R, x, rot_order )
 %   PARALLEL version of F_coef_mtrx(R, x,y )
+%
 %   Returns all the Fourier coefficients for each pair of k and kappa.
+%
 %In the problem of finding the optimal frequency distribution in a circle
 %ring of finite thickness for maximum energy in a circle in real space, we
 %need to find the eigenvalue of
