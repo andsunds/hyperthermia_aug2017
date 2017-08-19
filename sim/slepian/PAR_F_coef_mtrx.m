@@ -1,4 +1,4 @@
-function [ A ] = PAR_F_coef_mtrx( R, x, y )
+function [ A ] = PAR_F_coef_mtrx( R, x, rot_order )
 %   PARALLEL version of F_coef_mtrx(R, x,y )
 %   Returns all the Fourier coefficients for each pair of k and kappa.
 %In the problem of finding the optimal frequency distribution in a circle
@@ -10,43 +10,53 @@ function [ A ] = PAR_F_coef_mtrx( R, x, y )
 %since that's the optimal case. 
 %
 
+L=size(x,1); %We get the discretization size from x.
 
-L=size(x,1);
-A=zeros(L);
-
-%{
-for m = 1:L
-    for n = 1:m
-        A(m,n) = F_coef(R, x(m,n), y(m,n), 0 );
-    end
-end
-%}
-
-
-tri=@(i) i.*(i+1)/2;
-a=zeros(1,tri(L));
-J = 1:tri(L);
+tri=@(i) i.*(i+1)/2; %the i'th triangle number
+%An indexed lower triangle of a matrix together with row and col numbers.
+%   m:  _  
+%   1  |1|_  :j
+%   2  |2 3|_ 
+%   3  |4 5 6|__
+%   4  |7_8_9_10|
+%    n: 1 2 3 4
+%Given an index j, the row (m) and col (n) can be calculated as below. To
+%calculate m, all we have to do is invert the triangle number formula
+J = 1:tri(L); %all indeces
 m = ceil(-.5 + sqrt(.25 +2*J));
 n = J -tri(m-1);
 
-X=x(m);
-Y=y(n);
+%For each j, we need the values x(m(j)) and y(n(j)). To optimize the
+%parallellization, new (and longer) vectors X and Y are created precisely
+%so that X(j) = x(m(j)) and Y(j) = y(n(j)).
+X=x(m); 
+Y=x(n); %x(n) is sufficient since x and y are discretized identically
+
+a=zeros(1,tri(L)); %init
+%Parallellized for loop over all combinations of x and y.
 parfor j=J
-    a(j) = F_coef(R, X(j), Y(j), 0 );
+    %Calculating the Fourier coefficients.
+    a(j) = F_coef(R, X(j), Y(j), rot_order );
 end
+
+%Transfering the parallellized (1D) results to the matrix A
+A=zeros(L);
 for j=J
     A(m(j),n(j)) = a(j);
 end
-
-
-%A is symmetric, which is why we only calculate half of A and then flips it
-%over on itself.
+%A is symmetric, which is why we only calculate half of A and then flip it
+%over on itself; if just A+A', we get double the value on the diagonal
+%which is why -diag(diag(A)) is needed. 
 A=A+A.'-diag(diag(A));
+% note: important to use .'. If rot_order =/= 0, A is not hermetian, only
+% symmetric.
 
 end
 
+
 function [ a ] = F_coef( R, k1, k2, m )
 %   Numerically calculates the Fourier coefficients a_m(k1, k2).
+%This is used in each loop iteration above.
 
 % We need to find the coefficients
 %   a_m(k1,k2) = 1/(4\pi) 
