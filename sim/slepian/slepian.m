@@ -138,10 +138,13 @@ x=linspace(eps,1,L)';   %the free time variable of kernel
 y=linspace(eps,1,L)';   %integrated freq variable in the kernel
 [Y,X]=meshgrid(x,y);    %combine x and y into mesh (note order: [Y,X])
 
+
 n=100;
 data=zeros(n,1);
 C=linspace(0.1,10,n);                        % c = \Omega T
-for j=1:n
+
+tic
+parfor j=1:n
     c=C(j);
     N=0;
     Ks=besselj(N,c*X.*Y).*sqrt(c*Y.*X);    %kernel
@@ -155,9 +158,12 @@ for j=1:n
 
     data(j)=max(DD(i));
 end
-plot(C,1-data)
+toc
+%plot(C,1-data)
 
-%% plots and symptotics
+
+
+%% plots and asymptotics
 % Here we do see some numerical error in the eigenvalue calculation since
 % they are not following the asymptotic formula given by Slepian (IV).
 
@@ -192,22 +198,22 @@ R=2;
 Gamma=1;
 q=.1;
 
-L=30;
+L=300;
 
 x=Gamma*linspace(q,1,L)';   
 y=Gamma*linspace(q,1,L)';   
 [Y,X]=meshgrid(x,y);    
 
+tic
+A = PAR_F_coef_mtrx(R, x, y );
+toc
 
-A = F_coef_mtrx(R, X, Y );
-
+tic
 D=eigs(A.*Y,1)*R^2*Gamma*(1-q)/L
+toc
 
 
 
-%TODO:
-%See if Simpson's method helps here
-%then do a c loop (maybe also a q loop).
 
 
 

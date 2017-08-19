@@ -1,4 +1,5 @@
-function [ A ] = F_coef_mtrx(R, X, Y)
+function [ A ] = PAR_F_coef_mtrx( R, x, y )
+%   PARALLEL version of F_coef_mtrx(R, x,y )
 %   Returns all the Fourier coefficients for each pair of k and kappa.
 %In the problem of finding the optimal frequency distribution in a circle
 %ring of finite thickness for maximum energy in a circle in real space, we
@@ -10,14 +11,31 @@ function [ A ] = F_coef_mtrx(R, X, Y)
 %
 
 
-L=size(X,1);
+L=size(x,1);
 A=zeros(L);
 
-
+%{
 for m = 1:L
     for n = 1:m
-        A(m,n) = F_coef(R, X(m,n), Y(m,n), 0 );
+        A(m,n) = F_coef(R, x(m,n), y(m,n), 0 );
     end
+end
+%}
+
+
+tri=@(i) i.*(i+1)/2;
+a=zeros(1,tri(L));
+J = 1:tri(L);
+m = ceil(-.5 + sqrt(.25 +2*J));
+n = J -tri(m-1);
+
+X=x(m);
+Y=y(n);
+parfor j=J
+    a(j) = F_coef(R, X(j), Y(j), 0 );
+end
+for j=J
+    A(m(j),n(j)) = a(j);
 end
 
 
