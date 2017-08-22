@@ -146,8 +146,16 @@ toc
 
 
 
+%%
+clc;clf;clear all;
 
+load('data/D12_full.mat');
 
+plot(C/2/pi,(data(:,2)))
+hold on
+
+load('data/D2_ring.mat');
+plot(C/2/pi,(data))
 
 
 
