@@ -31,16 +31,131 @@ swedish, english %% Make sure to put the main language last!
 
 \swapcommands{\Lambda}{\varLambda}
 \swapcommands{\Omega}{\varOmega}
+\swapcommands{\Gamma}{\varGamma}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cite{PSWF-I_1961, PSWF-II_1961, PSWF-III_1962, PSWF-IV_1964, PSWF-V_1978}
+
+\subsection{Finite thickness circle ring in the frequency domain (2D)}
+So far we have looked at areas in the space and frequency domains
+which have the same shape, filled discs or spheres, but are scaled
+versions of each other ($S=c\Omega$). This does however forces us to
+include frequencies all the way down to 0, which is not an ideal
+description of a real hyperthermia system -- perhaps operating in the
+range from few hundered MHz up to a couple of GHz.
+
+We first need to define the areas $S$ and $\Omega$ in the space and
+frequency domain respectively. For the space domain we still want a
+filed region without a gap in the center, but for the frequency domain
+we want to exclude the center part of the region. Let $S$ be a filled
+circle disc of radius $R$, and $\Omega$ be the finite thickness circle
+ring with outer radius $\Gamma$ and inner radius $q\Gamma$, $0\le q<1$.
+The methodology used here is a direct translation of the ones used in
+\cite{PSWF-I_1961} and \cite{PSWF-IV_1964} to $S$ and $\Omega$.
+
+
+% As said before, $\Omega$ is a finite thickness circle ring with
+% outer radius $\Gamma$ and inner radius $q\Gamma$. 
+From the definition of the kernel $K_s$ in eqn. (6) in
+\cite{PSWF-IV_1964}, we get 
+\begin{equation}
+\begin{aligned}
+K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
+\oldint_S \rd^2r \ee^{\ii\vb*r\vdot\Delta\vb*k}\\
+=& (2\pi)^{-2}
+\int_0^{2\pi}\rd\theta \int_0^{R} \rd{r}\,r
+ \ee^{\ii\, r\Delta{k}\,\cos\theta},
+\end{aligned}
+\end{equation}
+where $\Delta{k} = \abs{\Delta\vb*k} = \abs{\vb*k-\vb*k'}$. To get to
+the second step here, choose the integration axes so that $\Delta{k}$
+lies on the $\theta=0$ axis and thus
+$\vb*r\vdot\Delta\vb*k=r\Delta{k}\,\cos\theta$;
+this can be done since, for the sake of the integration
+$\Delta{\vb*k}$ can be viewed as a constant. Next we use the usual
+Bessel function expansion \cite[formula 8.551.4b]{Gradshteyn-Ryzhik}
+\begin{equation}
+\ee^{\ii z\cos\theta} = \sum_{m=-\infty}^\infty
+\ii^mJ_m(z)\ee^{\ii m\theta}
+\end{equation}
+to write 
+\begin{equation}
+\begin{aligned}
+K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
+\sum_{m=-\infty}^\infty \ii^m
+\int_0^{2\pi}\rd\theta\, \ee^{\ii m\theta}
+\int_0^{R} \rd{r}\,r J_m(r\Delta{k}).
+\end{aligned}
+\end{equation}
+The $\theta$ integral is zero for all $m\neq0$ and $2\pi$ for $m=0$;
+to solve the $r$ integral we use 
+\cite[formula~8.472.3]{Gradshteyn-Ryzhik} 
+\begin{equation}
+\frac{1}{z}\dv{z}\qty[zJ_1(z)] = J_0(z).
+\end{equation}
+Together this leads to
+\begin{equation}
+\begin{aligned}
+K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
+\,(2\pi)\,\frac{1}{(\Delta{k})^2}
+\int_0^{R\Delta{k}} \rd{z}\,z\, J_0(z)\\
+=& (2\pi)^{-1} \frac{1}{(\Delta{k})^2}
+\Big[zJ_1(z)\Big]_{z=0}^{R\Delta k}
+&=(2\pi)^{-1} \frac{R}{\Delta{k}} J_1(R\Delta{k}).
+\end{aligned}
+\end{equation}
+
+The next step is to manipulate the actual integral eigenvalue equation
+\todo{ref to some eqn. before}
+\begin{equation}
+\lambda \psi(\vb*k) = \oldint_\Omega \rd^2k'\,
+%(2\pi)^{-1} \frac{R}{\Delta{k}} J_1(R\Delta{k}) 
+K_S(\vb*k-\vb*k')\psi(\vb*k')
+\end{equation}
+which by polar coordiane substitution becomes
+\begin{equation}
+\lambda\psi(k, \theta) =
+\frac{R}{2\pi}\,\int_0^{2\pi}\rd\theta'\,
+\int_{q\Gamma}^\Gamma\rd{k'}\,k'\frac{J_1(R\Delta{k})}{\Delta{k}} \psi(k',\theta')
+\end{equation}
+We note that, by the law of cosines, 
+$\Delta{k}=\abs{\vb*k-\vb*k'}=\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}$, 
+where $k=\abs{\vb*k}$, $k'=\abs{\vb*k'}$ and
+$\Delta\theta=\theta-\theta'$ is the angle between $\vb*k$ and
+$\vb*k'$. This means that 
+\begin{equation}\label{eq:KS-long}
+K_S(k, k', \Delta\theta) = \frac{R}{2\pi}\,
+\frac{J_1\qty(R\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)})}
+{\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}}
+\end{equation}
+is $2\pi$-periodic in $\Delta\theta$, and thus has a Fourier series
+expansion
+\todo{change to sin and cos representation.}
+\begin{equation} \label{eq:KS-FS}
+K_S(k, k', \Delta\theta) 
+= \sum_{n=-\infty}^\infty a_n(k, k') \ee^{\ii n\Delta\theta}
+= \sum_{n=-\infty}^\infty a_n(k, k') \ee^{\ii n\theta}\ee^{-\ii n\theta'},
+\end{equation}
+where
+\begin{equation} \label{eq:KS-FS_coef}
+a_n(k, k') = \frac{1}{2\pi} \int_0^{2\pi}\rd\phi\,
+K_S(k, k', \phi) \ee^{-\ii n\phi}.
+\end{equation}
+From the rightmost side of \eqref{eq:KS-FS} we see that $K_S$ is
+$2\pi$-periodic in \emph{both} $\theta$ and $\theta'$, which means
+that $\psi(k, \theta)$ must be $2\pi$-periodic in $\theta$ as well and
+thus have a Fourier series expansion
+\begin{equation} \label{eq:psi-FS}
+\psi(k, \theta) 
+= \sum_{n=-\infty}^\infty b_n(k) \ee^{\ii n\theta}.
+\end{equation}
 
 
 
-
-\section{Numerical implementation of the Landau-Pollack-Slepian
-  Theory}
+\section{Numerical implementation of the 
+Landau-Pollack-Slepian Theory}
 \newcommand{\varD}{\ensuremath{\mathcal{D}}}
 
 In the previous section, we saw that the teoretical limit, to how much
@@ -84,8 +199,26 @@ performance linear algebra libraries to find the eigenvalues and
 eigenvector to \eqref{eq:mtx-eig} numerically. 
 
 \subsubsection{Physical interpretation}
-\todo[inline]{Delta functions...}
+An interesting physical interpretation of the discretization is that
+the operation \eqref{eq:inttosum} can be viewed as introducing
+\begin{equation}
+%K_\varD(\kappa, k) \to K_\varD(\kappa, k) \times
+\Delta{k}\qty[\delta(k-k_0) + \delta(k-k_1) +\ldots+\delta(k-k_N)]
+\end{equation}
+into the integral, and effectively limiting the frequencydomain
+$\Omega$ to the dicrete frequencies $k_n$. 
 
+This idea could possibly be more cloesly related to reality, where the
+differnt antennas only transmitts in certain dicrete frequencies. And
+thus the discretized eigenvalue problem gives the theoretical maximum
+energy in a bounded region in space from a signal restriced to the
+chosen frequencies. 
+It is however worth pointing out that this result has only been proven
+for the 1D case\cite{PSWF-V_1978}, but there is no reason to believ
+that the discetized version cannot be extended to higher dimension
+like in the continuous case. 
+
+\begin{comment}
 \subsubsection{Improving this method using Simpson's rule}
 \todo[inline]{\url{https://math.stackexchange.com/questions/898087/discretization-of-an-integral}\\
 Will this even work?}
@@ -108,7 +241,7 @@ Simpson's $\nicefrac13$ rule)
 \int_{k_{n-1}}^{k_{n+1}}f(k)\id{k} \approx 
 \frac{\Delta{k}}{3} \Big[f(k_{n-1}) + 4f(k_n) + f(k_{n+1})\Big].
 \end{equation}
-
+\end{comment}
 
 
 
