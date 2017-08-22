@@ -1,15 +1,15 @@
 %% D=2, even kernel, c loop
 clc;clear all;
-% Same code as above but now running i a loop over different c values.
 
+todaystr=datestr(now,'yyyy-mm-dd');
 L=10000; %prec of int approx
 
-n=101;
+n=64;
+%data=zeros(n,1);
 data=zeros(n,2);
-%C=[.1 .5 1 1.5 2 3 5 10]; % c = \Omega T
-C=linspace(0,10,n);
+C=linspace(0,12.6,n);
 
-rot_order = 0;   % rotational order of full eigenfunction (just use 0)
+rot_order = 1;   % rotational order of full eigenfunction (just use 0)
 n_eigs    = 1;   % # of eigenvalues to be calc'ed for this rot order
 
 tic
@@ -18,6 +18,7 @@ parfor j=1:n
     c=C(j);
     D1 = interval1D_full( L, c, n_eigs );
     D2 = disc2D_sym( L, c, rot_order, n_eigs );
+    %data(j)=D2;
     data(j,:)=[D1,D2];
 end
 time=toc;
@@ -26,13 +27,16 @@ min = floor(time/60); time=time-min*60;
 sec=floor(time); 
 secdec=floor(1000*(time-sec));
 
-file=fopen('data/log.txt','a');
+filename=sprintf('data/log-full_start:%s.txt',todaystr);
+file=fopen(filename,'a');
 fprintf(file,'1D and 2D, both full.\n');
 fprintf(file,'Elapsed time %02d:%02d:%02d.%03d\n',hr,min,sec,secdec);
 fprintf(file,'data is a matrix with 1D in 1st col and 2D in 2nd col.\n\n\n');
 fclose(file);
 
-save('data/D12_full.mat','L','C','data')
+save(sprintf('data/D12_full-%d_L-%d_%s.mat',rot_order,L,todaystr),'L','C','data');
+
+fprintf('Done, %s\n',datestr(now,'yyyy-mm-dd_HH:MM:SS'))
 
 %for j=1:n;fprintf('c = %3.1f \t\tDD = %1.8e\n',C(j),data(j));end
 
@@ -61,21 +65,23 @@ set(gca,'xlim',[0,10],'yscale','log')
 %% D=2, not the full disc, c-loop 
 clc;clear all
 
-L=2000;
-n=21;
+L=1000;
+n=64;
 %C=[.1 .5 1 1.5 2 3 5 10];
-C=linspace(0,10,n);
+C=linspace(0,12.6,n);
 R=1;
-
+rot_order=1;
 Q=[.1, .3, .5, .7, .9];
 data=zeros(n,length(Q)); %init
 
-file=fopen('data/log.txt','a');
+todaystr=datestr(now,'yyyy-mm-dd');
+filename=sprintf('data/log-ring_start:%s.txt',todaystr);
+file=fopen(filename,'a');
 
 for b=1:length(Q) 
 clear A Gamma x
 
-q=Q(b)
+q=Q(b);
 A=cell(n,1);     %init
 Gamma=cell(n,1); %init
 x=cell(n,1);     %init
@@ -87,7 +93,7 @@ for i=1:n
     Gamma{i}=c/R;
     x{i}=Gamma{i}*linspace(q,1,L)';   
 
-    A{i} = PAR_F_coef_mtrx(R, x{i}, 0);
+    A{i} = PAR_F_coef_mtrx(R, x{i}, rot_order);
 end
 time=toc;
 hr  = floor(time/3600); time=time-hr*3600;
@@ -95,6 +101,7 @@ min = floor(time/60); time=time-min*60;
 sec=floor(time); 
 secdec=floor(1000*(time-sec));
 fprintf(file,'2D circle ring, q=%1.1f, calculating kernel matrix.\n', q);
+fprintf(file,'%s \n',datestr(now,'yyyy-mm-dd_HH:MM:SS'));
 fprintf(file,'Elapsed time %02d:%02d:%02d.%03d\n',hr,min,sec,secdec);
 
 tic
@@ -109,15 +116,16 @@ min = floor(time/60); time=time-min*60;
 sec=floor(time); 
 secdec=floor(1000*(time-sec));
 fprintf(file,'2D eigenvalues, circle ring.\n');
+fprintf(file,'%s \n',datestr(now,'yyyy-mm-dd_HH:MM:SS'));
 fprintf(file,'Elapsed time %02d:%02d:%02d.%03d\n\n',hr,min,sec,secdec);
 
 
-
+fprintf('q = %d done, %s\n',q,datestr(now,'yyyy-mm-dd_HH:MM:SS'))
 end
 
 fprintf(file,'data is a matrix with each col corresponding to a q value in Q.\n\n\n');
 fclose(file);
-save('data/D2_ring.mat','L','C','Q','data')
+save(sprintf('data/D2_ring-%d_L-%d_%s.mat',rot_order,L,todaystr),'L','C','Q','data')
 
 
 
