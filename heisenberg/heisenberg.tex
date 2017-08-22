@@ -93,14 +93,14 @@ a plane wave were the wavevector $\vb*k$ is any vector such that $\abs{\vb*k}^2=
 where the amplitude $\vb*A(\vb*k)$ now represents the amplitude of each wavecomponent $\ee^{\ii\vb*k \cdot \vb*x}$.
 
 As a nice function in space one can of course also expand it with its Fourier Transform
-\begin{equation}
-  \label{eq:f_exp}
-<<<<<<< HEAD
-  \vb*E(\vb*x)=\frac{1}{2\pi}\int_{\vb*k} \tilde{\vb*E}(\vb*k) \ee^{\ii(\vb*k\cdot\vb*x - \omega t)}\id^3k.
-=======
-  \vb*E(\vb*x)=\frac{1}{2\pi}\int_{\vb*k} \widetilde{\vb*E}(\vb*k) \ee^{\ii(\vb*k\cdot\vb*x - \omega t)}\id^3k.
->>>>>>> 7b1cb8ce091e3e80bc0468eebd55095651434725
-\end{equation}
+% \begin{equation}
+%  \label{eq:f_exp}
+%<<<<<<< HEAD
+%   \vb*E(\vb*x)=\frac{1}{2\pi}\int_{\vb*k} \tilde{\vb*E}(\vb*k) \ee^{\ii(\vb*k\cdot\vb*x - \omega t)}\id^3k.
+% =======
+%   \vb*E(\vb*x)=\frac{1}{2\pi}\int_{\vb*k} \widetilde{\vb*E}(\vb*k) \ee^{\ii(\vb*k\cdot\vb*x - \omega t)}\id^3k.
+% >>>>>>> 7b1cb8ce091e3e80bc0468eebd55095651434725
+% \end{equation}
 
 
 Comparing the Fourier expansion (\ref{eq:f_exp}), an integral over the whole $\vb*k$-space, with the general solution (\ref{eq:gen_sol}), an integral only over the subspace where $\abs{\vb*k}=\frac{\omega}{v}$ one can identify an expression for the Fourier transform $\tilde{\vb*E}(\vb*k)$ as
@@ -143,7 +143,7 @@ $\mathrm{Min}_\alpha\Delta_{\vb*\alpha}\tilde{\vb*E}=\frac{\omega^2}{v^2}$ and \
 If the variation of $E$ is high it implies that $E$ cannot be highly localized to one small neighbourhood in space, but it does not preclude $E$ from being concentrated in small neighbourhoods of two or more widely spread out points. Therefore, for hyperthermia treatment, the variation measure at best gives a hint on what we want. We could achieve a very high peak in the tumour without violating the inequality as long as a significant part of the EM-field is located outside of the head.
 This however is a consequence of the particular form we have stated the uncertainty relation, it does hold that a function cannot be highly localized both in the space and frequency domains but this can be quantified in many different ways, one of which we shall see in the next section.
 
-\subsection{the Slepian-Landau-Pollak uncertainty relation}
+\section{the Slepian-Landau-Pollak uncertainty relation}
 In a series of papers from the 60's D.Slepian, H.J.Landau and H.O.Pollak investigated how much energy a frequency-limited function can keep if it is restricted in space. By doing this one can reach an inequality on the form
 \begin{equation}
 \abs{S}\abs{\Omega} \geq c(\alpha,\beta),
@@ -160,7 +160,6 @@ A square-integrable function $f$ of $D$ variables is said to be $\Omega$-limited
 that is, it only contains frequencies in the area $\Omega$.
 We define the energy of a function to be
 \begin{equation*}
-<<<<<<< HEAD
 A=\int_{R^D}\abs{f(\vb*x)}^2\id^3x.
 \end{equation*}
 By Parseval's theorem we get that
@@ -202,7 +201,7 @@ form an orthogonal base for the space $\Omega$ and thus their inverse Fourier tr
 
 This $\lambda_0$ will be dependent on the size and shape of the areas $S$ and $\Omega$ and will form the base for our inequalities, by varying the shapes of $S$ and $\Omega$ we will have different maximi of the fraction of energy a function frequency-limited to $\Omega$ can maintain if it is also limited in space to $S$. In the following sections we will calculate these limits for some simple geometries as well as provide ideas for how it can be extended to more complex regions.
 
-\subsubsection{The disk and the ball}
+\subsection{The disk and the ball}
 By some beautiful symmetry arguments Slepian shows in, cite, that if $\Omega$ and $S$ are both disks with $S$ being a scaled version of $\Omega$ with $S=c\Omega$, then equation \eqref{eq:eigen} has the solutions
 \begin{align}
  &\psi_{0,n}(k,\theta)=\frac{\phi_{0,n}(k)}{\sqrt{k}}, \quad &\lambda_{0,n}= ...\gamma \\
@@ -230,14 +229,7 @@ where $\phi$ and $\gamma$ are solutions to an equation identical to \eqref{eq:Be
 By working with the differential equation \eqref{eq:Bessel_diff} Slepian managed to numerically calculate values for $\lambda$ and $\psi$ for different values of $c$. Blessed with the advances made in computer science the last 55 years we however chose to work directly with the integral equations \eqref{eq:eigen} and \eqref{eq:Bessel_int} which also yields themselves better to generalizations.
   
 
-=======
-A=\int_{\R^D}\abs{f(\id*x)}^2\id^Dx.
-\end{equation*}
-By Parseval's theorem we get that
-\begin{equation*}
-\text{Must put something here, otherwise \LaTeX will be sad. }
-\end{equation*}
->>>>>>> 7b1cb8ce091e3e80bc0468eebd55095651434725
+
 
 
 
