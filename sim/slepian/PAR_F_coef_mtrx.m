@@ -70,7 +70,9 @@ function [ a ] = F_coef( R, k1, k2, rot_order )
 
 z = @(t) R*sqrt(k1^2 + k2^2 - 2*k1*k2*cos(t));
 
-a = 1/(4*pi)*integral(@(t) exp(-1i*rot_order*t).*...
+a = 1/(4*pi)*integral(@(t) cos(rot_order*t).*...
                            (besselj(0,z(t)) + besselj(2,z(t))), 0, 2*pi);
-
+%The only rotational dependence must be of cos form, since the kernel is
+%even in t.
+                       
 end
