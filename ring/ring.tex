@@ -159,22 +159,20 @@ eigenvalue equation \eqref{eq:eigint-pol} can be written as
 \ee^{\ii (m-n)\theta'}.
 \end{aligned}
 \end{equation}
-Like before the $\theta'$ integral is only non-zero when $m-n=0$,
-which in terms of the Kronecker delta is $2\pi\delta_{m, n}$.
+Like before the $\theta'$ integral is only non-zero when $m-n=0$ and
+then the integral is just $2\pi$. We now get
+\begin{equation}
+\lambda\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
+= \sum_{n=-\infty}^\infty \ee^{\ii n\theta} 
+\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k'),
+\end{equation}
+which has to hold for all $\theta$ and therefore
+\begin{equation}
+\lambda_n b_n(k) = \int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k'),
+\end{equation}
 
-% where
-% \begin{equation} \label{eq:KS-FS_coef}
-% a_n(k, k') = \frac{1}{2\pi} \int_0^{2\pi}\rd\phi\,
-% K_S(k, k', \phi) \ee^{-\ii n\phi}.
-% \end{equation}
-% From the rightmost side of \eqref{eq:KS-FS} we see that $K_S$ is
-% $2\pi$-periodic in \emph{both} $\theta$ and $\theta'$, which means
-% that $\psi(k, \theta)$ must be $2\pi$-periodic in $\theta$ as well and
-% thus have a Fourier series expansion
-% \begin{equation} \label{eq:psi-FS}
-% \psi(k, \theta) 
-% = \sum_{n=-\infty}^\infty b_n(k) \ee^{\ii n\theta}.
-% \end{equation}
+
+
 
 
 
@@ -284,6 +282,81 @@ Simpson's $\nicefrac13$ rule)
 \bibliographystyle{ieeetr}
 \bibliography{references}%requires a file named 'references.bib'
 %% Citations are as usual: \cite{example_article}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\appendix
+
+\section{The Fourier coefficients of the frequency domain 
+circle ring kernel}\label{apx:KS}
+The kernel in question was \eqref{eq:KS-long}
+\begin{equation}
+K_S(k, k', \Delta\theta) = \frac{R}{2\pi}\,\frac{J_1\qty(RQ)}{Q}
+=\sum_{n=0}^\infty A_{n}(k, k')\, \cos(n\Delta\theta)
+\end{equation}
+where $Q=\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}$. Here we want to
+find the Fourier cosine coefficients $A_n(k, k')$; this is because we
+know that $K_S$ can only have cosine coefficient since it is even in
+$\Delta\theta$. 
+
+It just so happens to excist an expansion 
+\cite[formula 8.532.1]{Gradshteyn-Ryzhik} for preciecely this type of
+expression:
+\begin{equation}
+\frac{J_\nu\qty(RQ)}{Q^\nu} 
+= 2^\nu R^{-\nu} \varGamma(\nu) \sum_{m=0}^\infty ?? (m+\nu) 
+\frac{J_{m+\nu}(Rk)\,J_{m+\nu}(Rk')}{(kk')^\nu} 
+C_m^{(\nu)}\Big(\cos(\Delta\theta)\Big),
+\end{equation}
+with $Q=\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}$ exactly as above,
+and where $C_m^{(\nu)}(x)$ are the Gegenbauer polynomials. Next the
+gegenbauer polynomials reduce to the Chebychev polynomials of the
+second kind for $\nu=1$: \cite[chapter 18.4]{Arfken-Weber}  
+\begin{equation}
+C_m^{(1)}(z) = U_m(z).
+\end{equation}
+
+We can also relate the Chebychev polynomials of the second kind to the
+same of the first kind, $T_m(z)$, by
+\begin{equation}\label{eq:U2T}
+U_N(z) = 
+\begin{cases}
+2\sum_{j=0}^n T_{2j+1}(z)\qcomma&N=2n+1,\\
+1+2\sum_{j=1}^n T_{2j}(z)\qcomma&N=2n.
+\end{cases}
+\end{equation}
+This is useful because the Chebychev polynomials of the first kind
+satisfy the identity \cite[chapter 18.4]{Arfken-Weber}
+\begin{equation}\label{eq:Tcos}
+T_m(\cos\phi) = \cos(m\phi).
+\end{equation}
+% Furthermore, for $z=\cos\phi$, we have
+% \begin{equation}
+% U_m(\cos\phi) = \frac{\sin[(n+1)\phi]}{\sin\phi}.
+% \end{equation}
+
+Now back to the kernel in question\todo{cite!}
+\begin{equation}\label{eq:KS-U}
+K_S(k, k', \Delta\theta) = \frac{R}{2\pi}\,\frac{J_1\qty(RQ)}{Q}
+=\frac{1}{\pi kk'} \sum_{m=1}^\infty ??(m)
+J_m(Rk)J_m(Rk') U_{m-1}\Big(\cos(\Delta\theta)\Big).
+\end{equation}
+To find the pure $\cos(\Delta\theta)$ term, we use the relation
+\eqref{eq:U2T} but only keep the $T_1$ terms since those are the ones
+that give $\cos(\Delta\theta)$. By \eqref{eq:U2T} we see that the
+only terms containing $T_1(\cos(\Delta\theta))$ in \eqref{eq:KS-U} are
+the ones where $m-1$ is odd, that is $m=2l$ has to be even. We
+therefore get
+\begin{equation}
+A_1(k, k') = \frac{2}{\pi kk'} \sum_{l=1}^\infty ??(2l)
+J_{2l}(Rk)J_{2l}(Rk') 
+\end{equation}
+\todo{Will this even give anything?}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
