@@ -115,10 +115,11 @@ The next step is to manipulate the actual integral eigenvalue equation
 K_S(\vb*k-\vb*k')\psi(\vb*k')
 \end{equation}
 which by polar coordiane substitution becomes
-\begin{equation}
+\begin{equation}\label{eq:eigint-pol}
 \lambda\psi(k, \theta) =
-\frac{R}{2\pi}\,\int_0^{2\pi}\rd\theta'\,
-\int_{q\Gamma}^\Gamma\rd{k'}\,k'\frac{J_1(R\Delta{k})}{\Delta{k}} \psi(k',\theta')
+\int_{q\Gamma}^\Gamma\rd{k'}\,k'
+\int_{0}^{2\pi}\rd\theta'\,\frac{R}{2\pi}
+\frac{J_1(R\Delta{k})}{\Delta{k}} \psi(k',\theta')
 \end{equation}
 We note that, by the law of cosines, 
 $\Delta{k}=\abs{\vb*k-\vb*k'}=\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}$, 
@@ -130,30 +131,57 @@ K_S(k, k', \Delta\theta) = \frac{R}{2\pi}\,
 \frac{J_1\qty(R\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)})}
 {\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}}
 \end{equation}
-is $2\pi$-periodic in $\Delta\theta$, and thus has a Fourier series
-expansion
-\todo{change to sin and cos representation.}
+is $2\pi$-periodic in $\Delta\theta$, and thus has a Fourier series expansion 
 \begin{equation} \label{eq:KS-FS}
-K_S(k, k', \Delta\theta) 
-= \sum_{n=-\infty}^\infty a_n(k, k') \ee^{\ii n\Delta\theta}
-= \sum_{n=-\infty}^\infty a_n(k, k') \ee^{\ii n\theta}\ee^{-\ii n\theta'},
+K_S(k, k', \Delta\theta)  
+=\sum_{n=-\infty}^\infty a_{n}(k, k')\, \ee^{\ii n\Delta\theta}
+=\sum_{n=-\infty}^\infty a_{n}(k, k')\, \ee^{\ii n\theta}\ee^{-\ii n\theta'}
 \end{equation}
-where
-\begin{equation} \label{eq:KS-FS_coef}
-a_n(k, k') = \frac{1}{2\pi} \int_0^{2\pi}\rd\phi\,
-K_S(k, k', \phi) \ee^{-\ii n\phi}.
+We also know that the eigenfunctions, $\psi$, has to be periodic in
+$\theta$ since the kernel is periodic in both $\theta$ and
+$\theta'$. Therefore 
+\begin{equation}\label{eq:psi-FS}
+\psi(k, \theta) = \sum_{m=-\infty}^\infty b_m(k)\ee^{\ii m\theta}
 \end{equation}
-From the rightmost side of \eqref{eq:KS-FS} we see that $K_S$ is
-$2\pi$-periodic in \emph{both} $\theta$ and $\theta'$, which means
-that $\psi(k, \theta)$ must be $2\pi$-periodic in $\theta$ as well and
-thus have a Fourier series expansion
-\begin{equation} \label{eq:psi-FS}
-\psi(k, \theta) 
-= \sum_{n=-\infty}^\infty b_n(k) \ee^{\ii n\theta}.
+also has a Fourier series. 
+
+With the two results, \eqref{eq:KS-FS} and \eqref{eq:psi-FS}, the
+eigenvalue equation \eqref{eq:eigint-pol} can be written as
+\begin{equation}
+\begin{aligned}
+\lambda\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
+=& \int_{q\Gamma}^\Gamma\rd{k'}\,k'\int_{0}^{2\pi}\rd\theta'\,
+\sum_{n=-\infty}^\infty a_n(k)\ee^{\ii n\theta}\ee^{-\ii n\theta'}
+\sum_{m=-\infty}^\infty b_m(k)\ee^{\ii m\theta'}\\
+=& \sum_{n=-\infty}^\infty \ee^{\ii n\theta} \sum_{m=-\infty}^\infty 
+\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_m(k')
+\int_{0}^{2\pi}\rd\theta'\,
+\ee^{\ii (m-n)\theta'}.
+\end{aligned}
 \end{equation}
+Like before the $\theta'$ integral is only non-zero when $m-n=0$,
+which in terms of the Kronecker delta is $2\pi\delta_{m, n}$.
+
+% where
+% \begin{equation} \label{eq:KS-FS_coef}
+% a_n(k, k') = \frac{1}{2\pi} \int_0^{2\pi}\rd\phi\,
+% K_S(k, k', \phi) \ee^{-\ii n\phi}.
+% \end{equation}
+% From the rightmost side of \eqref{eq:KS-FS} we see that $K_S$ is
+% $2\pi$-periodic in \emph{both} $\theta$ and $\theta'$, which means
+% that $\psi(k, \theta)$ must be $2\pi$-periodic in $\theta$ as well and
+% thus have a Fourier series expansion
+% \begin{equation} \label{eq:psi-FS}
+% \psi(k, \theta) 
+% = \sum_{n=-\infty}^\infty b_n(k) \ee^{\ii n\theta}.
+% \end{equation}
 
 
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical implementation of the 
 Landau-Pollack-Slepian Theory}
 \newcommand{\varD}{\ensuremath{\mathcal{D}}}
