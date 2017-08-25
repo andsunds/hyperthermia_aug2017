@@ -320,11 +320,11 @@ C_m^{(1)}(z) = U_m(z).
 \end{equation}
 
 We can also relate the Chebychev polynomials of the second kind to the
-same of the first kind, $T_m(z)$, by
+same of the first kind, $T_m(z)$, by\todo{cite!}
 \begin{equation}\label{eq:U2T}
 U_N(z) = 
 \begin{cases}
-2\sum_{j=0}^n T_{2j+1}(z)\qcomma&N=2n+1,\\
+2\sum_{j=1}^n T_{2j-1}(z)\qcomma&N=2n-1,\\
 1+2\sum_{j=1}^n T_{2j}(z)\qcomma&N=2n.
 \end{cases}
 \end{equation}
@@ -338,23 +338,50 @@ T_m(\cos\phi) = \cos(m\phi).
 % U_m(\cos\phi) = \frac{\sin[(n+1)\phi]}{\sin\phi}.
 % \end{equation}
 
-Now back to the kernel in question\todo{cite!}
+Now back to the kernel in question
 \begin{equation}\label{eq:KS-U}
 K_S(k, k', \Delta\theta) = \frac{R}{2\pi}\,\frac{J_1\qty(RQ)}{Q}
-=\frac{1}{\pi kk'} \sum_{m=1}^\infty ??(m)
+=\frac{1}{\pi kk'} \sum_{m=1}^\infty m
 J_m(Rk)J_m(Rk') U_{m-1}\Big(\cos(\Delta\theta)\Big).
 \end{equation}
 To find the pure $\cos(\Delta\theta)$ term, we use the relation
 \eqref{eq:U2T} but only keep the $T_1$ terms since those are the ones
 that give $\cos(\Delta\theta)$. By \eqref{eq:U2T} we see that the
 only terms containing $T_1(\cos(\Delta\theta))$ in \eqref{eq:KS-U} are
-the ones where $m-1$ is odd, that is $m=2l$ has to be even. We
-therefore get
+the ones where $m-1$ is odd, that is $m=2l$ has to be even, and where
+$(m-1)\ge1$. We therefore get
 \begin{equation}
-A_1(k, k') = \frac{2}{\pi kk'} \sum_{l=1}^\infty ??(2l)
+A_1(k, k') = \frac{1}{\pi kk'} \sum_{l=1}^\infty 2l
+J_{2l}(Rk)J_{2l}(Rk') \times2
+=\frac{4}{\pi kk'} \sum_{l=1}^\infty l
 J_{2l}(Rk)J_{2l}(Rk') 
 \end{equation}
-\todo{Will this even give anything?}
+This can be generalized we can find any of the Fourier coefficients, for
+$\cos(N\Delta\theta)$, by identifying all terms containing $T_N$. With
+\eqref{eq:U2T}, it is clear that the indeces in \eqref{eq:KS-U} has to
+satisfy $(m-1)\ge N$ and also $(m-1)$ has to have the same parity as
+$N$, that is if $N$ is even then $m$ has to be odd and vice verse. We
+are now ready to write down the coefficients by the parity of $N$. 
+If $N=2n-1$ is odd, then
+\begin{equation}
+A_{2n-1}(k, k') = \frac{2}{\pi kk'} 
+\sum_{l=n}^\infty 2l J_{2l}(Rk)J_{2l}(Rk'),
+\end{equation}
+and if $N=2n$ is even and $N\ge2$, then
+\begin{equation}
+A_{2n}(k, k') = \frac{2}{\pi kk'} 
+\sum_{l=n}^\infty (2l-1) J_{2l-1}(Rk)J_{2l-1}(Rk'),
+\end{equation}
+and the special case where $N=0$
+\begin{equation}
+A_{0}(k, k') = \frac{1}{\pi kk'} 
+\qty[1+2\sum_{l=1}^\infty (2l-1) J_{2l-1}(Rk)J_{2l-1}(Rk')].
+\end{equation}
+
+\subsection{Recursive relation for the Fourier coefficients}
+For simplicity define $a_N:=$
+
+
 
 
 
