@@ -145,12 +145,21 @@ A_{2n} = \frac{2}{\pi kk'}
 \end{equation}
 and the special case where $N=0$
 \begin{equation}
-A_{0} = \frac{1}{\pi kk'} 
-\qty[1+2\sum_{l=1}^\infty (2l-1) J_{2l-1}(Rk)J_{2l-1}(Rk')].
+A_{0} = \frac{2}{\pi kk'} 
+\qty[\frac{1}{2}+\sum_{l=1}^\infty (2l-1) J_{2l-1}(Rk)J_{2l-1}(Rk')].
 \end{equation}
 
 \subsection{Recursive relation for the Fourier coefficients}
-For simplicity define $a_N:=$
+For simplicity define $a_N:=\pi kk'\,A_N/2$. Next we begin by looking
+at
+\begin{equation}
+\begin{aligned}
+a_0+a_1 =& 
+\frac{1}{2}+\sum_{l=1}^\infty (2l-1) J_{2l-1}(Rk)J_{2l-1}(Rk')
++\sum_{l=1}^\infty 2l J_{2l}(Rk)J_{2l}(Rk')\\
+=& \frac{1}{2} + \sum_{m=1}^\infty m J_{m}(Rk)J_{m}(Rk')
+\end{aligned}
+\end{equation}
 
 
 
