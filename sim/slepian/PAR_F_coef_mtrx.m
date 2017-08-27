@@ -1,4 +1,4 @@
-function [ A ] = PAR_F_coef_mtrx( R, x, rot_order )
+function [ A ] = PAR_F_coef_mtrx( R, k, rot_order )
 %   PARALLEL version of F_coef_mtrx(R, x,y )
 %
 %   Returns all the Fourier coefficients for each pair of k and kappa.
@@ -15,7 +15,7 @@ function [ A ] = PAR_F_coef_mtrx( R, x, rot_order )
 % x:         vector of discretized k values
 % rot_order: rotational order (0 for largest eigenvalue)
 
-L=size(x,1); %We get the discretization size from x.
+L=length(k); %We get the discretization size from x.
 
 tri=@(i) i.*(i+1)/2; %the i'th triangle number
 %An indexed lower triangle of a matrix together with row and col numbers.
@@ -34,14 +34,14 @@ n = J -tri(m-1);
 %For each j, we need the values x(m(j)) and y(n(j)). To optimize the
 %parallellization, new (and longer) vectors X and Y are created precisely
 %so that X(j) = x(m(j)) and Y(j) = y(n(j)).
-X=x(m); 
-Y=x(n); %x(n) is sufficient since x and y are discretized identically
+k1=k(m); 
+k2=k(n); %x(n) is sufficient since x and y are discretized identically
 
 a=zeros(1,tri(L)); %init
 %Parallellized for loop over all combinations of x and y.
 parfor j=J
     %Calculating the Fourier coefficients.
-    a(j) = F_coef(R, X(j), Y(j), rot_order );
+    a(j) = F_coef(R, k1(j), k2(j), rot_order );
 end
 
 %Transfering the parallellized (1D) results to the matrix A
