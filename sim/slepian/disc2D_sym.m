@@ -33,7 +33,7 @@ if nargout >1
 else
     D    =eigs(Ks,n_eigs,'LM');  %only eigenvalue(s)
 end
-D=diag(D)/L;                 %vector form, and normalizing
+D=D/L;                 %vector form, and normalizing
 
 d=2; %2 dimensional disc
 D=(c/2/pi)^d.*abs(2*pi*D).^2/c; %normalizing D to get the eigenvalues of the original problem
