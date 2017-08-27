@@ -66,13 +66,15 @@ set(gca,'xlim',[0,10],'yscale','log')
 clc;clear all
 
 L=1000;
-n=64;
+n=32;
 %C=[.1 .5 1 1.5 2 3 5 10];
-C=linspace(0,12.6,n);
+C=linspace(0.2,12.6,n);
 R=1;
-rot_order=1;
+neigs=1;
+rot_order=0;
 Q=[.1, .3, .5, .7, .9];
 data=zeros(n,length(Q)); %init
+
 
 todaystr=datestr(now,'yyyy-mm-dd');
 filename=sprintf('data/log-ring_start:%s.txt',todaystr);
@@ -92,8 +94,7 @@ for i=1:n
     c=C(i);
     Gamma{i}=c/R;
     x{i}=Gamma{i}*linspace(q,1,L)';   
-
-    A{i} = PAR_F_coef_mtrx(R, x{i}, rot_order);
+    A{i}  = PAR_F_coef_mtrx(R, x{i}, rot_order);
 end
 time=toc;
 hr  = floor(time/3600); time=time-hr*3600;
@@ -108,7 +109,7 @@ tic
 
 parfor j=1:n
     Y=repmat(x{j}',L,1);
-    data(j,b)=eigs(A{j}.*Y,1)*R^2*Gamma{j}*(1-q)/L;
+    data(j,b)=eigs(T1{j}.*Y,A{j}.*Y,neigs)*RT1^2/R^2*Gamma{j}*(1-q)/L;
 end
 time=toc;
 hr  = floor(time/3600); time=time-hr*3600;
@@ -126,17 +127,56 @@ end
 fprintf(file,'data is a matrix with each col corresponding to a q value in Q.\n\n\n');
 fclose(file);
 save(sprintf('data/D2_ring-%d_L-%d_%s.mat',rot_order,L,todaystr),'L','C','Q','data')
+%pause(1)
+%save(sprintf('data/D2_ring_MATRIX-%d_L-%d_%s.mat',rot_order,L,todaystr),'H','T1','T2')
 
 
 
+%% D=2, ring, BESSEL, c-loop 
+clc;clear all
+
+L=40;
+n=64;
+%C=[.1 .5 1 1.5 2 3 5 10];
+C=linspace(.2,12.6,n);
+R=1;
+HS=15;
+neigs=1;
+rot_order=0;
+Q=[.1, .3, .5, .7, .9];
+data=zeros(n,length(Q)); %init
 
 
+todaystr=datestr(now,'yyyy-mm-dd');
+filename=sprintf('data/log-ring_start_%s.txt',todaystr);
+file=fopen(filename,'a');
+
+for b=1:length(Q) 
+clear A Gamma x
+
+q=Q(b);
+
+tic
+
+parfor j=1:n
+    data(j,b)=ring2D(L,C(j),q, rot_order,neigs);
+end
+time=toc;
+hr  = floor(time/3600); time=time-hr*3600;
+min = floor(time/60); time=time-min*60;
+sec=floor(time); 
+secdec=floor(1000*(time-sec));
+fprintf(file,'2D eigenvalues, circle ring BESSEL.\n');
+fprintf(file,'%s \n',datestr(now,'yyyy-mm-dd_HH:MM:SS'));
+fprintf(file,'Elapsed time %02d:%02d:%02d.%03d\n\n',hr,min,sec,secdec);
 
 
+fprintf('q = %d done, %s\n',q,datestr(now,'yyyy-mm-dd_HH:MM:SS'))
+end
 
-
-
-
-
-
+fprintf(file,'data is a matrix with each col corresponding to a q value in Q.\n\n\n');
+fclose(file);
+save(sprintf('data/D2_ring-bessel-AB-%d_L-%d_%s.mat',rot_order,L,todaystr),'L','C','Q','data')
+%pause(1)
+%save(sprintf('data/D2_ring_MATRIX-%d_L-%d_%s.mat',rot_order,L,todaystr),'H','T1','T2')
 
