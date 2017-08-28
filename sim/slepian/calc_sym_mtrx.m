@@ -4,7 +4,7 @@ function [ A ] = calc_sym_mtrx( fun_of_2_args, vector )
 %the matrix 
 %   A(i,j) = fun_of_2_args(vector(i), vector(j));
 %It is implicitly understood that 
-%   fun_of_2_args(x,y) = fun_of_2_args(x,y)
+%   fun_of_2_args(x,y) = fun_of_2_args(y,x)
 
 
 
