@@ -70,7 +70,16 @@ english, swedish %% Make sure to put the main language last!
 %\todolist
 
 
+\section{Introduction}
+%\todo[inline]{General intro to hyopthermia and freq dep.}
 
+This project will study the efficacy of ultra-wideband (UWB) hyperthermia treatmants in comparison to narrowband (NB). Previous studies have mostly been conducted using numerical or experimantal methods. In this project however, we intend to investigate this subject from a more theoretical and mathematical stand point. 
+
+There exists a number of uncertainty  principals stating that a function cannot be highly localized in the space and frequency domains at the same time. An electromagnetic field coming from an UWB signal will be less localized in the frequency domain than a NB one and should therefore lead to better localization in the space domain. However, prior studies have found indications that this is not the case and an UWB approach does not significantly improve performance over NB.
+
+This project aims to find some theoretical grounds for the reasons behind this by taking a closer look at relevant uncertainty principles and calculating values for a simplified case of hyperthermia treatment. More specifically, the head and tumour will be regarded as two cocentrical disks
+
+%The goal of this project will be to explain why the Heissenberg inequality breaks down in a scenario like hyperthermia treatment, and to offer some theoretical understanding as to how some NB frequencies still can be focused.
 
 \section{Heisenberg's uncertainty principle and its signifance for Electromagnetic waves}
 The Fourier theory states that any function in space can be divided into a linear combination of plane waves 
@@ -159,7 +168,7 @@ This however is a consequence of the particular form we have stated the uncertai
 \footnotetext{The problem of summing the amplitude of the different components $E_i$ to get the final intensity $|E|^2$ will be dealt with later.}
 
 \section{The Slepian-Landau-Pollak uncertainty relations}
-In a series of papers from the 60's D.Slepian, H.J.Landau and H.O.Pollak investigated how much energy a frequency-limited function can keep if it is restricted in space. By doing this one can reach an inequality on the form
+In a series of papers from the 60's D. Slepian, H.J. Landau and H.O. Pollak investigated how much energy a frequency-limited function can keep if it is restricted in space. By doing this one can reach an inequality on the form
 \begin{equation}
 \abs{S}\abs{\Omega} \geq c(\alpha,\beta),
 \end{equation}
@@ -262,12 +271,12 @@ filed region without a gap in the center, but for the frequency domain
 we want to exclude the center part of the region. Let $S$ be a filled
 circle disc of radius $R$, and $\Omega$ be the finite thickness circle
 ring with outer radius $\Gamma$ and inner radius $q\Gamma$, $0\le q<1$.
+
+\section{Slepian's method using Fourier transforms}
 The methodology used here is a direct translation of the ones used in
 \cite{PSWF-I_1961} and \cite{PSWF-IV_1964} to $S$ and $\Omega$.
 
 
-% As said before, $\Omega$ is a finite thickness circle ring with
-% outer radius $\Gamma$ and inner radius $q\Gamma$. 
 From the definition of the kernel $K_s$ in eqn. (6) in
 \cite{PSWF-IV_1964}, we get 
 \begin{equation}
@@ -376,13 +385,20 @@ then the integral is just $2\pi$. We now get
 = \sum_{n=-\infty}^\infty \ee^{\ii n\theta} 
 \int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k'),
 \end{equation}
-which has to hold for all $\theta$ and therefore
+or more simply
 \begin{equation}
-\lambda_n b_n(k) = \int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k'),
+\lambda_n b_n(k) = \int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k').
 \end{equation}
 
+The problem however, with this method is that the kernel Fourier
+coefficients, $a_n(k, k')$, cannot be calculated analytically. This
+makes for some very costly numerical calculations if $a_n(k, k')$
+has to be calculated numerically for each pair of $k$ and $k'$.
 
 
+\subsection{A similar method using Hankel transforms}
+As a direct translation Slepian's method yielded a numerically 
+expensive method, we also looked 
 
 
 
