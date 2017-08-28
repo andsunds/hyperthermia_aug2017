@@ -70,7 +70,7 @@ n=32;
 %C=[.1 .5 1 1.5 2 3 5 10];
 C=linspace(0.2,12.6,n);
 R=1;
-neigs=1;
+n_eigs=1;
 rot_order=0;
 Q=[.1, .3, .5, .7, .9];
 data=zeros(n,length(Q)); %init
@@ -109,7 +109,7 @@ tic
 
 parfor j=1:n
     Y=repmat(x{j}',L,1);
-    data(j,b)=eigs(T1{j}.*Y,A{j}.*Y,neigs)*RT1^2/R^2*Gamma{j}*(1-q)/L;
+    data(j,b)=eigs(T1{j}.*Y,A{j}.*Y,n_eigs)*RT1^2/R^2*Gamma{j}*(1-q)/L;
 end
 time=toc;
 hr  = floor(time/3600); time=time-hr*3600;
@@ -135,14 +135,15 @@ save(sprintf('data/D2_ring-%d_L-%d_%s.mat',rot_order,L,todaystr),'L','C','Q','da
 %% D=2, ring, BESSEL, c-loop 
 clc;clear all
 
-L=20;
+L=100;
 n=32;
 %C=[.1 .5 1 1.5 2 3 5 10];
-C=linspace(.2,12.6,n);
+C=linspace(0.2,12.6,n);
 R=1;
-HS=10;
-neigs=1;
+
+n_eigs=1;
 rot_order=0;
+HS=2;
 Q=[.1, .3, .5, .7, .9];
 data=zeros(n,length(Q)); %init
 
@@ -152,14 +153,17 @@ filename=sprintf('data/log-ring_start_%s.txt',todaystr);
 file=fopen(filename,'a');
 
 for b=1:length(Q) 
-clear A Gamma x
-
 q=Q(b);
 
 tic
 
 parfor j=1:n
-    data(j,b)=ring2D_AB(L,C(j),q,HS, rot_order,neigs);
+    %Calculate the largest eigenvalue for each c.
+    [D,V]=ring2D_sym(L,C(j),q,rot_order,1);
+    u=HS*C(j)*linspace(q,1,L);
+    Kh=calc_sym_mtrx(@(a,b) coef(a,b,rot_order),u);
+    data(j,b)=D/(V'*(Kh*HS*C(j)*(1-q)/L)*V);
+    
 end
 time=toc;
 hr  = floor(time/3600); time=time-hr*3600;
@@ -169,8 +173,6 @@ secdec=floor(1000*(time-sec));
 fprintf(file,'2D eigenvalues, circle ring BESSEL.\n');
 fprintf(file,'%s \n',datestr(now,'yyyy-mm-dd_HH:MM:SS'));
 fprintf(file,'Elapsed time %02d:%02d:%02d.%03d\n\n',hr,min,sec,secdec);
-
-
 fprintf('q = %d done, %s\n',q,datestr(now,'yyyy-mm-dd_HH:MM:SS'))
 end
 
