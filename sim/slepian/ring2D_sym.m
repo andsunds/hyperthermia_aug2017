@@ -13,8 +13,7 @@ function [ D, V ] = ring2D_sym( L, c, q, rot_order, n_eigs )
 
 %           Rs=1
 v=c*linspace(q,1,L)'; %=k*Rs
-%Ks=coef_mtrx( v, rot_order ).*sqrt(v*v');
-Ks=calc_sym_mtrx( @(a,b) coef(a,b,rot_order), v);%.*sqrt(v*v');
+Ks=calc_sym_mtrx( @(a,b) coef(a,b,rot_order), v);
 
 if nargout >1
     [V,D]=eigs(Ks,n_eigs,'LM');  %eigenfunction(s) and eigenvalue(s)

@@ -135,12 +135,12 @@ save(sprintf('data/D2_ring-%d_L-%d_%s.mat',rot_order,L,todaystr),'L','C','Q','da
 %% D=2, ring, BESSEL, c-loop 
 clc;clear all
 
-L=40;
-n=64;
+L=20;
+n=32;
 %C=[.1 .5 1 1.5 2 3 5 10];
 C=linspace(.2,12.6,n);
 R=1;
-HS=15;
+HS=10;
 neigs=1;
 rot_order=0;
 Q=[.1, .3, .5, .7, .9];
@@ -159,7 +159,7 @@ q=Q(b);
 tic
 
 parfor j=1:n
-    data(j,b)=ring2D(L,C(j),q, rot_order,neigs);
+    data(j,b)=ring2D_AB(L,C(j),q,HS, rot_order,neigs);
 end
 time=toc;
 hr  = floor(time/3600); time=time-hr*3600;
@@ -176,7 +176,7 @@ end
 
 fprintf(file,'data is a matrix with each col corresponding to a q value in Q.\n\n\n');
 fclose(file);
-save(sprintf('data/D2_ring-bessel-AB-%d_L-%d_%s.mat',rot_order,L,todaystr),'L','C','Q','data')
+%save(sprintf('data/D2_ring-bessel-AB-%d_L-%d_%s.mat',rot_order,L,todaystr),'L','C','Q','data')
 %pause(1)
 %save(sprintf('data/D2_ring_MATRIX-%d_L-%d_%s.mat',rot_order,L,todaystr),'H','T1','T2')
 
