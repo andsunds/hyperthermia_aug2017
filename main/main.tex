@@ -1,5 +1,5 @@
 \documentclass[11pt,a4paper, 
-english, swedish %% Make sure to put the main language last!
+swedish,english %% Make sure to put the main language last!
 ]{article}
 \pdfoutput=1
 
@@ -103,12 +103,12 @@ which allows the use of phasors,
 \begin{equation*}
 \vb*E(\vb*x,t)=\Re\qty[\vb*E(\vb*x)\ee^{-\ii\omega t}].
 \end{equation*}
-In a lossless homogeneous media, with this notation, Maxwell's equations lead to
+In a lossless homogeneous media, with this notation, Maxwell's equations lead to the Helmholtz equation
 \begin{equation}
-  \label{eq:wave_free}
+  \label{eq:Helmholtz}
   \laplacian  \vb*E + \frac{\omega^2}{v^2}\vb*E=0,
 \end{equation} 
-where the speed of propagation $v=\frac{1}{\sqrt{\mu \epsilon}}$ has been inroduced. This equation has a solution
+where the speed of propagation $v=\frac{1}{\sqrt{\mu \epsilon}}$ has been introduced. This equation has a solution
 \begin{equation*}
 \vb*E(\vb*x)=\vb*A\ee^{i\vb*k \cdot \vb*x},
 \end{equation*}
@@ -213,7 +213,7 @@ and an inner product on the $\Omega$-space by
 the fraction of energy that an $\Omega$-limited function $f$ can have in a region $S$ can be written as
 \begin{equation}
   \label{eq:energy_frac_final}
-\frac{A_s}{A}=\frac{\int_\Omega\qty[I^{[\Omega S]}tilde{f}](\vb*k)\tilde{f}^*(\vb*k)\id^Dk}{\int_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk}=\frac{ \langle I\tilde{f}, \tilde{f}\rangle}{\langle \tilde{f}, \tilde{f} \rangle}.
+\frac{A_s}{A}=\frac{\int_\Omega\qty[I^{[\Omega S]}\tilde{f}](\vb*k)\tilde{f}^*(\vb*k)\id^Dk}{\int_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk}=\frac{ \langle I\tilde{f}, \tilde{f}\rangle}{\langle \tilde{f}, \tilde{f} \rangle}.
 \end{equation}
 
  In the litterature integral operators of the kind \eqref{eq:int_op} are called Hilbert-Schmidt integral operators if the kernel is square-integrable in $\Omega$, and such an operator is compact. Since the regions $S$ and $\Omega$ are bounded square-integrability holds for the kernel \eqref{eq:kernel} and since it is also complex symmetric with respect to its arguments, $K_s(\vb*k-\vb*k')=K_s^*(\vb*k'-\vb*k)$, the integral operator is self-adjoint with respect to the inner product \eqref{eq:in_prod}. From the Spectral theorem it now follows that the functions fullfilling the eigenvalue equation
@@ -272,7 +272,7 @@ we want to exclude the center part of the region. Let $S$ be a filled
 circle disc of radius $R$, and $\Omega$ be the finite thickness circle
 ring with outer radius $\Gamma$ and inner radius $q\Gamma$, $0\le q<1$.
 
-\section{Slepian's method using Fourier transforms}
+\subsubsection{Slepian's method using Fourier transforms}
 The methodology used here is a direct translation of the ones used in
 \cite{PSWF-I_1961} and \cite{PSWF-IV_1964} to $S$ and $\Omega$.
 
@@ -396,12 +396,67 @@ makes for some very costly numerical calculations if $a_n(k, k')$
 has to be calculated numerically for each pair of $k$ and $k'$.
 
 
-\subsection{A similar method using Hankel transforms}
-As a direct translation Slepian's method yielded a numerically 
-expensive method, we also looked 
+\subsubsection{A similar method using Hankel transforms}
+%As a direct translation Slepian's method yielded a numerically 
+%expensive method, we also looked 
+Slepian's method looked at the Fourier representation of the EM-field and looked at how a function limited in the Fourier ($\vb*k$) space behaved in the $\vb*x$-space. Although we were able to extract useful information it required alot of manipulations of the formulas and also in the end some costly numerical calculations. The reason behind this is that the Fourier ($\vb*k$) space speaks of plane waves which form solutions to the wave equation in cartesian coordinates while we were interested in geometries best described by polar coordinates. In an alternative approach we therefore started in a polar description, developed a base for the EM-field and used this to maximize a quotient of the form \eqref{eq:energy_frac_final}.
 
+In polar coordinates the Helmholtz equation \eqref{eq:Helmholtz} takes the form
+\begin{equation}
+\label{eq:Helmholtz_polar}
+(\pdv[2]{r}+\frac{1}{r}\pdv{r}+\frac{1}{r^2}\pdv[2]{\theta})E+k^2E=0,
+\end{equation}
+with $k^2=\omega^2\mu\epsilon$. For a separable function $\phi(r,\theta)=R(r)\Theta(\theta)$ the equation can be separated into two
+\begin{align}
+&n^2\Theta-\dv[2]{\Theta}{\theta}=0 \label{eq:angular} \\
+&r^2\dv[2]{R}{r}+r\dv{R}{r}+(k^2r^2-n^2)R=0 \label{eq:radial}.
+\end{align}
+Equation \eqref{eq:angular} has a solution of plane waves
+\begin{equation}
+\label{eq:sol_angular}
+\Theta(\theta)=c_n\ee^{\ii n \theta}.
+\end{equation}
+Since $\Theta$ must be periodic over $2\pi$, $n$ must be an integer which motivates the name $n^2$ for the previous arbitrary constant. We notice that these form a base for functions defined on the interval$[0,2\pi)$
+The radial equation \eqref{eq:radial} on the other hand has a solution of Bessel functions
+\begin{equation}
+\label{eq:sol_radial}
+R(r)=a_nJ_{n}(kr)+b_nN_{n}(kr).
+\end{equation}
+These functions form a base for functions defined on $[0,\infty)$ but the second kind of Bessel function $N_n$  cannot represent any physical function since they have a singularity in 0 and will therefore be disregarded.
+The final solution to \eqref{eq:Helmholtz_polar} can now be written as
+\begin{equation*}
+\phi_n(r,\theta)=a_nJ_n(kr)\ee^{\ii n \theta}.
+\end{equation*}
+Since the $r$ and $\theta$-components each form a base for their respective intervals an arbitrary function satisfying Helmholtz equation can be written as a sum of these
+\begin{equation}
+E(r,\theta)=\sum_{n=-\infty}^{\infty} a_nJ_n(kr)\ee^{\ii n \theta}.
+\end{equation}
 
-
+The Helmholtz equation \eqref{eq:Helmholtz} is valid for a given frequency $\omega$. To get the EM-field of many different frequency components one has to sum over all of them, or in the continous limit integrate. To integrate over $\omega$ is the same as integrating over $k$ which corresponds to the radius in the Fourier space. To get a direct analog to the circle rings previously discussed we can therefore let $k$ go from $q\Gamma$ to $\Gamma$ and obtain a general EM-field:
+\begin{equation}
+\label{eq:polar_wave_general}
+E(r,\theta)=\int_{q\Gamma}^\Gamma \id k \sum_{n=-\infty}^{\infty} a_n(k) J_n(kr)\ee^{\ii n \theta}
+=\sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k kb_n(k) J_n(kr)\ee^{\ii n \theta},
+\end{equation}
+where in the last step $a_n(k)$ has been replaced with $kb_n(k)$ for later convenience.
+This expression can now be used to calculate the energy in a bounded region $S$ following a similar procedure to Slepian's method
+\begin{equation}
+\begin{aligned}
+\int_S \id^2x \abs{E}^2&= \int_S \int_{q\Gamma}^\Gamma \id k \sum_{n= -\infty}^{\infty} kb_n(k) J_n(kr)\ee^{\ii n \theta} \int_{q\Gamma}^\Gamma \id k' \sum_{m= -\infty}^{\infty} \frac{b_m^*(k')}{k'} J_n(k'r)\ee^{-\ii m \theta}\\
+&=\int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k' \sum_{n= -\infty}^{\infty} \sum_{m= -\infty}^{\infty} \int_{r=0}^{R_s} \id r r J_n(kr)J_m(k'r)\underbrace{\int_{\theta=0}^{2\pi} \id \theta \ee^{\ii (n-m) \theta}}_{=2\pi \delta_{mn}}\\
+&=2\pi \sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k'  kb_n(k) k'b_n^*(k') \underbrace{\int_{r=0}^{R_s} \id r r J_n(kr) J_n(k'r)}_{K_s^n(k,k')}\\
+&=2\pi \sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k'  kb_n(k) k'b_n^*(k') K_S^n(k,k')\\
+&=2\pi \sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle,
+\end{aligned}
+\end{equation}
+where we in the last step defined the integral operator
+\begin{equation*}
+[I_S^nb_n](k')=\int_{q\Gamma}^\Gamma \id k k K_S^n(k,k')b_n(k),
+\end{equation*}
+and the inner product
+\begin{equation*}
+\langle u,v \rangle = \int_{q\Gamma}^\Gamma \id k k u(k), v(k).
+\end{equation*}
 
 
 
