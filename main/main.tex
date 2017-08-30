@@ -439,8 +439,9 @@ E(r,\theta)=\int_{q\Gamma}^\Gamma \id k \sum_{n=-\infty}^{\infty} a_n(k) J_n(kr)
 =\sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k kb_n(k) J_n(kr)\ee^{\ii n \theta},
 \end{equation}
 where in the last step $a_n(k)$ has been replaced with $kb_n(k)$ for later convenience.
-This expression can now be used to calculate the energy in a bounded region $S$ following a similar procedure to Slepian's method
+This expression can now be used to calculate the energy in a disk $S$ following a similar procedure to Slepian's method
 \begin{equation}
+  \label{eq:energy_bessel}
 \begin{aligned}
 \int_S \id^2x \abs{E}^2&= \int_S \int_{q\Gamma}^\Gamma \id k \sum_{n= -\infty}^{\infty} kb_n(k) J_n(kr)\ee^{\ii n \theta} \int_{q\Gamma}^\Gamma \id k' \sum_{m= -\infty}^{\infty} \frac{b_m^*(k')}{k'} J_n(k'r)\ee^{-\ii m \theta}\\
 &=\int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k' \sum_{n= -\infty}^{\infty} \sum_{m= -\infty}^{\infty} \int_{r=0}^{R_s} \id r r J_n(kr)J_m(k'r)\underbrace{\int_{\theta=0}^{2\pi} \id \theta \ee^{\ii (n-m) \theta}}_{=2\pi \delta_{mn}}\\
@@ -450,13 +451,44 @@ This expression can now be used to calculate the energy in a bounded region $S$ 
 \end{aligned}
 \end{equation}
 where we in the last step defined the integral operator
-\begin{equation*}
-[I_S^nb_n](k')=\int_{q\Gamma}^\Gamma \id k k K_S^n(k,k')b_n(k),
-\end{equation*}
+\begin{equation}
+  \label{eq:int_op_bessel}
+[I_S^nb_n](k'):=\int_{q\Gamma}^\Gamma \id k k K_S^n(k,k')b_n(k),
+\end{equation}
 and the inner product
+\begin{equation}
+  \label{eq:in_prod_bessel}
+\langle u,v \rangle := \int_{q\Gamma}^\Gamma \id k k u(k), v(k).
+\end{equation}
+
+If we let the radius $R_S$ of the disk $S$ tend to infinity the kernel $K_S$ tends to a $\delta$-function in $(k-k')$ divided by $k$;
 \begin{equation*}
-\langle u,v \rangle = \int_{q\Gamma}^\Gamma \id k k u(k), v(k).
+K_S(k,k')  := \int_{r=0}^{R_s} \id r r J_n(kr) J_n(k'r) \to \frac{\delta(k-k')}{k}, R_S \to \infty.
+  \end{equation*}
+This implies that the integral operator \ref{eq:int_op_bessel} tends to the identity operator $\mathbb{I}$;
+\begin{equation*}
+  \begin{aligned}
+    [I_S^nb_n](k')&:=\int_{q\Gamma}^\Gamma \id k k K_S^n(k,k')b_n(k) \to \int_{q\Gamma}^\Gamma \id k k \frac{\delta(k-k')}{k}b_n(k)
+    =b_n(k') \qc R_S \to \infty \forall b_n(k)\\
+  &\implies I_S^n \to \mathbb{I}, R_S \to \infty
+   \end{aligned}
 \end{equation*}
+
+Equation \eqref{eq:energy_bessel} now implies that the fraction of energy one can obtain in a disk of radius $R_S$ becomes the a fraction of sums
+\begin{equation}
+  \label{eq:energy_frac_bessel}
+\frac{\int_S \id^2x \abs{E}^2}{\int_{\mathbb{R}^2} \id^2x \abs{E}^2}=\frac{\sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle}{\sum_{m=-\infty}^{\infty} \langle b_m,b_m \rangle},
+\end{equation}
+Since a scaling of the $b_n$:s will not affect the fraction we can always normalize them so that $\sum_{n=-\infty}^{\infty} \langle b_n,b_n \rangle}=1$, which is equivalent to normalize the EM-field.
+Now the maximum of \eqref{eq:energy_frac_bessel} can be proven to be the largest eigenvalue to the family of operators $\{I_n\}$;
+\begin{equation*}
+  \begin{aligned}
+   & \text{max}_{b_n} \sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle
+    \leq \sum_{n=-\infty}^{\infty} \text{max}_{b_n}\langle [I_S^nb_n],b_n \rangle}\\
+&\qq*{which since} I_S \qq{is hermitian under the scalar product \ref{eq:in_prod_bessel} 
+  \end{aligned}
+\end{equation*}
+
 
 
 
