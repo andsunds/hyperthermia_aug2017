@@ -498,65 +498,73 @@ Now the maximum of \eqref{eq:energy_frac_bessel} can be proven to be the largest
 Landau-Pollack-Slepian Theory}
 \newcommand{\varD}{\ensuremath{\mathcal{D}}}
 
-In the previous section, we saw that the teoretical limit, to how much
-of the energy in a function bandlimited to the frequency region
-$\Omega$ can be conentrated in the real space region \varD, is set by
-an integral equation of the form 
-\begin{equation} \label{eq:int-eig}
-\lambda \Psi(\kappa) 
-= \oldint_{\Omega} \rd{k}\, K_\varD(\kappa, k) \Psi(k)
-\qcomma \kappa\in\Omega.
+In the previous section we have been occupied by integral eigenvalue
+equations of the form
+\begin{equation} %\label{eq:int-eig}
+\lambda E(k) 
+= \oldint_{\Omega} \rd^D{k}\, K(k, k') E(k')
+\qcomma k, k'\in\Omega.
 \end{equation}
-This section will provide a method to solve this type of integral
-eigenvalue equation numerically.
+We have also put down some work to reduce higher-dimensional
+integrals to one-dimensional ones
+\begin{equation} \label{eq:int-eig}
+\lambda \psi(k) 
+= \oldint_{I} \rd{k}\, K(k, k') \psi(k'),
+\end{equation}
+where the integration is now over some interval 
+$I=[\alpha, \beta]$. This was done so that the numerical method
+presented here could be applied. 
+
 
 \subsection{Discretization of the integral equation}
-The integral is discretized by
+Let's discretize the integral according to
 \begin{equation} \label{eq:inttosum}
 \begin{aligned}
-\oldint_\Omega\rd{k} &\to \sum_{n=1}^N\Delta{k}
-=\frac{\abs{\Omega}}{N} \sum_{n=1}^N,\\
-\Psi(k) \to \Psi_n = \Psi(k_n) &\qcomma
-K_\varD(\kappa, k) \to K_{m, n} = K_\varD(k_m, k_n).
+\oldint_I\rd{k} &\to \sum_{n=1}^N\Delta{k}
+=\frac{\abs{I}}{N} \sum_{n=1}^N,\\
+\psi(k) \to \psi_n = \psi(k_n) &\qcomma
+K(k, k') \to K_{m, n} = K(k_m, k_n),
 \end{aligned}
 \end{equation}
-where $\abs{\Omega}$ is the size of the region $\Omega$.
-%Next, $\Psi$ and $K_\varD$ are discretized via
-Note that $\kappa \to k_m$ (and not $\kappa_m$) since both 
-$k, \kappa\in\Omega$, and thus they are both discretized in the same
-way. 
+where $\abs{I}=\beta-\alpha$ is the size of the interval $I$.
 With these discretizations, \eqref{eq:int-eig} discretizes to
 \begin{equation}
-\lambda\Psi_m = \frac{1}{N} \sum_{n=1}^N K_{m, n} \Psi_n
+\lambda\Psi_m = \frac{\abs{I}}{N} \sum_{n=1}^N K_{m, n} \Psi_n
 \end{equation}
 which is just a matrix eigenvalue equation
 \begin{equation} \label{eq:mtx-eig}
 \Lambda \Psi = \mathsf{K}\Psi,
 \end{equation}
-where $\Lambda = N\lambda$ and $\mathsf{K}$ is the $N\times N$ matrix
+where $\Lambda = N\lambda/\abs{I}$ and $\mathsf{K}$ is the $N\times N$ matrix
 whose element $(m, n)$ is $K_{m, n}$. From here, there are many high
 performance linear algebra libraries to find the eigenvalues and
 eigenvector to \eqref{eq:mtx-eig} numerically. 
 
-\subsubsection{Physical interpretation}
-An interesting physical interpretation of the discretization is that
-the operation \eqref{eq:inttosum} can be viewed as introducing
-\begin{equation}
-%K_\varD(\kappa, k) \to K_\varD(\kappa, k) \times
-\Delta{k}\qty[\delta(k-k_0) + \delta(k-k_1) +\ldots+\delta(k-k_N)]
-\end{equation}
-into the integral, and effectively limiting the frequencydomain
-$\Omega$ to the dicrete frequencies $k_n$. 
+%\subsubsection{Symmetrization }
+We can also note that some effort was put into making the integral
+kernel symmetric. This not only has the effect of guarateeing that the
+eigenvectors of different eigenvalues will be orthogonal, but is also
+beneficial to most numerical methods to find eigenvalues. 
 
-This idea could possibly be more cloesly related to reality, where the
-differnt antennas only transmitts in certain dicrete frequencies. And
-thus the discretized eigenvalue problem gives the theoretical maximum
-energy in a bounded region in space from a signal restriced to the
-chosen frequencies. 
-It is however worth pointing out that this result has only been proven
-for the 1D case\cite{PSWF-V_1978}, but there is no reason to believ
-that the discetized version cannot be extended to higher dimension
-like in the continuous case. 
+
+% \subsubsection{Physical interpretation}
+% An interesting physical interpretation of the discretization is that
+% the operation \eqref{eq:inttosum} can be viewed as introducing
+% \begin{equation}
+% \Delta{k}\qty[\delta(k-k_0) + \delta(k-k_1) +\ldots+\delta(k-k_N)]
+% \end{equation}
+% into the integral, and effectively limiting the frequencydomain
+% $\Omega$ to the dicrete frequencies $k_n$. 
+
+% This idea could possibly be more cloesly related to reality, where the
+% differnt antennas only transmitts in certain dicrete frequencies. And
+% thus the discretized eigenvalue problem gives the theoretical maximum
+% energy in a bounded region in space from a signal restriced to the
+% chosen frequencies. 
+% It is however worth pointing out that this result has only been proven
+% for the 1D case\cite{PSWF-V_1978}, but there is no reason to believ
+% that the discetized version cannot be extended to higher dimension
+% like in the continuous case. 
 
 
 
