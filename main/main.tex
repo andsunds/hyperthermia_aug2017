@@ -483,12 +483,23 @@ Since a scaling of the $b_n$:s will not affect the fraction we can
 always normalize them so that $\sum_{n=-\infty}^{\infty} \langle b_n, b_n \rangle=1$, which is equivalent to normalize the EM-field.
 Now the maximum of \eqref{eq:energy_frac_bessel} can be proven to be the largest eigenvalue to the family of operators $\{I_n\}$;
 \begin{equation*}
-  \begin{aligned}
-   & \text{max}_{b_n} \sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle
-    \leq \sum_{n=-\infty}^{\infty} \text{max}_{b_n}\langle [I_S^nb_n],b_n \rangle\\
-&\qq*{which since} I_S \qq{is hermitian under the scalar product \ref{eq:in_prod_bessel}} 
-  \end{aligned}
+  \text{max}_{b_n} \sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle
+  \leq \sum_{n=-\infty}^{\infty} \text{max}_{b_n}\langle [I_S^nb_n],b_n \rangle,
+  \end{equation*}
+since $I_S$ is hermitian under the scalar product \ref{eq:in_prod_bessel} this is limited by
+\begin{equation*}
+  \sum_{n=-\infty}^{\infty}\lambda_n \langle b_n, b_n \rangle \leq \lambda_{\text{max}}\sum_{n=-\infty}^{\infty}\langle b_n, b_n\rangle=\lambda_{\text{max}},
 \end{equation*}
+where $\lambda_n$ denotes the largest eigenvalue of $I_S^n$ and $\lambda$_{max} the largest of these.
+If we choose the $b_n$:s so that
+\begin{equation*}
+  b_n(k)
+  =\begin{cases} &\phi_n \qc \lambda_n=\lambda_{\text{max}}  \\
+  &0 \qc \text{else}
+  \end{cases}
+\end{equation*}
+we obtain an equality which proves the statement.
+  
 
 
 
