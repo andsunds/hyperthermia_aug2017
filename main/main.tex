@@ -73,15 +73,142 @@ swedish,english %% Make sure to put the main language last!
 \section{Introduction}
 %\todo[inline]{General intro to hyopthermia and freq dep.}
 
-This project will study the efficacy of ultra-wideband (UWB) hyperthermia treatmants in comparison to narrowband (NB). Previous studies have mostly been conducted using numerical or experimantal methods. In this project however, we intend to investigate this subject from a more theoretical and mathematical stand point. 
+The current hyperthermia treatments mainly utilizes signals consisting of single or a narrow band (NB) of frequencies since simulations and numerical studies have not shown an increase of efficacy by using a wide band (WB). 
+However, in mathematical theory there exists a number of uncertainty  principals stating that a function cannot be highly localized in the space and frequency domains at the same time which would encourage the use of a wide band of frequencies, in contrast to prior studies.
 
-There exists a number of uncertainty  principals stating that a function cannot be highly localized in the space and frequency domains at the same time. An electromagnetic field coming from an UWB signal will be less localized in the frequency domain than a NB one and should therefore lead to better localization in the space domain. However, prior studies have found indications that this is not the case and an UWB approach does not significantly improve performance over NB.
+This project aims to shed some light to this apparent inconsistency by taking a closer look at relevant uncertainty principles and applying them to a simplified case of scalar fields satisfying the wave equation in two dimensions.
+First the Heisenberg inequality, a lower limit of the product of the field's variance in the two domains in  will be applied.
+Next, to get something more applicable to hyperthermia an uncertainty principle originally developed by D. Slepian, H.J. Landau and H.O. Pollak, which speaks of how well a function limited in frequency can be localized in a bounded region of space. At this point we will also introduce a polar wave decomposition to yield a more straight forward application of the theory than the normal plane wave decomposition.
 
-This project aims to find some theoretical grounds for the reasons behind this by taking a closer look at relevant uncertainty principles and calculating values for a simplified case of hyperthermia treatment. More specifically, the head and tumour will be regarded as two cocentrical disks
+Finally the results will be discussed from a hyperthermia treatment point of view and we will discuss some of the limitations as well as possible extensions of the theory.
 
-%The goal of this project will be to explain why the Heissenberg inequality breaks down in a scenario like hyperthermia treatment, and to offer some theoretical understanding as to how some NB frequencies still can be focused.
 
-\section{Heisenberg's uncertainty principle and its signifance for Electromagnetic waves}
+\subsection{Limitations}
+The human body contains many different materials and therefore a real hyperthermia treatment planning will often involve numerically solving Maxwell's equations to simulate how the EM-field will look like in the specific case.
+
+Since this project aims to extract what limitations the wave \emph{nature} sets we are not concerned with the actual wave propagation -- instead we ask the question, given a perfect way to create or propogate the EM-field what limits does a narrow band of frequencies and the wave equation set on the optimal distribution in a bounded region?
+
+With this in mind the study is limited to a homogeneous material stretching through all space. The material is assumed lossfree although the case of lossy materials and dampened EM-field's will be discussed briefly in chapter \ref{ch:discussion}.
+
+Further we limit ourselves to 2 dimensions since this suffices to capture the essential wave nature (a circular ring of wavenumbers as opposed to a point in 1 dimension) whilst not overly complicating the mathematics. 
+In this space we try to focus the distribution to a simple body, a disk since we believe that most more complicated bodies would yield approximately the same results.
+
+We will also limit our attention to scalar fields, real EM-fields are in fact vectors with certain limitations to its directions which would produce slightly tighter bounds then what we achieved but this was unfortunately beyond the scope of this project.
+
+Finally, for a real hyperthermia treatment it is not the intensity of the EM-field that is of concern but rather its mean-value in time that is of interest. This has major implications for the frequency dependence of the efficacy and will be discussed to some length in chapter \ref{ch:discussion}. However, the main part of this work is concerned with the EM-field itself and not its time mean.
+
+
+\subsection{Theory}
+Assuming a harmonic timedependence, the electric field can be represented, in complex notation, by
+\begin{equation}
+\vb*E(\vb*x,t)=\vb*E(\vb*x)\ee^{-\ii\omega t}%\cos(\omega t).
+\end{equation}
+%which allows the use of phasors,
+%\begin{equation}
+%\vb*E(\vb*x,t)=\Re\qty[\vb*E(\vb*x)\ee^{-\ii\omega t}].
+%\end{equation}
+In a loss-less and source-less homogeneous media the Maxwell equations reduce to
+\begin{equation}
+\begin{cases}
+\laplacian  \vb*E + k^2\vb*E=0,\\
+\div\vb*E = 0,
+\end{cases}
+\end{equation} 
+where $k^2 = \omega^2/v^2$ with $v=\frac{1}{\sqrt{\mu \epsilon}}$ being the speed of propagation. 
+
+To simplify matters however, we will limit the scope of this project to scalar fields satisfying the Helmholtz equation
+\begin{equation}
+  \label{eq:Helmholtz}
+  \qty(\laplacian + k^2)E=0.
+\end{equation} 
+
+\subsubsection{Plane wave decomposition}
+One solution to the Helmoholtz equation \eqref{eq:Helmholtz} are the plane waves
+\begin{equation}\label{eq:plane-wave}
+E(\vb*x)=A \ee^{\ii\vb*k \cdot \vb*x},
+\end{equation}
+were the wavevector $\vb*k$ is any vector such that $\vb*k\vdot\vb*k=k^2$, and $A$ is a constant amplitude. 
+
+The next step is to allow more for more than one frequency. The solution for each frequency will be of the form \eqref{eq:plane-wave}, each with its own amplitude $A(\vb*k)$. These solutions can then be summed up over all frequencies (magnitude as well as directions of $\vb*k$) and the final $E$ field becomes\footnotemark{}
+%\begin{equation} \label{eq:gen_sol}
+% E(\vb*x)=\int%_{\abs{\vb*k}=\frac{\omega}{v}}
+% \vb*A(\vb*k)\ee^{\ii\vb*k\cdot\vb*x}\id^3k,
+%\end{equation}
+%where the vectoramplitude $\vb*A(\vb*k)$ now represents the amplitude of each wavecomponent $\ee^{\ii\vb*k \cdot \vb*x}$.
+%The EM-field can also be expanded by its Fourier Transform
+\begin{equation} \label{eq:f_exp}
+E(\vb*x)= (2\pi)^{-D} \oldint_{\vb*k} \rd^Dk\,
+A(\vb*k) \ee^{\ii\vb*k\cdot\vb*x}.
+\end{equation}
+\footnotetext{The factor of $(2\pi)^{-D}$ is just for convenience in the comparison with the $D$ dimensional Fourier transform.}
+
+We can now identify \eqref{eq:f_exp} as an inverse Fourier transform of $A(\vb*k)$, and thus $A(\vb*k)$ has to be the Fourier transform of $E(\vb*x)$.
+%Comparing the Fourier expansion (\ref{eq:f_exp}), an integral over the whole $\vb*k$-space, with the general solution (\ref{eq:gen_sol}), an integral only over the subspace where $\abs{\vb*k}=\frac{\omega}{v}$ one can identify an expression for the Fourier transform $\widetilde{\vb*E}(\vb*k)$ as
+%\begin{equation}
+%  \label{eq:f_transf}
+%  \widetilde{\vb*E}(\vb*k)=2\pi\vb*A(\vb*k)\delta(\abs{\vb*k}-\frac{\omega}{v})=2\pi\vb*A(\theta,\phi)\delta(\abs{\vb*k}-\frac{\omega}{v}).
+%\end{equation}
+%Here a $\delta(\abs{\vb*k}-\frac{\omega}{v})$-term has been introduced to display the fact that the Fourier transform $\widetilde{\vb*E}(\vb*k)$ vanishes where $\abs{\vb*k} \neq\frac{\omega}{v}$.
+%This is further emphasized in the last step where one sees the amplitude $\vb*A$ not as a function of the wavevector $\vb*k$ but as a function of the angles in the $\vb*k$-space $\theta$ and $\phi$.
+
+%In short, for each frequency $\omega$ the Fourier transform of the EM-field is concentrated to a sphere shell with radius $\abs{\vb*k}=\frac{\omega}{v}$ and vanishes elsewhere.
+
+\subsubsection{Cylindrical wave decomposition in 2 dimensions}
+The 2 dimensional Helmholtz equation \eqref{eq:Helmholtz} in polar cooridnats is
+\begin{equation}
+\label{eq:Helmholtz_polar}
+\qty(\pdv[2]{r}+\frac{1}{r}\pdv{r}+\frac{1}{r^2}\pdv[2]{\theta})E+k^2E=0,
+\end{equation}
+%
+%For a separable function $\phi(r,\theta)=R(r)\Theta(\theta)$ the equation separates into
+%\begin{align}
+%&n^2\Theta+\dv[2]{\Theta}{\theta}=0 \label{eq:angular} \\
+%&r^2\dv[2]{R}{r}+r\dv{R}{r}+(k^2r^2-n^2)R=0 \label{eq:radial}.
+%\end{align}
+%Equation \eqref{eq:angular} has harmonic solutions
+%\begin{equation} \label{eq:sol_angular}
+%\Theta(\theta)=c_n\ee^{\ii n \theta}.
+%\end{equation}
+%Since $\Theta$ must be $2\pi$ periodic, $n$ must be an integer. 
+%%We notice that these form a base for functions defined on the interval$[0,2\pi)$
+%The radial equation \eqref{eq:radial} on the other hand has a solution of Bessel functions
+%\begin{equation}
+%\label{eq:sol_radial}
+%R(r)=a_n J_{n}(kr)+a'_n N_{n}(kr).
+%\end{equation}
+%We are however only interested in solutions \emph{without} singularities, wherefore only Bessel functions of the first kind are treated. % $a'_n=0$
+%%These functions form a base for functions defined on $[0, \infty)$ but the second kind of Bessel function $N_n$  cannot represent any physical function since they have a singularity in 0 and will therefore be disregarded.
+%The final solution to \eqref{eq:Helmholtz_polar} can be written as
+%\begin{equation*}
+%\phi_n(r,\theta)=a_nJ_n(kr)\ee^{\ii n \theta}.
+%\end{equation*}
+%
+%Since the Helmholtz equation is linear, an arbitrary non-singular function satisfying it can be written as a sum 
+Which has the standard non-singular solution
+\begin{equation}
+E(r, \theta)=\sum_{n=-\infty}^{\infty} a_nJ_n(kr)\ee^{\ii n \theta}.
+\end{equation}
+
+%The Helmholtz equation \eqref{eq:Helmholtz} is valid for a given frequency $\omega$. To get the EM-field of many different frequency components one has to sum over all of them, or in the continous limit integrate. To integrate over $\omega$ is the same as integrating over $k$ which corresponds to the radius in the Fourier space. To get a direct analog to the circle rings previously discussed we can therefore let $k$ go from $q\Gamma$ to $\Gamma$ and obtain a general EM-field:
+Analogously to the plane wave decomposition, we now introduce a spectrum of frequencies, and obtain
+\begin{equation}
+\label{eq:polar_wave_general}
+E(r,\theta)
+=\oldint_{k} \rd k \sum_{n=-\infty}^{\infty}\!\!a_n(k) J_n(kr)\ee^{\ii n \theta}
+=\sum_{n=-\infty}^{\infty}\!\! \ee^{\ii n \theta} \oldint_{k} \rd{k}\,k\,b_n(k) J_n(kr),
+\end{equation}
+where in the last step $a_n(k)$ has been replaced with $k\,b_n(k)$ for later convenience.
+
+%\subsubsection{Connection between Fourier and Bessel decomposition}
+
+
+
+
+
+\section{Uncertainty meassures}
+
+\subsection{Heisenberg's uncertainty principle}
+\todo[inline]{REDO!}
 The Fourier theory states that any function in space can be divided into a linear combination of plane waves 
 \begin{equation*}
  f(\vb*x) = \int_{\vb*k}\id^3k \tilde{f}(\vb*k) \ee^{\ii( \vb*k\vdot\vb*x - \omega t)}
@@ -89,57 +216,17 @@ The Fourier theory states that any function in space can be divided into a linea
 with different wave-vectors $\vb*k$. %wavelengths and directions of propagations. 
 One can speak of different representations in the space ($\vb*x$) domain and the spacial frequency ($\vb*k$) domain respectively, with the Fourier transform as the link between them.
 
-Heisenberg's uncertainty principle, a famous formula in quantum physics states that one cannot perfectly determine both the position and momentum of a free particle in space. This inequality however, is based only on the wave nature of particles and can be seen more as a mathematical inequality on Hilbert spaces than a physical one. As such it also has an equivalent with respect to Fourier transforms which says that the more localized a function is in the space domain the more spread out it must be in the spacial frequency domain.
+Heisenberg's uncertainty principle, a famous formula in quantum physics, states that one cannot perfectly determine both the position and momentum of a free particle in space.
+This has its root in the fact that the position and momentum of a particle is reltated by a Fourier transform. In a more general sense the Heisenberg uncertainty related the spread in frequency to the spread in time or position.
+%This inequality however, is based only on the wave nature of particles and can be seen more as a mathematical inequality on Hilbert spaces than a physical one. As such it also has an equivalent with respect to Fourier transforms which says that the more localized a function is in the space domain the more spread out it must be in the spacial frequency domain.
 
-From Maxwell's equations we know that if an electric field in a lossless media oscillates in time with a certain angular frequency $\omega$ then it  must also oscillate in space with a certain wavelength $\lambda=\sqrt{\epsilon \mu} \omega 2\pi$. Since the wavelength is basically the inverse of the length of the wavvevector $\vb*k$, the Fourier transform would be limited to contain wavevectors with such length. Thus an electric field generated by a NB signal will be highly localized in the frequency domain which should lead to a big spread in the space domain. Therefore an UWB signal would lead to a much better focus which contradicts actual results. We believe that this contradiction is due to a lack of detail in the reasoning and to understand why one must ``put the words into numbers'' and clarify what the uncertainty principle actually says and how it can be applied to the case of hyperthermia.
-
-\subsection{Decomposition of eletromagnetic waves in frequency components}
-
-Due to the linearity of Maxwell's equations, if the signal generating an EM-field varies harmonically in time so will the field,
-\begin{equation*}
-\vb*E(\vb*x,t)=\vb*E(\vb*x)\cos(\omega t).
-\end{equation*}
-which allows the use of phasors,
-\begin{equation*}
-\vb*E(\vb*x,t)=\Re\qty[\vb*E(\vb*x)\ee^{-\ii\omega t}].
-\end{equation*}
-In a lossless homogeneous media, with this notation, Maxwell's equations lead to the Helmholtz equation
-\begin{equation}
-  \label{eq:Helmholtz}
-  \laplacian  \vb*E + \frac{\omega^2}{v^2}\vb*E=0,
-\end{equation} 
-where the speed of propagation $v=\frac{1}{\sqrt{\mu \epsilon}}$ has been introduced. This equation has a solution
-\begin{equation*}
-\vb*E(\vb*x)=\vb*A\ee^{i\vb*k \cdot \vb*x},
-\end{equation*}
-a plane wave were the wavevector $\vb*k$ is any vector such that $\abs{\vb*k}=k$ and $\vb*A$ is a vector-amplitude $\vb*A=A_X\hat{x}+A_y\hat{y}+A_z\hat{z}$, such that each component corresponds to each component of the  EM-field.
-Again, since Maxwell's equations are linear, any sum of such solutions is also a solution and the general solution can be written as
-\begin{equation}
-  \label{eq:gen_sol}
-  \vb*E(\vb*x)=\int_{\abs{\vb*k}=\frac{\omega}{v}}\vb*A(\vb*k)\ee^{\ii\vb*k\cdot\vb*x}\id^3k,
-\end{equation}
-where the vectoramplitude $\vb*A(\vb*k)$ now represents the amplitude of each wavecomponent $\ee^{\ii\vb*k \cdot \vb*x}$.
-
-The EM-field can also be expanded by its Fourier Transform
-\begin{equation}
-  \label{eq:f_exp}
-  \vb*E(\vb*x)=\frac{1}{2\pi}\int_{\vb*k} \widetilde{\vb*E}(\vb*k) \ee^{\ii(\vb*k\cdot\vb*x - \omega t)}\id^3k.
- \end{equation}
+From Maxwell's equations we know that if an electric field in a lossless media oscillates in time with a certain angular frequency $\omega$ then it  must also oscillate in space with a certain wavevector $k=\sqrt{\mu\epsilon}\omega$. 
+%wavelength $\lambda=\sqrt{\epsilon \mu} \omega 2\pi$. Since the wavelength is basically the inverse of the length of the wavvevector $\vb*k$, the Fourier transform would be limited to contain wavevectors with such length. 
+An electric field generated by a NB signal will be highly localized in the frequency domain which should lead to a big spread in the spacial domain. Therefore an UWB signal would intuitievely lead to a much more focused field which contradicts previous results [?some~papers?]. We believe that this contradiction is due to a lack of detail in the reasoning and to understand why one must ``put the words into numbers'' and clarify what the uncertainty principle actually says and how it can be applied to the case of hyperthermia.
 
 
-Comparing the Fourier expansion (\ref{eq:f_exp}), an integral over the whole $\vb*k$-space, with the general solution (\ref{eq:gen_sol}), an integral only over the subspace where $\abs{\vb*k}=\frac{\omega}{v}$ one can identify an expression for the Fourier transform $\widetilde{\vb*E}(\vb*k)$ as
-
-\begin{equation}
-  \label{eq:f_transf}
-  \widetilde{\vb*E}(\vb*k)=2\pi\vb*A(\vb*k)\delta(\abs{\vb*k}-\frac{\omega}{v})=2\pi\vb*A(\theta,\phi)\delta(\abs{\vb*k}-\frac{\omega}{v}).
-\end{equation}
-
-Here a $\delta(\abs{\vb*k}-\frac{\omega}{v})$-term has been introduced to display the fact that the Fourier transform $\widetilde{\vb*E}(\vb*k)$ vanishes where $\abs{\vb*k} \neq\frac{\omega}{v}$.
-This is further emphasized in the last step where one sees the amplitude $\vb*A$ not as a function of the wavevector $\vb*k$ but as a function of the angles in the $\vb*k$-space $\theta$ and $\phi$.
-
-In short, for each frequency $\omega$ the Fourier transform of the EM-field is concentrated to a sphere shell with radius $\abs{\vb*k}=\frac{\omega}{v}$ and vanishes elsewhere.
-
-\subsection{Heisenberg's inequality}
+\subsubsection{Heisenberg's inequality}
+\todo[inline]{This train wreck needs some salvaging!}
 The common version of Heisenberg's uncertainty principle used in quantum mechanics states that the product of the variance of two observables must be greater than the expected value of their commutator. With the correct interpretations this can be reduced to the following form about vector fields and their Fourier transform cite folland, 
 \begin{equation}
 \Delta_{\vb*a}f \Delta_{\vb*\alpha} \tilde{f} \geq \frac{9}{4}, \quad \forall \vb*a, \vb*\alpha, \forall f \in \Lsq[\infty],
@@ -167,7 +254,9 @@ This however is a consequence of the particular form we have stated the uncertai
 
 \footnotetext{The problem of summing the amplitude of the different components $E_i$ to get the final intensity $|E|^2$ will be dealt with later.}
 
-\section{The Slepian-Landau-Pollak uncertainty relations}
+
+\subsection{The Slepian-Landau-Pollak uncertainty relations}
+\todo[inline]{REDO}
 In a series of papers from the 60's D. Slepian, H.J. Landau and H.O. Pollak investigated how much energy a frequency-limited function can keep if it is restricted in space. By doing this one can reach an inequality on the form
 \begin{equation}
 \abs{S}\abs{\Omega} \geq c(\alpha,\beta),
@@ -225,7 +314,11 @@ form an orthogonal base for the space $\Omega$ and thus their inverse Fourier tr
 
 This $\lambda_0$ will be dependent on the size and shape of the areas $S$ and $\Omega$ and will form the base for our inequalities. In the following sections we will calculate these limits for some simple geometries as well as provide ideas for how it can be extended to more complex regions.
 
+
+
+\begin{comment}
 \subsection{The disk and the ball}
+\todo[inline]{Remove?}
 If $\Omega$ and $S$ are both circular disks with $S$ a scaled version of $\Omega$, $S=c\Omega$, then the eigenvalue equation \eqref{eq:eigen} can be significantly simplified. Through symmetrical arguments Slepian shows in cite that the solutions can be written on the form
 \begin{align}
  &\psi_{0,n}(k,\theta)=\frac{\phi_{0,n}(k)}{\sqrt{k}}, \quad &\lambda_{0,n}= ...\gamma \\
@@ -252,27 +345,28 @@ Using surface harmonics he then continues to show that similiar formulas hold in
 where $\phi$ and $\gamma$ are solutions to an equation identical to \eqref{eq:Bessel_int} except that $N$ has to be replaced by $N+\frac{D-2}{2}$. 
 
 In the paper from 1964 cite Slepian proves that the $\phi$'s of \eqref{eq:Bessel_int} also satisfy a differential equation and with this he managed to numerically calculate values for $\lambda$ and $\psi$ for different values of $c$. However, with significantly improved computer technology, we chose to work directly with the integral equations \eqref{eq:eigen} and \eqref{eq:Bessel_int} which can also be generalized more easily.
-  
+\end{comment}
 
 
 
 
-\subsection{Finite thickness circle ring in the frequency domain (2D)}
+\section{Application of SLP theory in 2D to signals of limited bandwidth}
 So far we have looked at areas in the space and frequency domains
 which have the same shape, filled discs or spheres, but are scaled
-versions of each other ($S=c\Omega$). This does however forces us to
-include frequencies all the way down to 0, which is not an ideal
-description of a real hyperthermia system -- perhaps operating in the
+versions of each other ($S=c\Omega$). This corresponds to
+including frequencies all the way down to 0, which is not an ideal
+description of a real hyperthermia system which perhaps operates in the
 range from few hundered MHz up to a couple of GHz.
 
 We first need to define the areas $S$ and $\Omega$ in the space and
 frequency domain respectively. For the space domain we still want a
-filed region without a gap in the center, but for the frequency domain
+filled region without a gap in the center, but for the frequency domain
 we want to exclude the center part of the region. Let $S$ be a filled
 circle disc of radius $R$, and $\Omega$ be the finite thickness circle
 ring with outer radius $\Gamma$ and inner radius $q\Gamma$, $0\le q<1$.
 
-\subsubsection{Slepian's method using Fourier transforms}
+\subsection{Slepian's method using Fourier transforms}
+\todo[inline]{Poor unloved child, needs alot of care}
 The methodology used here is a direct translation of the ones used in
 \cite{PSWF-I_1961} and \cite{PSWF-IV_1964} to $S$ and $\Omega$.
 
@@ -329,6 +423,7 @@ K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
 The next step is to manipulate the actual integral eigenvalue equation
 \todo{ref to some eqn. before}
 \begin{equation}
+\label{eq:eigen_fourier}
 \lambda \psi(\vb*k) = \oldint_\Omega \rd^2k'\,
 %(2\pi)^{-1} \frac{R}{\Delta{k}} J_1(R\Delta{k}) 
 K_S(\vb*k-\vb*k')\psi(\vb*k')
@@ -354,7 +449,12 @@ is $2\pi$-periodic in $\Delta\theta$, and thus has a Fourier series expansion
 \begin{equation} \label{eq:KS-FS}
 K_S(k, k', \Delta\theta)  
 =\sum_{n=-\infty}^\infty a_{n}(k, k')\, \ee^{\ii n\Delta\theta}
-=\sum_{n=-\infty}^\infty a_{n}(k, k')\, \ee^{\ii n\theta}\ee^{-\ii n\theta'}
+=\sum_{n=-\infty}^\infty a_{n}(k, k')\, \ee^{\ii n\theta}\ee^{-\ii n\theta'},
+\end{equation}
+where 
+\begin{equation}
+a_{n}(k, k') = \frac{1}{2\pi} \int_0^{2\pi} \rd\phi\, 
+K_S(k, k', \phi)\ee^{-\ii n\phi}.
 \end{equation}
 We also know that the eigenfunctions, $\psi$, has to be periodic in
 $\theta$ since the kernel is periodic in both $\theta$ and
@@ -383,62 +483,26 @@ then the integral is just $2\pi$. We now get
 \begin{equation}
 \lambda\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
 = \sum_{n=-\infty}^\infty \ee^{\ii n\theta} 
-\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k'),
+\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k').
 \end{equation}
-or more simply
+By the uniqueness of Fourier series expansions, for all non-zero $b_n$ we must have
 \begin{equation}
-\lambda_n b_n(k) = \int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k').
+\label{eq:eigen_fourier_coef}
+\lambda_n b_n(k) = \int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k'),
 \end{equation}
+where $\lambda$ has been denoted by $\lambda_n$ since each $b_n(k)$ will have a different eigenvalue satisfying \eqref{eq:eigen_fourier_coef}. 
+%The problem of finding the largest eigenvalue to \eqref{eq:eigen_fourier} now results in finding the largest of the largest eigenvalues to \eqref{eq:eigen_fourier_coef} for all $n$.
 
-The problem however, with this method is that the kernel Fourier
-coefficients, $a_n(k, k')$, cannot be calculated analytically. This
-makes for some very costly numerical calculations if $a_n(k, k')$
-has to be calculated numerically for each pair of $k$ and $k'$.
+However, the problem with this method is that the Fourier coefficients of the kernel, $a_n(k, k')$, cannot be calculated analytically by direct integration using standard methods. This
+results in very costly numerical calculations since $a_n(k, k')$
+has to be calculated numerically for each pair of $k$ and $k'$, on 
+top of then calculationg the eigenvalues.
 
 
-\subsubsection{A similar method using Hankel transforms}
-%As a direct translation Slepian's method yielded a numerically 
-%expensive method, we also looked 
+\subsection{A similar method using Bessel decomposition}
+\todo[inline]{Needs a lot of love!}
 Slepian's method looked at the Fourier representation of the EM-field and looked at how a function limited in the Fourier ($\vb*k$) space behaved in the $\vb*x$-space. Although we were able to extract useful information it required alot of manipulations of the formulas and also in the end some costly numerical calculations. The reason behind this is that the Fourier ($\vb*k$) space speaks of plane waves which form solutions to the wave equation in cartesian coordinates while we were interested in geometries best described by polar coordinates. In an alternative approach we therefore started in a polar description, developed a base for the EM-field and used this to maximize a quotient of the form \eqref{eq:energy_frac_final}.
 
-In polar coordinates the Helmholtz equation \eqref{eq:Helmholtz} takes the form
-\begin{equation}
-\label{eq:Helmholtz_polar}
-(\pdv[2]{r}+\frac{1}{r}\pdv{r}+\frac{1}{r^2}\pdv[2]{\theta})E+k^2E=0,
-\end{equation}
-with $k^2=\omega^2\mu\epsilon$. For a separable function $\phi(r,\theta)=R(r)\Theta(\theta)$ the equation can be separated into two
-\begin{align}
-&n^2\Theta-\dv[2]{\Theta}{\theta}=0 \label{eq:angular} \\
-&r^2\dv[2]{R}{r}+r\dv{R}{r}+(k^2r^2-n^2)R=0 \label{eq:radial}.
-\end{align}
-Equation \eqref{eq:angular} has a solution of plane waves
-\begin{equation}
-\label{eq:sol_angular}
-\Theta(\theta)=c_n\ee^{\ii n \theta}.
-\end{equation}
-Since $\Theta$ must be periodic over $2\pi$, $n$ must be an integer which motivates the name $n^2$ for the previous arbitrary constant. We notice that these form a base for functions defined on the interval$[0,2\pi)$
-The radial equation \eqref{eq:radial} on the other hand has a solution of Bessel functions
-\begin{equation}
-\label{eq:sol_radial}
-R(r)=a_nJ_{n}(kr)+b_nN_{n}(kr).
-\end{equation}
-These functions form a base for functions defined on $[0,\infty)$ but the second kind of Bessel function $N_n$  cannot represent any physical function since they have a singularity in 0 and will therefore be disregarded.
-The final solution to \eqref{eq:Helmholtz_polar} can now be written as
-\begin{equation*}
-\phi_n(r,\theta)=a_nJ_n(kr)\ee^{\ii n \theta}.
-\end{equation*}
-Since the $r$ and $\theta$-components each form a base for their respective intervals an arbitrary function satisfying Helmholtz equation can be written as a sum of these
-\begin{equation}
-E(r,\theta)=\sum_{n=-\infty}^{\infty} a_nJ_n(kr)\ee^{\ii n \theta}.
-\end{equation}
-
-The Helmholtz equation \eqref{eq:Helmholtz} is valid for a given frequency $\omega$. To get the EM-field of many different frequency components one has to sum over all of them, or in the continous limit integrate. To integrate over $\omega$ is the same as integrating over $k$ which corresponds to the radius in the Fourier space. To get a direct analog to the circle rings previously discussed we can therefore let $k$ go from $q\Gamma$ to $\Gamma$ and obtain a general EM-field:
-\begin{equation}
-\label{eq:polar_wave_general}
-E(r,\theta)=\int_{q\Gamma}^\Gamma \id k \sum_{n=-\infty}^{\infty} a_n(k) J_n(kr)\ee^{\ii n \theta}
-=\sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k kb_n(k) J_n(kr)\ee^{\ii n \theta},
-\end{equation}
-where in the last step $a_n(k)$ has been replaced with $kb_n(k)$ for later convenience.
 This expression can now be used to calculate the energy in a disk $S$ following a similar procedure to Slepian's method
 \begin{equation}
   \label{eq:energy_bessel}
@@ -495,7 +559,7 @@ If we choose the $b_n$:s so that
 \begin{equation*}
   b_n(k)
   =\begin{cases} &\phi_n \qc \lambda_n=\lambda_{\text{max}}  \\
-  &0 \qc \text{else}
+  &0 \qc \text{otherwise}
   \end{cases}
 \end{equation*}
 we obtain an equality which proves the statement.
@@ -508,6 +572,7 @@ we obtain an equality which proves the statement.
 \section{Numerical implementation of the 
 Landau-Pollack-Slepian Theory}
 \newcommand{\varD}{\ensuremath{\mathcal{D}}}
+\todo[inline]{Dump this computer child's play  after end document}
 
 In the previous section we have been occupied by integral eigenvalue
 equations of the form
@@ -546,7 +611,7 @@ which is just a matrix eigenvalue equation
 \begin{equation} \label{eq:mtx-eig}
 \Lambda \Psi = \mathsf{K}\Psi,
 \end{equation}
-where $\Lambda = N\lambda/\abs{I}$ and $\mathsf{K}$ is the $N\times N$ matrix
+where $\lambda = \abs{I}\Lambda/N$ and $\mathsf{K}$ is the $N\times N$ matrix
 whose element $(m, n)$ is $K_{m, n}$. From here, there are many high
 performance linear algebra libraries to find the eigenvalues and
 eigenvector to \eqref{eq:mtx-eig} numerically. 
@@ -578,7 +643,13 @@ beneficial to most numerical methods to find eigenvalues.
 % like in the continuous case. 
 
 
+\section{Results}
 
+
+\section{Discussion and further developments}
+\label{ch:discussion}
+
+\section{Conclusions}
 
 
 
