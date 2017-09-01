@@ -17,7 +17,6 @@ Ks=calc_sym_mtrx( @(a,b) coef(a,b,rot_order), v);
 
 if nargout >1
     [V,D]=eigs(Ks,n_eigs,'LM');  %eigenfunction(s) and eigenvalue(s)
-    V=V./repmat(sqrt(u),1,n_eigs); %Normalizing the V to the eigenfunctions of the original problem
 else
     D    =eigs(Ks,n_eigs,'LM');  %only eigenvalue(s)
 end
