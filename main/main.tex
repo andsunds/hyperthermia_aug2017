@@ -8,7 +8,7 @@ swedish,english %% Make sure to put the main language last!
 \usepackage{../custom_as}
 
 %% Figures can now be put in a folder: 
-\graphicspath{ {figurer/} %{some_folder_name/}
+\graphicspath{ {figures/} %{some_folder_name/}
 }
 
 %% If you want to change the margins for just the captions
@@ -32,6 +32,8 @@ swedish,english %% Make sure to put the main language last!
 \swapcommands{\Omega}{\varOmega}
 \swapcommands{\Gamma}{\varGamma}
 \newcommand{\Lsq}[1]{\ensuremath{\mathcal{L}^2_{#1}}}
+\newcommand{\RT}{\ensuremath{R_{\text{T}}}}
+\newcommand{\RH}{\ensuremath{R_{\text{H}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
@@ -624,10 +626,78 @@ This fraction can be proven to be maximized by the largest eigenvalue to the fam
 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+
+\begin{figure}\centering
+\centerline{ % centers figures larges than 1\textwidth
+\includegraphics[width=18cm]{ring_T-infty_L1000.eps}
+}
+\caption{Theoretical maximum of energy-quotient inside the tumor
+  to all of real space, as a function of tumor size, $\RT$, measures
+  in sortest wavelengths, $\lambda$.}
+\label{fig:T-infty}
+\end{figure}
+
+\begin{figure}\centering
+\centerline{ % centers figures larges than 1\textwidth
+\includegraphics[width=18cm]{ring_T-H_L1000.eps}
+}
+\caption{Theoretical maximum of energy-quotient inside the tumor
+  to a head around the tumor, as a function of tumor size, $\RT$,
+  measures in sortest wavelengths, $\lambda$. Both the tumor and the
+  head are circular discs of radius $\RT$ and $\RH$ respectively;
+  $\RH=10RT$ was used for these graphs.}
+\label{fig:T-infty}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion and further developments}
+\label{ch:discussion}
+\subsection{SAR}
+\todo[inline]{May need some grooming to be presentable and shouldn't really be put here}
+\newtheorem{theorem}{Theorem}
+In hyperthermia treatment a good indicator for the temperature increase is the SAR-value (Specific Absorbation Rate), measured in [W/kg]:
+\begin{equation*}
+\text{SAR}(\vb*x)=\frac{\langle \vb*J(\vb*x,t)\cdot \vb*E(\vb*x,t) \rangle_t}{\rho(\vb*x)},
+\end{equation*}
+that is, a time average of the scalarproduct between the current density $\vb*J(\vb*x,t)$ and the electric field $\vb*E(\vb*x,t)$ divided by the density of the material $\rho(\vb*x)$. Due to Ohm's law this is simply a weighted version of the intensity $I=\abs{\vb*E}^2$. However, due to the time-averaging for multiple frequencies it can be shown that
+\begin{equation}
+\text{SAR}(\vb*x)=\sum_i\text{SAR}_i(\vb*x),         %\frac{1}{2}\sum_i\frac{\re[\sigma_i(\vb*x)\abs{\vb*E}^2]}{\rho(\vb*x)}
+\end{equation}
+that is a sum over the contribution from each frequency. In other words, when time-averaging there is no interference between different frequencies.
+Since a finite energy will always be applied, all possible solutions will be a convex combination of the contribution for each frequency. And due to the linearity over frequencies, any convex goalfunction $G(\text{SAR})$ will be convex in the frequencies and a powerful theorem from convex optimization can be applied:
+\begin{theorem}
+ Let $f$ be a convex function defined on a convex set $X$. Then any local minima of $f$ is also a global minima on $X$.
+\end{theorem}
+This implies that the minimum of $G$ is obtained with only the frequency $\omega_j$ that gives the smallest contribution to $G$.
+
+For a large family of goalfunctions the optimum is therefore obtained for a single frequency. In particular, any linear goalfunction is also convex and the main goalfunction used in this paper, \eqref{eq:energy_frac_final} would be optimized\footnote{the inverse of it would be minimized} by a single frequency if applied to SAR. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%% This bibliography ueses BibTeX
+\bibliographystyle{ieeetr}
+\bibliography{references}%requires a file named 'references.bib'
+%% Citations are as usual: \cite{example_article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage %% on a new page 
+\appendix  %% This will change the page numbering to A1, A2, A3, ...;
+           %% and also change the sections to A, A.1, ...; B, B.1, ...
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical implementation of the 
 Landau-Pollack-Slepian Theory}
-\newcommand{\varD}{\ensuremath{\mathcal{D}}}
 
 In the previous section we have been occupied by integral eigenvalue
 equations of the form
@@ -698,52 +768,6 @@ beneficial to most numerical methods to find eigenvalues.
 % that the discetized version cannot be extended to higher dimension
 % like in the continuous case. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Results}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion and further developments}
-\label{ch:discussion}
-\subsection{SAR}
-\todo[inline]{May need some grooming to be presentable and shouldn't really be put here}
-\newtheorem{theorem}{Theorem}
-In hyperthermia treatment a good indicator for the temperature increase is the SAR-value (Specific Absorbation Rate), measured in [W/kg]:
-\begin{equation*}
-\text{SAR}(\vb*x)=\frac{\langle \vb*J(\vb*x,t)\cdot \vb*E(\vb*x,t) \rangle_t}{\rho(\vb*x)},
-\end{equation*}
-that is, a time average of the scalarproduct between the current density $\vb*J(\vb*x,t)$ and the electric field $\vb*E(\vb*x,t)$ divided by the density of the material $\rho(\vb*x)$. Due to Ohm's law this is simply a weighted version of the intensity $I=\abs{\vb*E}^2$. However, due to the time-averaging for multiple frequencies it can be shown that
-\begin{equation}
-\text{SAR}(\vb*x)=\sum_i\text{SAR}_i(\vb*x),         %\frac{1}{2}\sum_i\frac{\re[\sigma_i(\vb*x)\abs{\vb*E}^2]}{\rho(\vb*x)}
-\end{equation}
-that is a sum over the contribution from each frequency. In other words, when time-averaging there is no interference between different frequencies.
-Since a finite energy will always be applied, all possible solutions will be a convex combination of the contribution for each frequency. And due to the linearity over frequencies, any convex goalfunction $G(\text{SAR})$ will be convex in the frequencies and a powerful theorem from convex optimization can be applied:
-\begin{theorem}
- Let $f$ be a convex function defined on a convex set $X$. Then any local minima of $f$ is also a global minima on $X$.
-\end{theorem}
-This implies that the minimum of $G$ is obtained with only the frequency $\omega_j$ that gives the smallest contribution to $G$.
-
-For a large family of goalfunctions the optimum is therefore obtained for a single frequency. In particular, any linear goalfunction is also convex and the main goalfunction used in this paper, \eqref{eq:energy_frac_final} would be optimized\footnote{the inverse of it would be minimized} by a single frequency if applied to SAR. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusions}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
-%\newpage
-%% This bibliography ueses BibTeX
-\bibliographystyle{ieeetr}
-\bibliography{references}%requires a file named 'references.bib'
-%% Citations are as usual: \cite{example_article}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage %% on a new page 
-\appendix  %% This will change the page numbering to A1, A2, A3, ...;
-           %% and also change the sections to A, A.1, ...; B, B.1, ...
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
