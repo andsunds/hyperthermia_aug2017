@@ -769,6 +769,65 @@ beneficial to most numerical methods to find eigenvalues.
 % like in the continuous case. 
 
 
+\subsection{Justification of the numerical method}
+
+\begin{table}
+
+\centering
+\caption{Table of eigevalues to the 2D disc of frequencies, as given
+  by Slepian in \cite{PSWF-IV_1964}, $\lambda$, and numerically
+  calculated using the method of this section, $\hat\lambda$; also the
+  relative discrepancies between Slepian's method and this is given as
+  $(\hat\lambda-\lambda)/\lambda$. The numerical values have been
+  calculated using both the algorithem for only the full disc, and
+  also using the algorithm for a circle ring with $q=1/L$.
+}
+\label{tab:just}
+\begin{tabular}{|r|c|c|c|c|c|}\cline{2-6}
+\multicolumn{1}{c|}{}
+&Slepian\cite{PSWF-IV_1964}&
+\multicolumn{2}{|c|}{Disc, numerical ($L=5000$)}&
+\multicolumn{2}{|c|}{Ring, numerical ($L=1000$)}
+\\ \hline
+$c$\phantom{1.}&$\lambda$
+&$\hat\lambda$&$(\hat\lambda-\lambda)/\lambda$
+&$\hat\lambda$&$(\hat\lambda-\lambda)/\lambda$
+\\ \hline
+  0.1 & 2.4968775e-3 & 
+2.49787510e-03 &\bf\phantom{-}4.0e-4&  
+2.49687188e-03 &\bf-2.3e-6
+\\ \hline
+  0.5 & 6.0585348e-2 & 
+6.06088302e-02 &\bf\phantom{-}3.9e-4&  
+6.05834074e-02 &\bf-3.2e-5
+\\ \hline
+  1.0 & 2.2111478e-1 & 
+2.21192655e-01 &\bf\phantom{-}3.5e-4&  
+2.21087997e-01 &\bf-1.2e-4
+\\ \hline
+  1.5 & 4.2951906e-1 & 
+4.29646579e-01 &\bf\phantom{-}3.0e-4&  
+4.29407932e-01 &\bf-2.5e-4
+\\ \hline
+  2.0 & 6.2963045e-1 & 
+6.29775619e-01 &\bf\phantom{-}2.3e-4&  
+6.29363231e-01 &\bf-4.2e-4
+\\ \hline
+  3.0 & 8.8705036e-1 & 
+8.87143325e-01 &\bf\phantom{-}1.0e-4&  
+8.86395173e-01 &\bf-7.3e-4
+\\ \hline
+  5.0 & 9.9534230e-1 & 
+9.95350350e-01 &\bf\phantom{-}8.1e-6&  
+9.94366440e-01 &\bf-9.8e-4
+\\ \hline
+ 10.0 & 9.9999957e-1 & 
+9.99999399e-01 &\bf\phantom{}-1.7e-7&  
+9.98997959e-01 &\bf-1.0e-3
+\\ \hline
+\end{tabular}
+\end{table}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
