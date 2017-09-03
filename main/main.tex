@@ -34,6 +34,7 @@ swedish,english %% Make sure to put the main language last!
 \newcommand{\Lsq}[1]{\ensuremath{\mathcal{L}^2_{#1}}}
 \newcommand{\RT}{\ensuremath{R_{\text{T}}}}
 \newcommand{\RH}{\ensuremath{R_{\text{H}}}}
+\newcommand{\tf}{\ensuremath{\tilde{f}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
@@ -133,66 +134,31 @@ E(\vb*x)=A \ee^{\ii\vb*k \cdot \vb*x},
 were the wavevector $\vb*k$ is any vector such that $\vb*k\vdot\vb*k=k^2$, and $A$ is a constant amplitude. 
 
 The next step is to allow more for more than one frequency. The solution for each frequency will be of the form \eqref{eq:plane-wave}, each with its own amplitude $A(\vb*k)$. These solutions can then be summed up over all frequencies (magnitude as well as directions of $\vb*k$) and the final $E$ field becomes\footnotemark{}
-%\begin{equation} \label{eq:gen_sol}
-% E(\vb*x)=\int%_{\abs{\vb*k}=\frac{\omega}{v}}
-% \vb*A(\vb*k)\ee^{\ii\vb*k\cdot\vb*x}\id^3k,
-%\end{equation}
-%where the vectoramplitude $\vb*A(\vb*k)$ now represents the amplitude of each wavecomponent $\ee^{\ii\vb*k \cdot \vb*x}$.
-%The EM-field can also be expanded by its Fourier Transform
-\begin{equation} \label{eq:f_exp}
+\begin{equation} \label{eq:FT-inv}
 E(\vb*x)= (2\pi)^{-D} \oldint_{\vb*k} \rd^Dk\,
-A(\vb*k) \ee^{\ii\vb*k\cdot\vb*x}.
+A(\vb*k) \ee^{\ii\vb*k\vdot\vb*x}.
 \end{equation}
 \footnotetext{The factor of $(2\pi)^{-D}$ is just for convenience in the comparison with the $D$ dimensional Fourier transform.}
 
-We can now identify \eqref{eq:f_exp} as an inverse Fourier transform of $A(\vb*k)$, and thus $A(\vb*k)$ has to be the Fourier transform of $E(\vb*x)$.
-%Comparing the Fourier expansion (\ref{eq:f_exp}), an integral over the whole $\vb*k$-space, with the general solution (\ref{eq:gen_sol}), an integral only over the subspace where $\abs{\vb*k}=\frac{\omega}{v}$ one can identify an expression for the Fourier transform $\widetilde{\vb*E}(\vb*k)$ as
-%\begin{equation}
-%  \label{eq:f_transf}
-%  \widetilde{\vb*E}(\vb*k)=2\pi\vb*A(\vb*k)\delta(\abs{\vb*k}-\frac{\omega}{v})=2\pi\vb*A(\theta,\phi)\delta(\abs{\vb*k}-\frac{\omega}{v}).
-%\end{equation}
-%Here a $\delta(\abs{\vb*k}-\frac{\omega}{v})$-term has been introduced to display the fact that the Fourier transform $\widetilde{\vb*E}(\vb*k)$ vanishes where $\abs{\vb*k} \neq\frac{\omega}{v}$.
-%This is further emphasized in the last step where one sees the amplitude $\vb*A$ not as a function of the wavevector $\vb*k$ but as a function of the angles in the $\vb*k$-space $\theta$ and $\phi$.
+We can now identify \eqref{eq:FT-inv} as an inverse Fourier transform
+of $A(\vb*k)$, and thus $A(\vb*k)$ has to be the Fourier transform of
+$E(\vb*x)$:
+\begin{equation}\label{eq:FT}
+A(\vb*k) = \oldint_{\vb*x} \rd^Dx\, E(\vb*x)\ee^{-\ii \vb*k\vdot\vb*x}.
+\end{equation}
 
-%In short, for each frequency $\omega$ the Fourier transform of the EM-field is concentrated to a sphere shell with radius $\abs{\vb*k}=\frac{\omega}{v}$ and vanishes elsewhere.
 
 \subsubsection{Polar wave decomposition in 2 dimensions}
 The 2 dimensional Helmholtz equation \eqref{eq:Helmholtz} in polar cooridnats is
 \begin{equation}
 \label{eq:Helmholtz_polar}
 \qty(\pdv[2]{r}+\frac{1}{r}\pdv{r}+\frac{1}{r^2}\pdv[2]{\theta})E+k^2E=0,
-\end{equation}
-%
-%For a separable function $\phi(r,\theta)=R(r)\Theta(\theta)$ the equation separates into
-%\begin{align}
-%&n^2\Theta+\dv[2]{\Theta}{\theta}=0 \label{eq:angular} \\
-%&r^2\dv[2]{R}{r}+r\dv{R}{r}+(k^2r^2-n^2)R=0 \label{eq:radial}.
-%\end{align}
-%Equation \eqref{eq:angular} has harmonic solutions
-%\begin{equation} \label{eq:sol_angular}
-%\Theta(\theta)=c_n\ee^{\ii n \theta}.
-%\end{equation}
-%Since $\Theta$ must be $2\pi$ periodic, $n$ must be an integer. 
-%%We notice that these form a base for functions defined on the interval$[0,2\pi)$
-%The radial equation \eqref{eq:radial} on the other hand has a solution of Bessel functions
-%\begin{equation}
-%\label{eq:sol_radial}
-%R(r)=a_n J_{n}(kr)+a'_n N_{n}(kr).
-%\end{equation}
-%We are however only interested in solutions \emph{without} singularities, wherefore only Bessel functions of the first kind are treated. % $a'_n=0$
-%%These functions form a base for functions defined on $[0, \infty)$ but the second kind of Bessel function $N_n$  cannot represent any physical function since they have a singularity in 0 and will therefore be disregarded.
-%The final solution to \eqref{eq:Helmholtz_polar} can be written as
-%\begin{equation*}
-%\phi_n(r,\theta)=a_nJ_n(kr)\ee^{\ii n \theta}.
-%\end{equation*}
-%
-%Since the Helmholtz equation is linear, an arbitrary non-singular function satisfying it can be written as a sum 
+\end{equation} 
 Which has the standard non-singular solution
 \begin{equation}
 E(r, \theta)=\sum_{n=-\infty}^{\infty} a_nJ_n(kr)\ee^{\ii n \theta}.
 \end{equation}
 
-%The Helmholtz equation \eqref{eq:Helmholtz} is valid for a given frequency $\omega$. To get the EM-field of many different frequency components one has to sum over all of them, or in the continous limit integrate. To integrate over $\omega$ is the same as integrating over $k$ which corresponds to the radius in the Fourier space. To get a direct analog to the circle rings previously discussed we can therefore let $k$ go from $q\Gamma$ to $\Gamma$ and obtain a general EM-field:
 Analogously to the plane wave decomposition, we now introduce a spectrum of frequencies, and obtain
 \begin{equation}
 \label{eq:polar_wave_general}
@@ -208,194 +174,192 @@ where in the last step $a_n(k)$ has been replaced with $k\,b_n(k)$ for later con
 
 
 
-\section{Focusing meassures}
-To start talking about focusing waves, there has to be some meassure
-to quantify how well focused a wave is. This report will mainly deal
-with the intensity meassure used by Slepian, Landau and Pollack in a
-series of papers
+\section{Localization measures}
+To start talking about focusing waves, one has to be able 
+to quantify how localized it is. This is mainly done through
+different measures on the energy distribution of the wave,
+$\abs{f}^2$. 
+
+This report will mainly deal with the fraction of energy in a bounded
+area, which was used by
+Slepian, Pollack and Landau (SPL) in a series of papers 
 \cite{PSWF-I_1961,PSWF-II_1961,PSWF-III_1962,PSWF-IV_1964,PSWF-V_1978}.
-However, to address the Heissenberg uncertainty principle, which
-concerns a type of variance meassure, an account of both types of
-meassures and how they are used will be given in this section. 
+However, to address the Heisenberg uncertainty principle, which
+concerns a type of variance measure, an account of both types of
+measures and how they are used will be given in this section. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{comment}
-\subsection{Heisenberg's uncertainty principle}
-\todo[inline]{REDO!}
-The Fourier theory states that any function in space can be divided into a linear combination of plane waves 
-\begin{equation*}
- f(\vb*x) = \int_{\vb*k}\id^3k \tilde{f}(\vb*k) \ee^{\ii( \vb*k\vdot\vb*x - \omega t)}
-\end{equation*}
-with different wave-vectors $\vb*k$. %wavelengths and directions of propagations. 
-One can speak of different representations in the space ($\vb*x$) domain and the spacial frequency ($\vb*k$) domain respectively, with the Fourier transform as the link between them.
-
-Heisenberg's uncertainty principle, a famous formula in quantum physics, states that one cannot perfectly determine both the position and momentum of a free particle in space.
-This has its root in the fact that the position and momentum of a particle is reltated by a Fourier transform. In a more general sense the Heisenberg uncertainty related the spread in frequency to the spread in time or position.
-%This inequality however, is based only on the wave nature of particles and can be seen more as a mathematical inequality on Hilbert spaces than a physical one. As such it also has an equivalent with respect to Fourier transforms which says that the more localized a function is in the space domain the more spread out it must be in the spacial frequency domain.
-
-From Maxwell's equations we know that if an electric field in a lossless media oscillates in time with a certain angular frequency $\omega$ then it  must also oscillate in space with a certain wavevector $k=\sqrt{\mu\epsilon}\omega$. 
-%wavelength $\lambda=\sqrt{\epsilon \mu} \omega 2\pi$. Since the wavelength is basically the inverse of the length of the wavvevector $\vb*k$, the Fourier transform would be limited to contain wavevectors with such length. 
-An electric field generated by a NB signal will be highly localized in the frequency domain which should lead to a big spread in the spacial domain. Therefore an UWB signal would intuitievely lead to a much more focused field which contradicts previous results [?some~papers?]. We believe that this contradiction is due to a lack of detail in the reasoning and to understand why one must ``put the words into numbers'' and clarify what the uncertainty principle actually says and how it can be applied to the case of hyperthermia.
-\end{comment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Heisenberg's uncertainty principle}
-%\subsubsection{Heisenberg's inequality}
 The common quantum mechanical version of Heisenberg's uncertainty
-principle used in states that \emph{the product of the variance of
+principle states that \emph{the product of the variance of
   position and momentum must be greater than some fixed value}. This
-is however rooted in the interpretation that position and momentum are
+is rooted in the interpretation that position and momentum are
 related through fourier transfrom. 
 
-The general mathematical statement of the Heissenberg uncertainty
-principle, for a function $f$ and its Fourier transfrom $\tilde{f}$,
-is \cite{Folland} 
-%\todo{Need a value here}
+The general mathematical statement of the Heisenberg uncertainty
+principle, for a function $f$ and its Fourier transfrom\footnotemark{}
+$\tf$, is \cite{Folland} 
+\footnotetext{With the Fourier transform defined as in \eqref{eq:FT}. }
 \begin{equation}
-\Delta_{\vb*a}f \Delta_{\vb*\alpha} \tilde{f} \geq 1 \quad 
+\Delta_{\vb*a}f \Delta_{\vb*\alpha} \tf \geq \frac{D^2}{4} \quad 
 %\forall \vb*a, \vb*\alpha, 
 \forall f \in \Lsq{\infty},%[\mathbb{R}^2],
 \end{equation}
 where $\Delta_{\vb*a}f$ is a variance measure of $f$ is around
-\emph{any} reference point $\vb*a$; analogously for
-$\Delta_{\vb*\alpha}$ and $\vb*\alpha$.
+\emph{any} reference point $\vb*a$, analogously for
+$\Delta_{\vb*\alpha}\tf$ and $\vb*\alpha$.
 These variances are defined by
 \begin{equation} \label{eq:spread_def}
 \Delta_{\vb*a}f=
-\frac{\oldint_{\vb*x}\id^3x\abs{\vb*x-\vb*a}^2\abs{f(\vb*x)}^2}
-{\oldint_{\vb*x}\id^3x\abs{f(\vb*x)}^2},
+\frac{\oldint_{\vb*x}\rd^Dx\,\abs{\vb*x-\vb*a}^2\abs{f(\vb*x)}^2}
+{\oldint_{\vb*x}\rd^Dx\,\abs{f(\vb*x)}^2},
 \end{equation}
 and analogously for the Fourier transfrom.
-The minimum is achieved when $\vb*a$ is at the center of mass of $f$.
+% The minimum is achieved when $\vb*a$ ($\vb*\alpha$) is at the center
+% of mass of $f$ ($\tf$):
+% \begin{equation}
+% \vb*x_{\text{CM}}=\frac{\oldint_{\vb*x}\rd^Dx\,\vb*x\abs{f(\vb*x)}^2}
+% {\oldint_{\vb*x}\rd^Dx\,\abs{f(\vb*x)}^2}.
+% \end{equation}
 
+
+If $\Delta_{\vb*a}f$ is high, $f$ cannot be highly localized to one
+single small neighbourhood in space. It does not however, preclude $f$
+from having narrow peaks; there can exist several narrow peaks which
+are spread out from each other and still have $\Delta_{\vb*a}{f}$
+being large. 
+For hyperthermia treatment, this means that the variation measure at
+best gives a hint on what we want. It is possilbe to achieve a very
+strong and narrow radiation peak inside the tumour without violating
+the Heisenberg inequality, i.e. using NB signals, as long as a
+significant part of the radiation intensity is located outside of the 
+head.  
+This is a consequence of the particular localization measure used in
+the Heisenberg uncertainty relation. It is still a mathematical truth,
+but it might be too blunt to be practically applicable in hyperthermia
+treatments. 
+
+
+
+\subsection{The Slepian-Pollack-Landau method}
+\todo[inline]{Cut down a bit on math and formalism}
+Another localization measure was used by SPL in
+\cite{PSWF-I_1961,PSWF-II_1961,PSWF-III_1962,PSWF-IV_1964,PSWF-V_1978}. 
+\todo{Maybe change?}
+In what follows we will show the broad strokes for developing this
+theory. In doing so we will prove the existance of a useful set of
+functions ${\psi_i}$ which span the room of frequency-limited
+functions.%  and one of which maximizes the energy retained for a
+% frequency-limited function also limited in the space $S$. 
+
+A square-integrable function $f$ of $D$ variables is said to be
+$\Omega$-limited if it can be represented as a Fourier integral over
+the bounded region $\Omega$, 
+\begin{equation}\label{eq:freq-lim}
+f(\vb*x)=\qty(2\pi)^{-D}\oldint_\Omega \rd^Dk\,
+\tf(\vb*k)\ee^{\ii(\vb*k \cdot \vb*x)} 
+\end{equation}
+i.e. it only contains frequencies in the area $\Omega$.
+
+% The total energy of a function is defined as
+% \begin{equation*}
+% A=\oldint_{R^D}\abs{f(\vb*x)}^2\id^Dx
+% =\qty(\frac{1}{2\pi})^D \oldint_\Omega \abs{\tf(\vb*k)}^2\id^Dk,
+% \end{equation*}
+% where the last equality is due to Parseval.
+
+The energy of a function $f$ in a region $S$ is defined as 
+\begin{equation}\label{eq:AS}
+A_S=\oldint_S\rd^Dx\,\abs{f(\vb*x)}^2.
+\end{equation}
+Using Parseval's formula, the total engergy of the $\Omega$-limited
+function $f$ can be written as 
+\begin{equation}\label{eq:Atot}
+A=\oldint_{R^D}\rd^Dx\, \abs{f(\vb*x)}^2 =
+(2\pi)^{-D}\oldint_\Omega\rd^Dk\, \abs{\tf(\vb*k)}^2.
+\end{equation}
+
+
+By substituing \eqref{eq:freq-lim} into \eqref{eq:AS}, we get
+\begin{equation}\label{eq:AS-KS}
+\begin{aligned}
+A_S%=\oldint_S\abs{f(\vb*x)}^2\id^Dx
+&=\qty({2\pi})^{-2D} \oldint_S\rd^Dx \oldint_\Omega \rd^Dk\,
+\tf(\vb*k)\ee^{\ii\vb*k\cdot \vb*x}
+\oldint_\Omega \id^Dk'\,
+\tf^*(\vb*k')\ee^{-\ii\vb*k'\cdot \vb*x}\\
+&=\qty (2\pi)^{-D} \oldint_\Omega\rd^Dk\oldint_\Omega\rd^Dk'\,
+\tf(\vb*k)\tf^*(\vb*k')K_s(\vb*k-\vb*k')\\
+%&=\ip{I\tf}{\tf}
+\end{aligned}
+\end{equation}
+where
+\begin{equation} \label{eq:kernel}
+K_s(\vb*k-\vb*k')=(2\pi)^{-D}\oldint_S\rd^Dx\,
+\ee^{\ii\vb*x \cdot(\vb*k-\vb*k')},
+\end{equation}
+is called an integral \emph{kernel}.
+Define an integral operator $I_S$:
+\begin{equation} \label{eq:int_op}
+\qty[I_S g](\vb*k')=\oldint_\Omega\rd^Dk\, 
+K_S(\vb*k-\vb*k')g(\vb*k).
+\end{equation}
+The fraction of energy that the $\Omega$-limited function $f$ can have
+in a region $S$ can then be written as 
+\begin{equation} \label{eq:energy_frac_final}
+\frac{A_s}{A}=
+\frac{\oldint_\Omega\rd^Dk\, \qty[I\tf](\vb*k)\tf^*(\vb*k)}
+{\oldint_\Omega \rd^Dk\, \abs{\tf(\vb*k)}^2}
+=\frac{\ip{I_S\tf}{\tf}}{\ip{\tf}},
+\end{equation}
+where we have defined an inner product on the $\Omega$-space:
+\begin{equation} \label{eq:in_prod}
+\ip{f}{g} =\oldint_\Omega\rd^Dk\, f(\vb*k)g^*(\vb*k).
+\end{equation}
+
+% In the litterature integral operators, like \eqref{eq:int_op},
+% are called Hilbert-Schmidt integral operators if the kernel is
+% square-integrable in $\Omega$, and such an operator is compact. 
+% Since the regions $S$ and $\Omega$ are bounded square-integrability
+% holds for the kernel \eqref{eq:kernel} and since it is also complex
+% symmetric with respect to its arguments,
+% $K_s(\vb*k-\vb*k')=K_s^*(\vb*k'-\vb*k)$, the integral operator 
+\todo{CITE!}
+It can be shown that the integral operator \eqref{eq:int_op} is 
+self-adjoint and compact. From the Spectral theorem it now follows
+that the functions fullfilling the eigenvalue equation 
+\begin{equation}
+  \label{eq:eigen}
+\qty[I_S\psi](\vb*k)=\oldint_\Omega \rd^Dk'\,K_s(\vb*k')\psi(\vb*k') 
+=\lambda \psi(\vb*k)
+\end{equation}
+form an orthogonal base for the space $\Omega$. 
+It also follows that the maximum of equation
+\eqref{eq:energy_frac_final} is
+the largest eigenvalue $\lambda_0$ of equation \eqref{eq:eigen}. In
+other word $\lambda_0$ is an upper bound for the fraction of erergy
+in $S$ for an $\Omega$-limited function. 
+This upper bound will be dependent on the geometries of the areas
+$S$ and $\Omega$. The following section will be devoted to calculating
+this $\lambda_0$ for bandwidth limited function in two dimensions. 
+
+
+
+\section{Two dimensional application to
+ signals of limited bandwidth}
 %For the EM-field this gives an inequality for each component $E_i$\footnotemark{}
 %\begin{equation}
 %  \label{eq:ineq_final}
 %  \Delta_{\vb*a}E_i\geq \frac{9}{4} \frac{1}{\mathrm{Min}_\alpha\Delta_{\vb*\alpha}\tilde{E_i}}, \quad \forall \vb*a.
 %\end{equation}
-\todo[inline]{Need to rewrite!}
+\todo[inline]{Need to rewrite! Or move?}
 Since the fourier transform of the EM field is concentrated on a sphere we achieve the minimum spread for $\alpha=0$ and using equations \eqref{eq:spread_def} one gets,
 $\min_\alpha\Delta_{\vb*\alpha}\tilde{E}=\frac{\omega^2}{v^2}$ and \eqref{eq:ineq_final} becomes
 \begin{equation}
  \Delta_{\vb*a}E\geq \frac{9v^2}{4\omega^2}=\frac{9\lambda^2}{16\pi^2}=\frac{9}{16\pi^2\epsilon\mu\nu^2}.
  \end{equation}
+\todo[inline]{end}
 
-
-If the spacial variation of $f$ is high it implies that it cannot be
-highly localized to one single small neighbourhood in space; it does not
-however, preclude $f$ from having narrow peaks, there can e.g. exist
-several narrow peaks which are spread out from each other and still
-have $\Delta{f}$ being large.
-
-For hyperthermia treatment, this means that the variation measure at
-best gives a hint on what we want. It is possilbe to achieve a very
-strong and narrow radiation peak inside the tumour without violating
-the Heissenberg inequality, i.e. using NB signals, as long as a
-significant part of the radiation intensity is located outside of the 
-head.  
-This however is a consequence of the particular focus meassure used in
-this uncertainty relation; the mathematical result is still true, but
-it might not provide enough insite to be practically applicable in
-hyperthermia treatments.
-
-
-
-\subsection{The Slepian-Landau-Pollak uncertainty relations}
-\todo[inline]{Cut down a bit on math and formalism}
-In a series of papers from the 60's D. Slepian, H.J. Landau and H.O. Pollak investigated how much energy a frequency-limited function can keep if it is restricted in space. By doing this one can reach an inequality on the form
-\begin{equation}
-\abs{S}\abs{\Omega} \geq c(\alpha,\beta),
-\end{equation}
-Where $S$ and $\Omega$ are areas to which a function is restricted to in space respectivley frequency. The constants $\alpha$ and $\beta$ are the fractions of energy that the function contains in these areas. 
-
-In what follows we will show the broad strokes for developing the theory from which the inequality can be extracted. In doing so we will prove the existance of a useful set of functions ${\psi_i}$ who span the room of frequency-limited functions and one of which maximizes the energy retained for a frequency-limited function also limited in the space $S$.
-
-A square-integrable function $f$ of $D$ variables is said to be $\Omega$-limited if it can be represented as a Fourier integral over the bounded region $\Omega$,
-
-\begin{equation}
-  f(\vb*x)=\qty(\frac{1}{2\pi})^D\oldint_\Omega \tilde{f}(\vb*k)\ee^{\ii(\vb*k \cdot \vb*x)} \id^Dk,
-\end{equation}
-that is, it only contains frequencies in the area $\Omega$.
-We define the energy of a function to be
-\begin{equation*}
-A=\oldint_{R^D}\abs{f(\vb*x)}^2\id^3x.
-\end{equation*}
-By Parseval's theorem we get that
-\begin{equation*}
-A=\oldint_{R^D}\abs{f(\vb*x)}^2\id^3x=\qty(\frac{1}{2\pi})^D \oldint_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk.
-\end{equation*}
-In a bounded region $S$ of the space $R^D$ one gets the total energy
-\begin{align*}
-  A_S=\oldint_S\abs{f(\vb*x)}^2\id^Dx&=\oldint_S\id^Dx \qty(\frac{1}{2\pi})^{2D}\oldint_\Omega \tilde{f}(\vb*k)\ee^{\ii\vb*k\cdot \vb*x}\id^Dk \oldint_\Omega \tilde{f}^*(\vb*k')\ee^{-\ii\vb*k'\cdot \vb*x}\id^Dk'\\
- & =\qty (\frac{1}{2\pi})^D \oldint_\Omega\id^3k\oldint_\Omega\tilde{f}(\vb*k)\tilde{f}^*(\vb*k')K_s(\vb*k-\vb*k')\id^Dk',
-\end{align*}
-with the kernel
-\begin{equation}
-  \label{eq:kernel}
-K_s(\vb*k-\vb*k')=\frac{1}{2\pi}^D\oldint_S\ee^{\ii\vb*x \cdot(\vb*k-\vb*k')}.
-\end{equation}
-Next if we define an integraloperator $I^{[\Omega S]}$ such that;
-\begin{equation}
-  \label{eq:int_op}
-\qty[I^{[\Omega S]}\phi](\vb*k')=\oldint_\Omega K_S(\vb*k-\vb*k')\phi(\vb*k)\id^Dk,
-\end{equation}
-and an inner product on the $\Omega$-space by
-\begin{equation}
-  \label{eq:in_prod}
-   \langle f,g\rangle =\oldint_\Omega f(\vb*k)g^*(\vb*k)\id^3k,
-\end{equation}
-the fraction of energy that an $\Omega$-limited function $f$ can have in a region $S$ can be written as
-\begin{equation}
-  \label{eq:energy_frac_final}
-\frac{A_s}{A}=\frac{\oldint_\Omega\qty[I^{[\Omega S]}\tilde{f}](\vb*k)\tilde{f}^*(\vb*k)\id^Dk}{\oldint_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk}=\frac{ \langle I\tilde{f}, \tilde{f}\rangle}{\langle \tilde{f}, \tilde{f} \rangle}.
-\end{equation}
-
- In the litterature integral operators of the kind \eqref{eq:int_op} are called Hilbert-Schmidt integral operators if the kernel is square-integrable in $\Omega$, and such an operator is compact. Since the regions $S$ and $\Omega$ are bounded square-integrability holds for the kernel \eqref{eq:kernel} and since it is also complex symmetric with respect to its arguments, $K_s(\vb*k-\vb*k')=K_s^*(\vb*k'-\vb*k)$, the integral operator is self-adjoint with respect to the inner product \eqref{eq:in_prod}. From the Spectral theorem it now follows that the functions fullfilling the eigenvalue equation
-\begin{equation}
-  \label{eq:eigen}
-\qty[I^{[\Omega S]}\psi](\vb*k)=\oldint_\Omega K_s(\vb*k')\psi(\vb*k') \id^Dk'=\lambda \psi(\vb*k)
-\end{equation}
-form an orthogonal base for the space $\Omega$ and thus their inverse Fourier transform a base for the space of $\Omega$-limited functions in $R^D$. It also follows that the maximum of equation \eqref{eq:energy_frac_final}, the maximum fraction of energy, equals the largest eigenvalue $\lambda_0$ of equation \eqref{eq:eigen} and the function fulfilling this is the inverse Fourier transform of the coresponding eigenfunction $\psi_0$.
-
-This $\lambda_0$ will be dependent on the size and shape of the areas $S$ and $\Omega$ and will form the base for our inequalities. In the following sections we will calculate these limits for some simple geometries as well as provide ideas for how it can be extended to more complex regions.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{comment}
-\subsection{The disk and the ball}
-\todo[inline]{Remove?}
-If $\Omega$ and $S$ are both circular disks with $S$ a scaled version of $\Omega$, $S=c\Omega$, then the eigenvalue equation \eqref{eq:eigen} can be significantly simplified. Through symmetrical arguments Slepian shows in cite that the solutions can be written on the form
-\begin{align}
- &\psi_{0,n}(k,\theta)=\frac{\phi_{0,n}(k)}{\sqrt{k}}, \quad &\lambda_{0,n}= ...\gamma \\
-  &\psi_{N,n}(k, \theta)=\frac{\phi_{N,n}(k)}{\sqrt{k}}\mqty{\sin(N\theta)\\ \cos(N\theta)} , \quad &\lambda_{N,n}= ... \gamma\\
-  &N,n=0,1,\ldots
-\end{align}
-where $\phi$ and $\gamma$ are solutions to a simpler eigenvalue equation
-\begin{equation}
-  \label{eq:Bessel_int}
-\gamma\phi(k)=\int_0^1 J_N(ckk')\sqrt{ckk'}\phi(k')\id k', \quad 0\leq k' \leq 1.
-\end{equation}
-
-%Further he shows that these $\phi$ also satisfy the differential equation
-%\begin{equation}
-%  \label{eq:Bessel_diff}
-%(1-k^2)\dv[2]{\phi}{k}-2k\dv{\phi}{k} +\qty(\frac{\frac{1}{4}-N^2}{k^2}+\xi)=0.
-%\end{equation}
-
-Using surface harmonics he then continues to show that similiar formulas hold in higher dimensions D>2
-\begin{align}
-  &\psi_{0,n}(k,\theta)=k^{-(D-1)/2}\phi_{0,n}(k)S_N^l, \quad \lambda_{0,n}= ...\gamma \\
-  &l= 1,2, \ldots , h(N,D), \quad N,n=0,1, \ldots,
-\end{align}
-where $\phi$ and $\gamma$ are solutions to an equation identical to \eqref{eq:Bessel_int} except that $N$ has to be replaced by $N+\frac{D-2}{2}$. 
-
-In the paper from 1964 cite Slepian proves that the $\phi$'s of \eqref{eq:Bessel_int} also satisfy a differential equation and with this he managed to numerically calculate values for $\lambda$ and $\psi$ for different values of $c$. However, with significantly improved computer technology, we chose to work directly with the integral equations \eqref{eq:eigen} and \eqref{eq:Bessel_int} which can also be generalized more easily.
-\end{comment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\section{Application of SLP theory in 2D to signals of limited bandwidth}
 \todo[inline]{REDO intro}
 So far we have looked at areas in the space and frequency domains
 which have the same shape, filled discs or spheres, but are scaled
@@ -413,153 +377,186 @@ Therefore, we let $S$ be a filled
 circle disc of radius $R$, and $\Omega$ be the finite thickness circle
 ring with outer radius $\Gamma$ and inner radius $q\Gamma$, $0\le q<1$.
 
-%We first need to define the areas $S$ and $\Omega$ in the space and
-%frequency domain respectively.
-%For the space domain we still want a
-%filled region without a gap in the center, but for the frequency domain
-%we want to exclude the center part of the region. Let $S$ be a filled
-%circle disc of radius $R$, and $\Omega$ be the finite thickness circle
-%ring with outer radius $\Gamma$ and inner radius $q\Gamma$, $0\le q<1$.
 
-\subsection{Slepian's method using Fourier transforms}
-\todo[inline]{Move most of the math here to appendix!}
+\subsection{The SPL method using Fourier transforms}
+%\todo[inline]{Move most of the math here to appendix!}
 The methodology used here is a direct translation of the ones used in
-\cite{PSWF-I_1961} and \cite{PSWF-IV_1964} to $S$ and $\Omega$.
+\cite{PSWF-I_1961} and \cite{PSWF-IV_1964} to $S$ and $\Omega$. This
+section will be somewhat short and superficial; this is due to the
+fact that the next method will be much more efficient
+numerically. Althogh there are some useful tools which will be
+developed here.
 
 
 From the definition of the kernel $K_s$ in equation \eqref{eq:kernel}, we get 
 \begin{equation}
 \begin{aligned}
 K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
-\oldint_S \rd^2r \ee^{\ii\vb*r\vdot\Delta\vb*k}\\
-=& (2\pi)^{-2}
-\int_0^{2\pi}\rd\theta \int_0^{R} \rd{r}\,r
- \ee^{\ii\, r\Delta{k}\,\cos\theta},
+\oldint_S \rd^2r \ee^{\ii\vb*r\vdot(\vb*k-\vb*k')}.
+%\\ =& (2\pi)^{-2}
+% \int_0^{2\pi}\rd\theta \int_0^{R} \rd{r}\,r
+%  \ee^{\ii\, r\Delta{k}\,\cos\theta},
 \end{aligned}
 \end{equation}
-where $\Delta{k} = \abs{\Delta\vb*k} = \abs{\vb*k-\vb*k'}$.
-Note that the integration axes has been chosen so that $\Delta{k}$
-lies on the $\theta=0$ axis.
-%To get to the second step here, choose the integration axes so that $\Delta{k}$
-%lies on the $\theta=0$ axis and thus $\vb*r\vdot\Delta\vb*k=r\Delta{k}\,\cos\theta$;
-%this can be done since, for the sake of the integration
-%$\Delta{\vb*k}$ can be viewed as a constant.
-Next we use the usual Bessel function expansion \cite[formula 8.551.4b]{Gradshteyn-Ryzhik}
+%where $\Delta{k} = \abs{\Delta\vb*k} = \abs{\vb*k-\vb*k'}$.
+%Note that the integration axes has been chosen so that $\Delta{k}$
+%lies on the $\theta=0$ axis.
+By substituting to polar coordinates and using the usual Bessel
+function expansion \cite[formula 8.551.4b]{Gradshteyn-Ryzhik} 
 \begin{equation}
 \ee^{\ii z\cos\theta} = \sum_{m=-\infty}^\infty
 \ii^mJ_m(z)\ee^{\ii m\theta}
 \end{equation}
-to write 
-\begin{equation}
+and some other Bessel function identities 
+\cite[formula~8.472.3]{Gradshteyn-Ryzhik}, we eventually end up with
+% \begin{equation}
+% \begin{aligned}
+% K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
+% \sum_{m=-\infty}^\infty \ii^m
+% \int_0^{2\pi}\rd\theta\, \ee^{\ii m\theta}
+% \int_0^{R} \rd{r}\,r J_m(r\Delta{k}).
+% \end{aligned}
+% \end{equation}
+% The $\theta$ integral is zero for all $m\neq0$ and $2\pi$ for $m=0$ and the $r$ integral is solved using 
+% \cite[formula~8.472.3]{Gradshteyn-Ryzhik} 
+% \begin{equation}
+% \frac{1}{z}\dv{z}\qty[zJ_1(z)] = J_0(z).
+% \end{equation}
+% Together this leads to
+\begin{equation}\label{eq:KS-short}
 \begin{aligned}
-K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
-\sum_{m=-\infty}^\infty \ii^m
-\int_0^{2\pi}\rd\theta\, \ee^{\ii m\theta}
-\int_0^{R} \rd{r}\,r J_m(r\Delta{k}).
+K_S(\vb*k-\vb*k') %=& (2\pi)^{-2}
+% \,(2\pi)\,\frac{1}{(\Delta{k})^2}
+% \int_0^{R\Delta{k}} \rd{z}\,z\, J_0(z)\\
+% =& (2\pi)^{-1} \frac{1}{(\Delta{k})^2}
+% \Big[zJ_1(z)\Big]_{z=0}^{R\Delta k}
+&=(2\pi)^{-1}R\, \frac{J_1(R\Delta{k})}{\Delta{k}}.
 \end{aligned}
 \end{equation}
-The $\theta$ integral is zero for all $m\neq0$ and $2\pi$ for $m=0$ and the $r$ integral is solved using 
-\cite[formula~8.472.3]{Gradshteyn-Ryzhik} 
-\begin{equation}
-\frac{1}{z}\dv{z}\qty[zJ_1(z)] = J_0(z).
-\end{equation}
-Together this leads to
-\begin{equation}
-\begin{aligned}
-K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
-\,(2\pi)\,\frac{1}{(\Delta{k})^2}
-\int_0^{R\Delta{k}} \rd{z}\,z\, J_0(z)\\
-=& (2\pi)^{-1} \frac{1}{(\Delta{k})^2}
-\Big[zJ_1(z)\Big]_{z=0}^{R\Delta k}
-&=(2\pi)^{-1} \frac{R}{\Delta{k}} J_1(R\Delta{k}).
-\end{aligned}
-\end{equation}
+With the law of cosines
+$\Delta{k}=\abs{\vb*k-\vb*k'}=\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}$,
+where $k=\abs{\vb*k}$, $k'=\abs{\vb*k'}$ and
+$\Delta\theta=(\theta-\theta')$ is the angle between $\vb*k$ and
+$\vb*k'$.
 
-The next step is to manipulate the actual integral eigenvalue equation \eqref{eq:eigen},
+The next step is to manipulate the actual integral eigenvalue equation
+\eqref{eq:eigen}.
+The numerical method described in Appendix~\ref{apx:num} requires that
+we only have a 1 dimensional integral.
 %\begin{equation}
 %\label{eq:eigen_fourier}
 %\lambda \psi(\vb*k) = \oldint_\Omega \rd^2k'\,
 %(2\pi)^{-1} \frac{R}{\Delta{k}} J_1(R\Delta{k}) 
 %K_S(\vb*k-\vb*k')\psi(\vb*k')
 %\end{equation}
-which by polar coordiane substitution becomes
-\begin{equation}\label{eq:eigint-pol}
-\lambda\psi(k, \theta) =
-\int_{q\Gamma}^\Gamma\rd{k'}\,k'
-\int_{0}^{2\pi}\rd\theta'\,\frac{R}{2\pi}
-\frac{J_1(R\Delta{k})}{\Delta{k}} \psi(k',\theta')
-\end{equation}
-We note that, by the law of cosines, 
-$\Delta{k}=\abs{\vb*k-\vb*k'}=\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}$, 
-where $k=\abs{\vb*k}$, $k'=\abs{\vb*k'}$ and
-$\Delta\theta=\theta-\theta'$ is the angle between $\vb*k$ and
-$\vb*k'$. This means that 
-\begin{equation}\label{eq:KS-long}
-K_S(k, k', \Delta\theta) = \frac{R}{2\pi}\,
-\frac{J_1\qty(R\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)})}
-{\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}}
-\end{equation}
+%which by polar coordiane substitution becomes
+% \begin{equation}\label{eq:eigint-pol}
+% \lambda\psi(k, \theta) =
+% \int_{q\Gamma}^\Gamma\rd{k'}\,k'
+% \int_{0}^{2\pi}\rd\theta'\,\frac{R}{2\pi}
+% \frac{J_1(R\Delta{k})}{\Delta{k}} \psi(k',\theta')
+% \end{equation}
+% We note that, by the law of cosines, 
+% $\Delta{k}=\abs{\vb*k-\vb*k'}=\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}$, 
+% where $k=\abs{\vb*k}$, $k'=\abs{\vb*k'}$ and
+% $\Delta\theta=\theta-\theta'$ is the angle between $\vb*k$ and
+% $\vb*k'$. This means that 
+% \begin{equation}\label{eq:KS-long}
+% K_S(k, k', \Delta\theta) = \frac{R}{2\pi}\,
+% \frac{J_1\qty(R\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)})}
+% {\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}}
+% \end{equation}
+To get this, we note that $K_S(\vb*k-\vb*k')$
 is $2\pi$-periodic in $\Delta\theta$, and thus has a Fourier series expansion 
 \begin{equation} \label{eq:KS-FS}
 K_S(k, k', \Delta\theta)  
 =\sum_{n=-\infty}^\infty a_{n}(k, k')\, \ee^{\ii n\Delta\theta}
-=\sum_{n=-\infty}^\infty a_{n}(k, k')\, \ee^{\ii n\theta}\ee^{-\ii n\theta'},
+=\sum_{n=-\infty}^\infty \ee^{\ii n\theta}\,a_{n}(k, k')\,\ee^{-\ii n\theta'},
 \end{equation}
 where 
 \begin{equation}
 a_{n}(k, k') = \frac{1}{2\pi} \int_0^{2\pi} \rd\phi\, 
 K_S(k, k', \phi)\ee^{-\ii n\phi}.
 \end{equation}
-We also know that the eigenfunctions, $\psi$, has to be periodic in
-$\theta$ since the kernel is periodic in both $\theta$ and
-$\theta'$. Therefore $\psi(k,\theta)$ also has a Fourier series
+Viewing \eqref{eq:eigen} as the definition of $\psi$, we also know
+that the eigenfunctions, $\psi$, has to be periodic in 
+$\theta$ since the kernel is periodic in $\theta$. Therefore
+$\psi(k,\theta)$ also has to have a Fourier series 
 \begin{equation}\label{eq:psi-FS}
 \psi(k, \theta) = \sum_{m=-\infty}^\infty b_m(k)\ee^{\ii m\theta}.
 \end{equation}
 
 
-With the two results, \eqref{eq:KS-FS} and \eqref{eq:psi-FS}, the
-eigenvalue equation \eqref{eq:eigint-pol} can be written as
+Substituting \eqref{eq:KS-FS} and \eqref{eq:psi-FS} into the
+eigenvalue equation \eqref{eq:eigen} with polar coordinates, and
+changing the order of summation and integration, yields
 \begin{equation}
 \begin{aligned}
 \lambda\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
-=& \int_{q\Gamma}^\Gamma\rd{k'}\,k'\int_{0}^{2\pi}\rd\theta'\,
-\sum_{n=-\infty}^\infty a_n(k)\ee^{\ii n\theta}\ee^{-\ii n\theta'}
-\sum_{m=-\infty}^\infty b_m(k)\ee^{\ii m\theta'}\\
+% =& \int_{q\Gamma}^\Gamma\rd{k'}\,k'
+% \int_{0}^{2\pi}\rd\theta'\,
+% \sum_{n=-\infty}^\infty a_n(k')\ee^{\ii n\theta}\ee^{-\ii n\theta'}
+% \sum_{m=-\infty}^\infty b_m(k')\ee^{\ii m\theta'}\\ 
 =& \sum_{n=-\infty}^\infty \ee^{\ii n\theta} \sum_{m=-\infty}^\infty 
-\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_m(k')
+\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_m(k')
 \int_{0}^{2\pi}\rd\theta'\,
 \ee^{\ii (m-n)\theta'}.
 \end{aligned}
 \end{equation}
-Like before the $\theta'$ integral is only non-zero when $m-n=0$ and
+The $\theta'$ integral is only non-zero when $m-n=0$ and
 then the integral is just $2\pi$. We now get
 \begin{equation}
 \lambda\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
-= \sum_{n=-\infty}^\infty \ee^{\ii n\theta} 
-\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k').
+= 2\pi\sum_{n=-\infty}^\infty \ee^{\ii n\theta} 
+\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_n(k').
 \end{equation}
-By the uniqueness of Fourier series expansions, for all non-zero $b_n$ we must have
+By the uniqueness of Fourier series expansions, for all non-zero $b_n$
+we must have 
 \begin{equation}
 \label{eq:eigen_fourier_coef}
-\lambda_n b_n(k) = \int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k') b_n(k'),
+\lambda_n b_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_n(k'),
 \end{equation}
-where $\lambda$ has been denoted by $\lambda_n$ since each $b_n(k)$ will have a different eigenvalue satisfying \eqref{eq:eigen_fourier_coef}. 
-%The problem of finding the largest eigenvalue to \eqref{eq:eigen} now results in finding the largest of the largest eigenvalues to \eqref{eq:eigen_fourier_coef} for all $n$.
+where $\lambda$ has been denoted by $\lambda_n$ since each $b_n(k)$
+will have a different eigenvalue satisfying
+\eqref{eq:eigen_fourier_coef}.  
+%The problem of finding the largest eigenvalue to \eqref{eq:eigen} now
+%results in finding the largest of the largest eigenvalues to
+%\eqref{eq:eigen_fourier_coef} for all $n$. 
 
-However, the problem with this method is that the Fourier coefficients of the kernel, $a_n(k, k')$, cannot be calculated analytically by direct integration using standard methods. This
-results in very costly numerical calculations since $a_n(k, k')$
-has to be calculated numerically for each pair of $k$ and $k'$, on 
-top of then calculationg the eigenvalues.
-%
-This problem stems from trying to adobt a plane wave decomposition to polar coordinates. By starting from the polar wave decomposition one can avoid these difficulties, which is what we will do in the following section.
+There is one last thing we can do to make
+\eqref{eq:eigen_fourier_coef} more suitable for numerical solution,
+and that is to symmetrisize the kernel $k'a_n(k')$. To do that we
+make the substitution $b_n(k)=\phi_n(k)/\sqrt{k}$, which yields
+\begin{equation}
+\lambda_n \phi_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,
+\sqrt{kk'}a_n(k, k') b_n(k').
+\end{equation}
+This makes the kernel $\sqrt{kk'}a_n(k, k')$ symmetric in $k$ and
+$k'$, since $a_n(k, k')=a_n(k', k)$ was already symmetric. Besides
+making the numerical eigenvalue calculation more efficient, this also
+has some nice mathematical implications. Like for instance $\phi_n$
+constituting an orthogonal base on $[q\Gamma, \Gamma]$.\todo{cite!}
 
-\subsection{A similar method using Bessel decomposition}
+However, the problem with this method is that the Fourier coefficients
+of the kernel, $a_n(k, k')$, cannot be calculated analytically by
+direct integration using standard methods. This results in very costly
+numerical calculations since $a_n(k, k')$ has to be calculated
+numerically for each pair of $k$ and $k'$, on top of then calculationg
+the eigenvalues. 
+This problem stems from trying to adobt a plane wave decomposition to
+polar coordinates. By starting from the polar wave decomposition one
+can avoid these difficulties, which is what we will do in the
+following section. 
+
+\subsection{Expanding the SPL method using Bessel decomposition}
 \todo[inline]{Needs a very very light touch}
 %Slepian's method looked at the Fourier representation of the EM-field and looked at how a function limited in the Fourier ($\vb*k$) space behaved in the $\vb*x$-space. Although we were able to extract useful information it required alot of manipulations of the formulas and also in the end some costly numerical calculations. The reason behind this is that the Fourier ($\vb*k$) space speaks of plane waves which form solutions to the wave equation in cartesian coordinates while we were interested in geometries best described by polar coordinates. In an alternative approach we therefore started in a polar description, developed a base for the EM-field and used this to maximize a quotient of the form \eqref{eq:energy_frac_final}.
 
 
-The polar decomposition of the field \eqref{eq:polar_wave_general} can be used to calculate the energy in a disk $S$ following a procedure to the one used by Slepian %Eller used in the previous section?
+The polar decomposition of the field \eqref{eq:polar_wave_general} can
+be used to calculate the energy in a disk $S$ following a procedure
+similar to the one used by Slepian \cite{PSWF-IV_1964}
+%Eller used in the previous section?
 \begin{equation}
   \label{eq:energy_bessel}
 \begin{aligned}
@@ -698,7 +695,7 @@ For a large family of goalfunctions the optimum is therefore obtained for a sing
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical implementation of the 
 Landau-Pollack-Slepian Theory}
-
+\label{apx:num}
 In the previous section we have been occupied by integral eigenvalue
 equations of the form
 \begin{equation} %\label{eq:int-eig}
