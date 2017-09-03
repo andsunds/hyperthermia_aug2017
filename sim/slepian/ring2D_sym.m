@@ -20,7 +20,7 @@ if nargout >1
 else
     D    =eigs(Ks,n_eigs,'LM');  %only eigenvalue(s)
 end
-D=D*c*(1-q)/L; %/Rs^2, but we have difined Rs:=1.
+D=D*c*(1-q)/L; %normalizing
 
 
 end
