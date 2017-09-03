@@ -331,17 +331,17 @@ that the functions fullfilling the eigenvalue equation
 \begin{equation}
   \label{eq:eigen}
 \qty[I_S\psi](\vb*k)=\oldint_\Omega \rd^Dk'\,K_s(\vb*k')\psi(\vb*k') 
-=\lambda \psi(\vb*k)
+=\mu \psi(\vb*k)
 \end{equation}
 form an orthogonal base for the space $\Omega$. 
 It also follows that the maximum of equation
 \eqref{eq:energy_frac_final} is
-the largest eigenvalue $\lambda_0$ of equation \eqref{eq:eigen}. In
-other word $\lambda_0$ is an upper bound for the fraction of erergy
+the largest eigenvalue $\mu_0$ of equation \eqref{eq:eigen}. In
+other word $\mu_0$ is an upper bound for the fraction of erergy
 in $S$ for an $\Omega$-limited function. 
 This upper bound will be dependent on the geometries of the areas
 $S$ and $\Omega$. The following section will be devoted to calculating
-this $\lambda_0$ for bandwidth limited function in two dimensions. 
+this $\mu_0$ for bandwidth limited function in two dimensions. 
 
 
 
@@ -356,7 +356,7 @@ this $\lambda_0$ for bandwidth limited function in two dimensions.
 Since the fourier transform of the EM field is concentrated on a sphere we achieve the minimum spread for $\alpha=0$ and using equations \eqref{eq:spread_def} one gets,
 $\min_\alpha\Delta_{\vb*\alpha}\tilde{E}=\frac{\omega^2}{v^2}$ and \eqref{eq:ineq_final} becomes
 \begin{equation}
- \Delta_{\vb*a}E\geq \frac{9v^2}{4\omega^2}=\frac{9\lambda^2}{16\pi^2}=\frac{9}{16\pi^2\epsilon\mu\nu^2}.
+ \Delta_{\vb*a}E\geq \frac{9v^2}{4\omega^2}=\frac{9\mu^2}{16\pi^2}=\frac{9}{16\pi^2\epsilon\mu\nu^2}.
  \end{equation}
 \todo[inline]{end}
 
@@ -445,13 +445,13 @@ The numerical method described in Appendix~\ref{apx:num} requires that
 we only have a 1 dimensional integral.
 %\begin{equation}
 %\label{eq:eigen_fourier}
-%\lambda \psi(\vb*k) = \oldint_\Omega \rd^2k'\,
+%\mu \psi(\vb*k) = \oldint_\Omega \rd^2k'\,
 %(2\pi)^{-1} \frac{R}{\Delta{k}} J_1(R\Delta{k}) 
 %K_S(\vb*k-\vb*k')\psi(\vb*k')
 %\end{equation}
 %which by polar coordiane substitution becomes
 % \begin{equation}\label{eq:eigint-pol}
-% \lambda\psi(k, \theta) =
+% \mu\psi(k, \theta) =
 % \int_{q\Gamma}^\Gamma\rd{k'}\,k'
 % \int_{0}^{2\pi}\rd\theta'\,\frac{R}{2\pi}
 % \frac{J_1(R\Delta{k})}{\Delta{k}} \psi(k',\theta')
@@ -470,20 +470,20 @@ To get this, we note that $K_S(\vb*k-\vb*k')$
 is $2\pi$-periodic in $\Delta\theta$, and thus has a Fourier series expansion 
 \begin{equation} \label{eq:KS-FS}
 K_S(k, k', \Delta\theta)  
-=\sum_{n=-\infty}^\infty a_{n}(k, k')\, \ee^{\ii n\Delta\theta}
-=\sum_{n=-\infty}^\infty \ee^{\ii n\theta}\,a_{n}(k, k')\,\ee^{-\ii n\theta'},
+=\sum_{n=-\infty}^\infty b_{n}(k, k')\, \ee^{\ii n\Delta\theta}
+=\sum_{n=-\infty}^\infty \ee^{\ii n\theta}\,b_{n}(k, k')\,\ee^{-\ii n\theta'},
 \end{equation}
 where 
-\begin{equation}
-a_{n}(k, k') = \frac{1}{2\pi} \int_0^{2\pi} \rd\phi\, 
-K_S(k, k', \phi)\ee^{-\ii n\phi}.
+\begin{equation} \label{eq:KS-FS-coef}
+b_{n}(k, k') = \frac{1}{2\pi} \int_0^{2\pi} \rd(\Delta\theta)\; 
+K_S(k, k', \Delta\theta)\ee^{-\ii n\Delta\theta}.
 \end{equation}
 Viewing \eqref{eq:eigen} as the definition of $\psi$, we also know
 that the eigenfunctions, $\psi$, has to be periodic in 
 $\theta$ since the kernel is periodic in $\theta$. Therefore
-$\psi(k,\theta)$ also has to have a Fourier series 
+$\psi(k, \theta)$ also has to have a Fourier series 
 \begin{equation}\label{eq:psi-FS}
-\psi(k, \theta) = \sum_{m=-\infty}^\infty b_m(k)\ee^{\ii m\theta}.
+\psi(k, \theta) = \sum_{m=-\infty}^\infty a_m(k)\ee^{\ii m\theta}.
 \end{equation}
 
 
@@ -492,31 +492,31 @@ eigenvalue equation \eqref{eq:eigen} with polar coordinates, and
 changing the order of summation and integration, yields
 \begin{equation}
 \begin{aligned}
-\lambda\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
+\mu\sum_{l=-\infty}^\infty a_l(k)\ee^{\ii l\theta}
 % =& \int_{q\Gamma}^\Gamma\rd{k'}\,k'
 % \int_{0}^{2\pi}\rd\theta'\,
-% \sum_{n=-\infty}^\infty a_n(k')\ee^{\ii n\theta}\ee^{-\ii n\theta'}
+% \sum_{n=-\infty}^\infty b_n(k')\ee^{\ii n\theta}\ee^{-\ii n\theta'}
 % \sum_{m=-\infty}^\infty b_m(k')\ee^{\ii m\theta'}\\ 
 =& \sum_{n=-\infty}^\infty \ee^{\ii n\theta} \sum_{m=-\infty}^\infty 
-\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_m(k')
+\int_{q\Gamma}^\Gamma\rd{k'}\,k' b_n(k, k') a_m(k')
 \int_{0}^{2\pi}\rd\theta'\,
 \ee^{\ii (m-n)\theta'}.
 \end{aligned}
 \end{equation}
-The $\theta'$ integral is only non-zero when $m-n=0$ and
+The $\theta'$ integral is only non-zero when $(m-n)=0$ and
 then the integral is just $2\pi$. We now get
 \begin{equation}
-\lambda\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
+\mu\sum_{l=-\infty}^\infty a_l(k)\ee^{\ii l\theta}
 = 2\pi\sum_{n=-\infty}^\infty \ee^{\ii n\theta} 
-\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_n(k').
+\int_{q\Gamma}^\Gamma\rd{k'}\,k' b_n(k, k') a_n(k').
 \end{equation}
-By the uniqueness of Fourier series expansions, for all non-zero $b_n$
+By the uniqueness of Fourier series expansions, for all non-zero $a_n$
 we must have 
 \begin{equation}
 \label{eq:eigen_fourier_coef}
-\lambda_n b_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_n(k'),
+\mu_n b_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,k' b_n(k, k') a_n(k'),
 \end{equation}
-where $\lambda$ has been denoted by $\lambda_n$ since each $b_n(k)$
+where $\mu$ has been denoted by $\mu_n$ since each $a_n(k)$
 will have a different eigenvalue satisfying
 \eqref{eq:eigen_fourier_coef}.  
 %The problem of finding the largest eigenvalue to \eqref{eq:eigen} now
@@ -525,22 +525,22 @@ will have a different eigenvalue satisfying
 
 There is one last thing we can do to make
 \eqref{eq:eigen_fourier_coef} more suitable for numerical solution,
-and that is to symmetrisize the kernel $k'a_n(k')$. To do that we
-make the substitution $b_n(k)=\phi_n(k)/\sqrt{k}$, which yields
+and that is to symmetrisize the kernel $k'b_n(k')$. To do that we
+make the substitution $a_n(k)=\phi_n(k)/\sqrt{k}$, which yields
 \begin{equation}
-\lambda_n \phi_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,
-\sqrt{kk'}a_n(k, k') b_n(k').
+\mu_n \phi_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,
+\sqrt{kk'}b_n(k, k') \phi_n(k').
 \end{equation}
-This makes the kernel $\sqrt{kk'}a_n(k, k')$ symmetric in $k$ and
-$k'$, since $a_n(k, k')=a_n(k', k)$ was already symmetric. Besides
+This makes the kernel $\sqrt{kk'}b_n(k, k')$ symmetric in $k$ and
+$k'$, since $b_n(k, k')=b_n(k', k)$ was already symmetric. Besides
 making the numerical eigenvalue calculation more efficient, this also
 has some nice mathematical implications. Like for instance $\phi_n$
 constituting an orthogonal base on $[q\Gamma, \Gamma]$.\todo{cite!}
 
 However, the problem with this method is that the Fourier coefficients
-of the kernel, $a_n(k, k')$, cannot be calculated analytically by
+of the kernel, $b_n(k, k')$, cannot be calculated analytically by
 direct integration using standard methods. This results in very costly
-numerical calculations since $a_n(k, k')$ has to be calculated
+numerical calculations since $b_n(k, k')$ has to be calculated
 numerically for each pair of $k$ and $k'$, on top of then calculationg
 the eigenvalues. 
 This problem stems from trying to adobt a plane wave decomposition to
@@ -549,33 +549,64 @@ can avoid these difficulties, which is what we will do in the
 following section. 
 
 \subsection{Expanding the SPL method using Bessel decomposition}
-\todo[inline]{Needs a very very light touch}
 %Slepian's method looked at the Fourier representation of the EM-field and looked at how a function limited in the Fourier ($\vb*k$) space behaved in the $\vb*x$-space. Although we were able to extract useful information it required alot of manipulations of the formulas and also in the end some costly numerical calculations. The reason behind this is that the Fourier ($\vb*k$) space speaks of plane waves which form solutions to the wave equation in cartesian coordinates while we were interested in geometries best described by polar coordinates. In an alternative approach we therefore started in a polar description, developed a base for the EM-field and used this to maximize a quotient of the form \eqref{eq:energy_frac_final}.
 
+The SPL method can be expanded to also cover polar decomposition
+\eqref{eq:polar_wave_general}. The main idea of this generalization is
+that for circularly symmetric geometries in 2D, polar decomposition
+using Bessel function is more natural. 
+This generalization will here be illustrated through the example using
+$S$ and $\Omega$ as defined above, and the goal should be to
+circumvent the problem of evaluating \eqref{eq:KS-FS-coef} from the
+previous section.
 
-The polar decomposition of the field \eqref{eq:polar_wave_general} can
-be used to calculate the energy in a disk $S$ following a procedure
-similar to the one used by Slepian \cite{PSWF-IV_1964}
-%Eller used in the previous section?
+To calculate the energy of the field $E$ in the disk $S$, we
+substitute \eqref{eq:polar_wave_general} into \eqref{eq:AS}: 
 \begin{equation}
-  \label{eq:energy_bessel}
 \begin{aligned}
-\int_S \id^2x \abs{E}^2&= \int_S \int_{q\Gamma}^\Gamma \id k \sum_{n= -\infty}^{\infty} kb_n(k) J_n(kr)\ee^{\ii n \theta} \int_{q\Gamma}^\Gamma \id k' \sum_{m= -\infty}^{\infty} \frac{b_m^*(k')}{k'} J_n(k'r)\ee^{-\ii m \theta}\\
-&=\int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k' \sum_{n= -\infty}^{\infty} \sum_{m= -\infty}^{\infty} \int_{r=0}^{R_s} \id r r J_n(kr)J_m(k'r)\underbrace{\int_{\theta=0}^{2\pi} \id \theta \ee^{\ii (n-m) \theta}}_{=2\pi \delta_{mn}}\\
-&=2\pi \sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k'  kb_n(k) k'b_n^*(k') \underbrace{\int_{r=0}^{R_s} \id r r J_n(kr) J_n(k'r)}_{K_s^n(k,k')}\\
-&=2\pi \sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k'  kb_n(k) k'b_n^*(k') K_S^n(k,k')\\
-&=2\pi \sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle,
+A_S= \int_S \rd^2x\, \abs{E}^2 = 
+\int_0^{R_S} r\rd{r} \int_0^{2\pi} \rd\theta \,&
+\int_{q\Gamma}^\Gamma \rd{k}\!\!
+\sum_{n= -\infty}^{\infty}\!\! kb_n(k) J_n(kr)\ee^{\ii n \theta}\\
+&\times
+\int_{q\Gamma}^\Gamma \rd{k'}\!\!
+\sum_{m= -\infty}^{\infty}\!\! k'b_m^*(k') J_n(k'r)\ee^{-\ii m
+  \theta}.
 \end{aligned}
 \end{equation}
-where we in the last step defined the integral operator
+If we now rearrange the order of sumation and integration, and
+evaluate the $\theta$ integral, we see that $m=n$ and we get a factor
+of $2\pi$ like in the previous section. By introducing the kernel
+\begin{equation}\label{eq:KS-bessel}
+K_S^n(k, k') = \int_{0}^{R_s} \rd{r}\, r J_n(kr) J_n(k'r),
+\end{equation}
+the energy fraction can be written as
+\begin{equation}
+\begin{aligned}
+A_S &=2\pi \sum_{n=-\infty}^{\infty} 
+\int_{q\Gamma}^\Gamma \rd{k} \int_{q\Gamma}^\Gamma \rd{k'}\,  
+kk'\, b_n(k)b_n^*(k') K_S^n(k, k')\\
+&=2\pi \sum_{n=-\infty}^{\infty} \ip{I_S^nb_n}{b_n},
+\end{aligned}
+\end{equation}
+% \begin{equation} \label{eq:energy_bessel}
+% \begin{aligned}
+% \int_S \id^2x \abs{E}^2&= \int_S \int_{q\Gamma}^\Gamma \id k \sum_{n= -\infty}^{\infty} kb_n(k) J_n(kr)\ee^{\ii n \theta} \int_{q\Gamma}^\Gamma \id k' \sum_{m= -\infty}^{\infty} \frac{b_m^*(k')}{k'} J_n(k'r)\ee^{-\ii m \theta}\\
+% &=\int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k' \sum_{n= -\infty}^{\infty} \sum_{m= -\infty}^{\infty} \int_{r=0}^{R_s} \id r r J_n(kr)J_m(k'r)\underbrace{\int_{\theta=0}^{2\pi} \id \theta \ee^{\ii (n-m) \theta}}_{=2\pi \delta_{mn}}\\
+% &=2\pi \sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k'  kb_n(k) k'b_n^*(k') \underbrace{\int_{r=0}^{R_s} \id r r J_n(kr) J_n(k'r)}_{K_s^n(k,k')}\\
+% &=2\pi \sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k'  kb_n(k) k'b_n^*(k') K_S^n(k,k')\\
+% &=2\pi \sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle,
+% \end{aligned}
+% \end{equation}
+where we in the last step introduced the integral operator
 \begin{equation}
   \label{eq:int_op_bessel}
-[I_S^nb_n](k'):=\int_{q\Gamma}^\Gamma \id k k K_S^n(k,k')b_n(k),
+[I_S^nb_n](k'):=\int_{q\Gamma}^\Gamma \rd{k}\, k K_S^n(k,k')b_n(k),
 \end{equation}
-and the inner product
+the inner product
 \begin{equation}
   \label{eq:in_prod_bessel}
-\langle u,v \rangle := \int_{q\Gamma}^\Gamma \id k k u(k), v(k).
+\ip{u}{v} := \int_{q\Gamma}^\Gamma \rd{k}\, k\, u(k) v(k).
 \end{equation}
 
 If we let the radius $R_S$ of the disk $S$ tend to infinity the kernel $K_S$ tends to a $\delta$-function in $(k-k')$ divided by $k$;
@@ -596,7 +627,7 @@ Equation \eqref{eq:energy_bessel} now implies that the fraction of energy one ca
   \label{eq:energy_frac_bessel}
 \frac{\int_S \id^2x \abs{E}^2}{\int_{\mathbb{R}^2} \id^2x \abs{E}^2}=\frac{\sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle}{\sum_{m=-\infty}^{\infty} \langle b_m,b_m \rangle}.
 \end{equation}
-This fraction can be proven to be maximized by the largest eigenvalue to the family of operators $\{I_n\}$, $\lambda_\text{max}$.
+This fraction can be proven to be maximized by the largest eigenvalue to the family of operators $\{I_n\}$, $\mu_\text{max}$.
 \todo{this method is equivalent to the previous because blabla}
 %Since a scaling of the $b_n$:s will not affect the fraction we can
 %always normalize them so that $\sum_{n=-\infty}^{\infty} \langle b_n, b_n \rangle=1$, which is equivalent to normalize the EM-field.
@@ -607,47 +638,74 @@ This fraction can be proven to be maximized by the largest eigenvalue to the fam
 %  \end{equation*}
 %since $I_S$ is hermitian under the scalar product \ref{eq:in_prod_bessel} this is limited by
 %\begin{equation*}
-%  \sum_{n=-\infty}^{\infty}\lambda_n \langle b_n, b_n \rangle \leq \lambda_{\text{max}}\sum_{n=-\infty}^{\infty}\langle b_n, b_n\rangle=\lambda_{\text{max}},
+%  \sum_{n=-\infty}^{\infty}\mu_n \langle b_n, b_n \rangle \leq \mu_{\text{max}}\sum_{n=-\infty}^{\infty}\langle b_n, b_n\rangle=\mu_{\text{max}},
 %\end{equation*}
-%where $\lambda_n$ denotes the largest eigenvalue of $I_S^n$ and $\lambda_{\text{max}}$ the largest of these.
+%where $\mu_n$ denotes the largest eigenvalue of $I_S^n$ and $\mu_{\text{max}}$ the largest of these.
 %If we choose the $b_n$:s so that
 %\begin{equation*}
 %  b_n(k)
-%  =\begin{cases} &\phi_n \qc \lambda_n=\lambda_{\text{max}}  \\
+%  =\begin{cases} &\phi_n \qc \mu_n=\mu_{\text{max}}  \\
 %  &0 \qc \text{otherwise}
 %  \end{cases}
 %\end{equation*}
 %we obtain an equality which proves the statement.
   
 
-
-
-
+The advantage of this method is that this time, the kernel
+\eqref{eq:KS-bessel} can be calculated analytically
+\todo{Formula \#, and check if wrong}\cite{Gradshteyn-Ryzhik}
+\begin{equation}
+K_S^n(k, k') =
+\begin{cases}
+R_S\frac{k'J_{n}(R_sk)J_{n-1}(R_sk')-kJ_{n-1}(R_sk)J_{n}(R_sk')}{k^2-k'^2}
+\qc &k\neq k'\\
+\frac{R_S^2}{2}\qty[ \Big(J_{n}(R_Sk)\Big)^2
+-J_{n-1}(R_sk)J_{n+1}(R_sk)]
+\qc &k= k'.
+\end{cases}
+\end{equation}
+So now, the numerical calculation of the eigenvalues are significantly
+faster than with the previous method.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
 
 \begin{figure}\centering
 \centerline{ % centers figures larges than 1\textwidth
-\includegraphics[width=18cm]{ring_T-infty_L1000.eps}
+\includegraphics[width=18cm]{ring_both_L1000.eps}
 }
-\caption{Theoretical maximum of energy-quotient inside the tumor
-  to all of real space, as a function of tumor size, $\RT$, measures
-  in sortest wavelengths, $\lambda$.}
-\label{fig:T-infty}
+\caption{Theoretical maximum of energy fraction inside the tumor, both
+  compared to the total energy in real space (line) as well as
+  compared to a ``head'' region (dashed). The fraction are plotted as
+  a function of tumor size, $\RT$, measured in sortest wavelengths,
+  $\lambda_{\min}$. The different values of $q$ corresponds to the width of
+  the frequency band, where $\lambda_{\min}=\RT/(2\pi c)$ and
+  $\lambda_{\max}=\RT/(q2\pi c)=\lambda_{\min}/q$, i.e. a larger $q$
+  means a narrower band. }
+\label{fig:both}
 \end{figure}
 
-\begin{figure}\centering
-\centerline{ % centers figures larges than 1\textwidth
-\includegraphics[width=18cm]{ring_T-H_L1000.eps}
-}
-\caption{Theoretical maximum of energy-quotient inside the tumor
-  to a head around the tumor, as a function of tumor size, $\RT$,
-  measures in sortest wavelengths, $\lambda$. Both the tumor and the
-  head are circular discs of radius $\RT$ and $\RH$ respectively;
-  $\RH=10RT$ was used for these graphs.}
-\label{fig:T-H}
-\end{figure}
+% \begin{figure}\centering
+% \centerline{ % centers figures larges than 1\textwidth
+% \includegraphics[width=18cm]{ring_T-infty_L1000.eps}
+% }
+% \caption{Theoretical maximum of energy-quotient inside the tumor
+%   to all of real space, as a function of tumor size, $\RT$, measures
+%   in sortest wavelengths, $\lambda$.}
+% \label{fig:T-infty}
+% \end{figure}
+
+% \begin{figure}\centering
+% \centerline{ % centers figures larges than 1\textwidth
+% \includegraphics[width=18cm]{ring_T-H_L1000.eps}
+% }
+% \caption{Theoretical maximum of energy-quotient inside the tumor
+%   to a head around the tumor, as a function of tumor size, $\RT$,
+%   measures in sortest wavelengths, $\lambda$. Both the tumor and the
+%   head are circular discs of radius $\RT$ and $\RH$ respectively;
+%   $\RH=10RT$ was used for these graphs.}
+% \label{fig:T-H}
+% \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion and out looks}
@@ -699,14 +757,14 @@ Landau-Pollack-Slepian Theory}
 In the previous section we have been occupied by integral eigenvalue
 equations of the form
 \begin{equation} %\label{eq:int-eig}
-\lambda E(k) 
+\mu E(k) 
 = \oldint_{\Omega} \rd^D{k}\, K(k, k') E(k')
 \qcomma k, k'\in\Omega.
 \end{equation}
 We have also put down some work to reduce higher-dimensional
 integrals to one-dimensional ones
 \begin{equation} \label{eq:int-eig}
-\lambda \psi(k) 
+\mu \psi(k) 
 = \oldint_{I} \rd{k}\, K(k, k') \psi(k'),
 \end{equation}
 where the integration is now over an interval 
@@ -727,13 +785,13 @@ K(k, k') \to K_{m, n} = K(k_m, k_n),
 where $\abs{I}=\beta-\alpha$ is the size of the interval $I$.
 With these discretizations, \eqref{eq:int-eig} discretizes to
 \begin{equation}
-\lambda\Psi_m = \frac{\abs{I}}{N} \sum_{n=1}^N K_{m, n} \Psi_n
+\mu\Psi_m = \frac{\abs{I}}{N} \sum_{n=1}^N K_{m, n} \Psi_n
 \end{equation}
 which is just a matrix eigenvalue equation
 \begin{equation} \label{eq:mtx-eig}
-\Lambda \Psi = \mathsf{K}\Psi,
+\mu' \Psi = \mathsf{K}\Psi,
 \end{equation}
-where $\Lambda=N/\abs{I}\lambda$ and $\mathsf{K}$ is the $N\times N$ matrix
+where $\mu'=N\mu/\abs{I}$ and $\mathsf{K}$ is the $N\times N$ matrix
 whose element $(m, n)$ is $K_{m, n}$. From here, there are many high
 performance linear algebra libraries to find the eigenvalues and
 eigenvector to \eqref{eq:mtx-eig} numerically. 
@@ -772,10 +830,10 @@ beneficial to most numerical methods to find eigenvalues.
 
 \centering
 \caption{Table of eigevalues to the 2D disc of frequencies, as given
-  by Slepian in \cite{PSWF-IV_1964}, $\lambda$, and numerically
-  calculated using the method of this section, $\hat\lambda$; also the
+  by Slepian in \cite{PSWF-IV_1964}, $\mu$, and numerically
+  calculated using the method of this section, $\hat\mu$; also the
   relative discrepancies between Slepian's method and this is given as
-  $(\hat\lambda-\lambda)/\lambda$. The numerical values have been
+  $(\hat\mu-\mu)/\mu$. The numerical values have been
   calculated using both the algorithem for only the full disc, and
   also using the algorithm for a circle ring with $q=1/L$.
 }
@@ -786,9 +844,9 @@ beneficial to most numerical methods to find eigenvalues.
 \multicolumn{2}{|c|}{Disc, numerical ($L=5000$)}&
 \multicolumn{2}{|c|}{Ring, numerical ($L=1000$)}
 \\ \hline
-$c$\phantom{1.}&$\lambda$
-&$\hat\lambda$&$(\hat\lambda-\lambda)/\lambda$
-&$\hat\lambda$&$(\hat\lambda-\lambda)/\lambda$
+$c$\phantom{1.}&$\mu$
+&$\hat\mu$&$(\hat\mu-\mu)/\mu$
+&$\hat\mu$&$(\hat\mu-\mu)/\mu$
 \\ \hline
   0.1 & 2.4968775e-3 & 
 2.49787510e-03 &\bf\phantom{-}4.0e-4&  
