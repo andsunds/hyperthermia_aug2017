@@ -301,7 +301,7 @@ hyperthermia treatments.
 
 
 \subsection{The Slepian-Landau-Pollak uncertainty relations}
-\todo[inline]{REDO}
+\todo[inline]{Cut down a bit on math and formalism}
 In a series of papers from the 60's D. Slepian, H.J. Landau and H.O. Pollak investigated how much energy a frequency-limited function can keep if it is restricted in space. By doing this one can reach an inequality on the form
 \begin{equation}
 \abs{S}\abs{\Omega} \geq c(\alpha,\beta),
@@ -313,54 +313,54 @@ In what follows we will show the broad strokes for developing the theory from wh
 A square-integrable function $f$ of $D$ variables is said to be $\Omega$-limited if it can be represented as a Fourier integral over the bounded region $\Omega$,
 
 \begin{equation}
-  f(\vb*x)=\qty(\frac{1}{2\pi})^D\int_\Omega \tilde{f}(\vb*k)\ee^{\ii(\vb*k \cdot \vb*x)} \id^Dk,
+  f(\vb*x)=\qty(\frac{1}{2\pi})^D\oldint_\Omega \tilde{f}(\vb*k)\ee^{\ii(\vb*k \cdot \vb*x)} \id^Dk,
 \end{equation}
 that is, it only contains frequencies in the area $\Omega$.
 We define the energy of a function to be
 \begin{equation*}
-A=\int_{R^D}\abs{f(\vb*x)}^2\id^3x.
+A=\oldint_{R^D}\abs{f(\vb*x)}^2\id^3x.
 \end{equation*}
 By Parseval's theorem we get that
 \begin{equation*}
-A=\int_{R^D}\abs{f(\vb*x)}^2\id^3x=\qty(\frac{1}{2\pi})^D \int_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk.
+A=\oldint_{R^D}\abs{f(\vb*x)}^2\id^3x=\qty(\frac{1}{2\pi})^D \oldint_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk.
 \end{equation*}
 In a bounded region $S$ of the space $R^D$ one gets the total energy
 \begin{align*}
-  A_S=\int_S\abs{f(\vb*x)}^2\id^Dx&=\int_S\id^Dx \qty(\frac{1}{2\pi})^{2D}\int_\Omega \tilde{f}(\vb*k)\ee^{\ii\vb*k\cdot \vb*x}\id^Dk \int_\Omega \tilde{f}^*(\vb*k')\ee^{-\ii\vb*k'\cdot \vb*x}\id^Dk'\\
- & =\qty (\frac{1}{2\pi})^D \int_\Omega\id^3k\int_\Omega\tilde{f}(\vb*k)\tilde{f}^*(\vb*k')K_s(\vb*k-\vb*k')\id^Dk',
+  A_S=\oldint_S\abs{f(\vb*x)}^2\id^Dx&=\oldint_S\id^Dx \qty(\frac{1}{2\pi})^{2D}\oldint_\Omega \tilde{f}(\vb*k)\ee^{\ii\vb*k\cdot \vb*x}\id^Dk \oldint_\Omega \tilde{f}^*(\vb*k')\ee^{-\ii\vb*k'\cdot \vb*x}\id^Dk'\\
+ & =\qty (\frac{1}{2\pi})^D \oldint_\Omega\id^3k\oldint_\Omega\tilde{f}(\vb*k)\tilde{f}^*(\vb*k')K_s(\vb*k-\vb*k')\id^Dk',
 \end{align*}
 with the kernel
 \begin{equation}
   \label{eq:kernel}
-K_s(\vb*k-\vb*k')=\frac{1}{2\pi}^D\int_S\ee^{\ii\vb*x \cdot(\vb*k-\vb*k')}.
+K_s(\vb*k-\vb*k')=\frac{1}{2\pi}^D\oldint_S\ee^{\ii\vb*x \cdot(\vb*k-\vb*k')}.
 \end{equation}
 Next if we define an integraloperator $I^{[\Omega S]}$ such that;
 \begin{equation}
   \label{eq:int_op}
-\qty[I^{[\Omega S]}\phi](\vb*k')=\int_\Omega K_S(\vb*k-\vb*k')\phi(\vb*k)\id^Dk,
+\qty[I^{[\Omega S]}\phi](\vb*k')=\oldint_\Omega K_S(\vb*k-\vb*k')\phi(\vb*k)\id^Dk,
 \end{equation}
 and an inner product on the $\Omega$-space by
 \begin{equation}
   \label{eq:in_prod}
-   \langle f,g\rangle =\int_\Omega f(\vb*k)g^*(\vb*k)\id^3k,
+   \langle f,g\rangle =\oldint_\Omega f(\vb*k)g^*(\vb*k)\id^3k,
 \end{equation}
 the fraction of energy that an $\Omega$-limited function $f$ can have in a region $S$ can be written as
 \begin{equation}
   \label{eq:energy_frac_final}
-\frac{A_s}{A}=\frac{\int_\Omega\qty[I^{[\Omega S]}\tilde{f}](\vb*k)\tilde{f}^*(\vb*k)\id^Dk}{\int_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk}=\frac{ \langle I\tilde{f}, \tilde{f}\rangle}{\langle \tilde{f}, \tilde{f} \rangle}.
+\frac{A_s}{A}=\frac{\oldint_\Omega\qty[I^{[\Omega S]}\tilde{f}](\vb*k)\tilde{f}^*(\vb*k)\id^Dk}{\oldint_\Omega \abs{\tilde{f}(\vb*k)}^2 \id^Dk}=\frac{ \langle I\tilde{f}, \tilde{f}\rangle}{\langle \tilde{f}, \tilde{f} \rangle}.
 \end{equation}
 
  In the litterature integral operators of the kind \eqref{eq:int_op} are called Hilbert-Schmidt integral operators if the kernel is square-integrable in $\Omega$, and such an operator is compact. Since the regions $S$ and $\Omega$ are bounded square-integrability holds for the kernel \eqref{eq:kernel} and since it is also complex symmetric with respect to its arguments, $K_s(\vb*k-\vb*k')=K_s^*(\vb*k'-\vb*k)$, the integral operator is self-adjoint with respect to the inner product \eqref{eq:in_prod}. From the Spectral theorem it now follows that the functions fullfilling the eigenvalue equation
 \begin{equation}
   \label{eq:eigen}
-\qty[I^{[\Omega S]}\psi](\vb*k)=\int_\Omega K_s(\vb*k')\psi(\vb*k') \id^Dk'=\lambda \psi(\vb*k)
+\qty[I^{[\Omega S]}\psi](\vb*k)=\oldint_\Omega K_s(\vb*k')\psi(\vb*k') \id^Dk'=\lambda \psi(\vb*k)
 \end{equation}
 form an orthogonal base for the space $\Omega$ and thus their inverse Fourier transform a base for the space of $\Omega$-limited functions in $R^D$. It also follows that the maximum of equation \eqref{eq:energy_frac_final}, the maximum fraction of energy, equals the largest eigenvalue $\lambda_0$ of equation \eqref{eq:eigen} and the function fulfilling this is the inverse Fourier transform of the coresponding eigenfunction $\psi_0$.
 
 This $\lambda_0$ will be dependent on the size and shape of the areas $S$ and $\Omega$ and will form the base for our inequalities. In the following sections we will calculate these limits for some simple geometries as well as provide ideas for how it can be extended to more complex regions.
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{comment}
 \subsection{The disk and the ball}
 \todo[inline]{Remove?}
@@ -391,7 +391,7 @@ where $\phi$ and $\gamma$ are solutions to an equation identical to \eqref{eq:Be
 
 In the paper from 1964 cite Slepian proves that the $\phi$'s of \eqref{eq:Bessel_int} also satisfy a differential equation and with this he managed to numerically calculate values for $\lambda$ and $\psi$ for different values of $c$. However, with significantly improved computer technology, we chose to work directly with the integral equations \eqref{eq:eigen} and \eqref{eq:Bessel_int} which can also be generalized more easily.
 \end{comment}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -422,7 +422,7 @@ ring with outer radius $\Gamma$ and inner radius $q\Gamma$, $0\le q<1$.
 %ring with outer radius $\Gamma$ and inner radius $q\Gamma$, $0\le q<1$.
 
 \subsection{Slepian's method using Fourier transforms}
-%\todo[inline]{Poor unloved child, needs alot of care}
+\todo[inline]{Move most of the math here to appendix!}
 The methodology used here is a direct translation of the ones used in
 \cite{PSWF-I_1961} and \cite{PSWF-IV_1964} to $S$ and $\Omega$.
 
