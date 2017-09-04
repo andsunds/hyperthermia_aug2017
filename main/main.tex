@@ -559,7 +559,7 @@ maximum is to be taken over all $n$.
 
 Analagously to the case in the previons section, theis eigenvalue
 equation can be symmetrisized to
-\begin{equation}
+\begin{equation}\label{eq:eig-n-bessel}
 \mu_n\phi_n(k) = \int_{q\Gamma}^{\Gamma}\rd{k}\,
 \sqrt{kk'} K_S^{(n)}(k, k')\,\phi_n(k').
 \end{equation}
@@ -582,9 +582,33 @@ K_S^{(n)}(k, k') =
 So now, the numerical calculation of the eigenvalues are significantly
 faster than with the previous method.
 
-\section{SAR}
+\todo[inline]{Expression for single frequency}
 
-\newtheorem{theorem}{Theorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Numerical results}
+In \figref{fig:both} the numerically calculated eigenvalues of \eqref{eq:eig-n-bessel}, with $n=0$, are shown for different values of the ratio between the tumour size and the shortest wavelength, $\RT/\lambda_{\min}=\RT\Gamma/(2\pi)$. This corresponds to the theoretical maximum of the energy focused in a circularly tumor for isotropic (angularly independent) fields in twodimensions, limited to wavelengths between $\lambda_{\min}$ and $\lambda_{\max}$.
+The reason we choose to plot for isotropic fields ($n=0$) is that this corresponded to the largest eigenvalue for most values of $\RT\Gamma$, especially the lower ones.
+The different lines correspond to different values of the longest wavelength $\lambda_{\max}=\lambda_{\min}/q$. 
+
+\begin{figure}\centering
+\centerline{ % centers figures larges than 1\textwidth
+\includegraphics[width=18cm]{ring_both_L1000.eps}
+}
+\caption{Theoretical maximum of energy fraction inside the tumor for isotropic 
+  fields, both compared to the total energy in real space (line) as well as
+  compared to a ``head'' region (dashed). The fractions are plotted as
+  a function of tumor size, $\RT$, measured in shortest wavelengths,
+  $\lambda_{\min}$. The different values of $q\in[0, 1]$ corresponds to 
+  the width of the frequency band, where $\lambda_{\min}=2\pi/\Gamma$ and
+  $\lambda_{\max}=2\pi/(q\Gamma)=\lambda_{\min}/q$, i.e. a larger $q$
+  means a narrower band. The head and tumor regions used were concentrical discs;
+  where the radius of the head region was $10\RT$. }
+\label{fig:both}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion and outlooks}
 In hyperthermia treatment a good indicator for the temperature
 increase is the Specific Absorbation Rate (SAR): 
 \begin{equation*}
@@ -604,47 +628,11 @@ frequencies vanishes. Thus
 that is a sum over the contribution from each frequency.
 % In other words, when time-averaging there is no interference between different frequencies.
 
-Since a finite energy will always be applied, all possible solutions
-will be a convex combination of the contribution for each
-frequency. And due to the linearity over frequencies, any convex
-goalfunction $G(\text{SAR})$ will be convex in the frequencies and a
-powerful theorem from convex optimization can be applied: 
-\begin{theorem}
- Let $f$ be a convex function defined on a convex set $X$. Then any
- local minima of $f$ is also a global minima on $X$. 
-\end{theorem}
-This implies that the minimum of $G$ is obtained with only the
-frequency $\omega_j$ that gives the smallest contribution to $G$. 
+Due to this linearity, and since a finite enrgy will always be applied, it can be proven from the theory of convex optimization 
+that a large family of of goalfunctions, convex goalfunctions, are optimized by using a single frequency only. 
+In particular, this applies to any linear goalfunction such as the main goalfunction used in this paper,
+\eqref{eq:energy_frac_final} would be optimized by a single frequency if applied to SAR.  
 
-For a large family of goalfunctions the optimum is therefore obtained
-for a single frequency. In particular, any linear goalfunction is also
-convex and the main goalfunction used in this paper,
-\eqref{eq:energy_frac_final} would be optimized\footnote{the inverse
-  of it would be minimized} by a single frequency if applied to SAR.  
-
-\todo[inline]{Expression for single frequency}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Results}
-
-\begin{figure}\centering
-\centerline{ % centers figures larges than 1\textwidth
-\includegraphics[width=18cm]{ring_both_L1000.eps}
-}
-\caption{Theoretical maximum of energy fraction inside the tumor, both
-  compared to the total energy in real space (line) as well as
-  compared to a ``head'' region (dashed). The fraction are plotted as
-  a function of tumor size, $\RT$, measured in sortest wavelengths,
-  $\lambda_{\min}$. The different values of $q$ corresponds to the width of
-  the frequency band, where $\lambda_{\min}=\RT/(2\pi c)$ and
-  $\lambda_{\max}=\RT/(q2\pi c)=\lambda_{\min}/q$, i.e. a larger $q$
-  means a narrower band. }
-\label{fig:both}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion and outlooks}
 \label{sec:discussion}
 
 
