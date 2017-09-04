@@ -74,7 +74,7 @@ swedish,english %% Make sure to put the main language last!
 
 
 \section{Introduction}
-%\todo[inline]{General intro to hyopthermia and freq dep.}
+\todo[inline]{Do we label all equations?}
 
 The current hyperthermia treatments mainly utilizes signals consisting of single or a narrow band (NB) of frequencies since simulations and numerical studies have not shown an increase of efficacy by using a wide band (WB). 
 However, in mathematical theory there exists a number of uncertainty  principals stating that a function cannot be highly localized in the space and frequency domains at the same time which would encourage the use of a wide band of frequencies, in contrast to prior studies.
@@ -107,10 +107,6 @@ For each frequency $\omega$ the electric field will have a harmonic timedependen
   \label{eq:phasor}
 \vb*E(\vb*x,t)=\Re\qty[\vb*E(\vb*x)\ee^{-\ii\omega t}]%\cos(\omega t).
 \end{equation}
-%which allows the use of phasors,
-%\begin{equation}
-%\vb*E(\vb*x,t)=\Re\qty[\vb*E(\vb*x)\ee^{-\ii\omega t}].
-%\end{equation}
 In a loss-less and source-less homogeneous media the Maxwell equations reduce to
 \begin{equation}
 \begin{cases}
@@ -478,8 +474,8 @@ make the substitution $b_n(k)=\phi_n(k)/\sqrt{k}$, which yields
 This makes the kernel $\sqrt{kk'}b_n(k, k')$ symmetric in $k$ and
 $k'$, since $b_n(k, k')=b_n(k', k)$ was already symmetric. Besides
 making the numerical eigenvalue calculation more efficient, this also
-has some nice mathematical implications. Like for instance $\phi_n$
-constituting an orthogonal base on $[q\Gamma, \Gamma]$.\todo{cite!}
+has some nice mathematical implications, for instance $\phi_n$
+constitutes an orthogonal base on $[q\Gamma, \Gamma]$.\todo{cite!}
 
 However, the problem with this method is that the Fourier coefficients
 of the kernel, $b_n(k, k')$, cannot be calculated analytically by
@@ -575,7 +571,7 @@ equation can be symmetrisized to
 The advantage of this method is that this time, the kernel
 \eqref{eq:KS-bessel} can be calculated analytically
 \cite[Formula 5.54]{Gradshteyn-Ryzhik}
-\begin{equation}
+\begin{equation}\label{eq:kernel_expr}
 K_S^{(n)}(k, k') =
 \begin{cases}
 \frac{R_S}{k^2-k'^2}
@@ -589,7 +585,21 @@ K_S^{(n)}(k, k') =
 So now, the numerical calculation of the eigenvalues are significantly
 faster than with the previous method.
 
-\todo[inline]{Expression for single frequency}
+
+\subsection{Energy of a single frequency}
+It is also of interest to study how much energy a field limited to one frequency
+$\omega_i$ can maintain if it is limited to $S$. Starting from equation \eqref{eq:polar_wave}
+and using similar arguments as in the previous section one arrives to the expression
+\begin{equation}
+A_S=2\pi\sum_n \abs{a_n}^2\int_0^{R_S}\rd r \, r (J_n(k_ir))^2,
+\end{equation}
+where $k_i=\frac{\omega_i}{v}$ as usual.
+The integral is recognized as the one defining the kernel $K_S$ for ($k=k'$) and from equation \eqref{eq:kernel_expr} we obtain
+\begin{equation}\label{eq:energy_single}
+A_S=2\pi \sum_n \abs{a_n}^2\frac{R_S^2}{2}\qty[ \qty(J_{n}(R_Sk))^2
+-J_{n-1}(R_sk)J_{n+1}(R_sk)].
+  \end{equation}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
@@ -633,6 +643,23 @@ The different lines correspond to different values of the longest wavelength $\l
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion and outlooks}
+Figuren visar blabla, det kan man tolka som blabla
+\subsection{Lossy material}
+\todo[inline]{The subsections are not supposed to be like this in the end, only pointers to what we want to discuss}
+hej
+\subsection{AB-historia}
+The SPL method is based upon maximizing the energy within a bounded region $S$
+compared to the total energy in the room. This is not really the kind of optimization
+one wants to do for a hyperthermia treatment where we are concerned of what happens in the head.
+Therefore a measure of the kind $A_T/A_H$ where $T$ ($H$) stands for the tumor (head) region, would be prefered.
+The measure \eqref{eq:energy_frac_final} is easily generalized to this kind and one can prove that the maximum
+becomes the largest eigenvalue to the \emph{generalized} eigenvalue problem $I_T \psi=\mu I_H \psi$. However when we
+tried to obtain this value numerically we encountered problems related to the matrices being almost singular.
+
+
+\subsection{3D}
+
+\subsection{SAR}
 In hyperthermia treatment a good indicator for the temperature
 increase is the Specific Absorbation Rate (SAR): 
 \begin{equation*}
@@ -654,8 +681,8 @@ that is a sum over the contribution from each frequency.
 
 Due to this linearity, and since a finite enrgy will always be applied, it can be proven from the theory of convex optimization 
 that a large family of of goalfunctions, convex goalfunctions, are optimized by using a single frequency only. 
-In particular, this applies to any linear goalfunction such as the main goalfunction used in this paper,
-\eqref{eq:energy_frac_final} would be optimized by a single frequency if applied to SAR.  
+In particular, this applies to any linear goalfunction such as the main goalfunction used in this paper
+\eqref{eq:energy_frac_final}. Therefore if it was applied to SAR it would be maximized by a single frequency.  
 
 \label{sec:discussion}
 
