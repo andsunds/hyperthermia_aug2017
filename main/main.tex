@@ -91,14 +91,14 @@ The human body contains many different materials and therefore a real hypertherm
 
 Since this project aims to extract what limitations the wave \emph{nature} sets we are not concerned with the actual wave propagation -- instead we ask the question, given a perfect way to create or propogate the EM-field what limits does a narrow band of frequencies and the wave equation set on the optimal distribution in a bounded region?
 
-With this in mind the study is limited to a homogeneous material stretching through all space. The material is assumed lossfree although the case of lossy materials and dampened EM-field's will be discussed briefly in chapter \ref{ch:discussion}.
+With this in mind the study is limited to a homogeneous material stretching through all space. The material is assumed lossfree although the case of lossy materials and dampened EM-field's will be discussed briefly in chapter \ref{sec:discussion}.
 
 Further we limit ourselves to 2 dimensions since this suffices to capture the essential wave nature (a circular ring of wavenumbers as opposed to a point in 1 dimension) whilst not overly complicating the mathematics. 
 In this space we try to focus the distribution to a simple body, a disk since we believe that most more complicated bodies would yield approximately the same results.
 
 We will also limit our attention to scalar fields, real EM-fields are in fact vectors with certain limitations to its directions which would produce slightly tighter bounds then what we achieved but this was unfortunately beyond the scope of this project.
 
-Finally, for a real hyperthermia treatment it is not the intensity of the EM-field that is of concern but rather its mean-value in time that is of interest. This has major implications for the frequency dependence of the efficacy and will be discussed to some length in chapter \ref{ch:discussion}. However, the main part of this work is concerned with the EM-field itself and not its time mean.
+Finally, for a real hyperthermia treatment it is not the intensity of the EM-field that is of concern but rather its mean-value in time that is of interest. This has major implications for the frequency dependence of the efficacy and will be discussed to some length in chapter \ref{sec:discussion}. However, the main part of this work is concerned with the EM-field itself and not its time mean.
 
 
 \subsection{Theory}
@@ -242,7 +242,7 @@ treatments.
 
 
 \subsection{The Slepian-Pollack-Landau method}
-\todo[inline]{Cut down a bit on math and formalism}
+\label{sec:SPL-method}
 Another localization measure was used by SPL in
 \cite{PSWF-I_1961,PSWF-II_1961,PSWF-III_1962,PSWF-IV_1964,PSWF-V_1978}. 
 \todo{Maybe change?}
@@ -390,17 +390,9 @@ developed here.
 
 From the definition of the kernel $K_s$ in equation \eqref{eq:kernel}, we get 
 \begin{equation}
-\begin{aligned}
-K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
+K_S(\vb*k-\vb*k') = (2\pi)^{-2}
 \oldint_S \rd^2r \ee^{\ii\vb*r\vdot(\vb*k-\vb*k')}.
-%\\ =& (2\pi)^{-2}
-% \int_0^{2\pi}\rd\theta \int_0^{R} \rd{r}\,r
-%  \ee^{\ii\, r\Delta{k}\,\cos\theta},
-\end{aligned}
 \end{equation}
-%where $\Delta{k} = \abs{\Delta\vb*k} = \abs{\vb*k-\vb*k'}$.
-%Note that the integration axes has been chosen so that $\Delta{k}$
-%lies on the $\theta=0$ axis.
 By substituting to polar coordinates and using the usual Bessel
 function expansion \cite[formula 8.551.4b]{Gradshteyn-Ryzhik} 
 \begin{equation}
@@ -409,29 +401,9 @@ function expansion \cite[formula 8.551.4b]{Gradshteyn-Ryzhik}
 \end{equation}
 and some other Bessel function identities 
 \cite[formula~8.472.3]{Gradshteyn-Ryzhik}, we eventually end up with
-% \begin{equation}
-% \begin{aligned}
-% K_S(\vb*k-\vb*k') =& (2\pi)^{-2}
-% \sum_{m=-\infty}^\infty \ii^m
-% \int_0^{2\pi}\rd\theta\, \ee^{\ii m\theta}
-% \int_0^{R} \rd{r}\,r J_m(r\Delta{k}).
-% \end{aligned}
-% \end{equation}
-% The $\theta$ integral is zero for all $m\neq0$ and $2\pi$ for $m=0$ and the $r$ integral is solved using 
-% \cite[formula~8.472.3]{Gradshteyn-Ryzhik} 
-% \begin{equation}
-% \frac{1}{z}\dv{z}\qty[zJ_1(z)] = J_0(z).
-% \end{equation}
-% Together this leads to
 \begin{equation}\label{eq:KS-short}
-\begin{aligned}
-K_S(\vb*k-\vb*k') %=& (2\pi)^{-2}
-% \,(2\pi)\,\frac{1}{(\Delta{k})^2}
-% \int_0^{R\Delta{k}} \rd{z}\,z\, J_0(z)\\
-% =& (2\pi)^{-1} \frac{1}{(\Delta{k})^2}
-% \Big[zJ_1(z)\Big]_{z=0}^{R\Delta k}
-&=(2\pi)^{-1}R\, \frac{J_1(R\Delta{k})}{\Delta{k}}.
-\end{aligned}
+K_S(\vb*k-\vb*k') 
+=(2\pi)^{-1}R\, \frac{J_1(R\Delta{k})}{\Delta{k}}.
 \end{equation}
 With the law of cosines
 $\Delta{k}=\abs{\vb*k-\vb*k'}=\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}$,
@@ -439,43 +411,19 @@ where $k=\abs{\vb*k}$, $k'=\abs{\vb*k'}$ and
 $\Delta\theta=(\theta-\theta')$ is the angle between $\vb*k$ and
 $\vb*k'$.
 
-The next step is to manipulate the actual integral eigenvalue equation
-\eqref{eq:eigen}.
-The numerical method described in Appendix~\ref{apx:num} requires that
-we only have a 1 dimensional integral.
-%\begin{equation}
-%\label{eq:eigen_fourier}
-%\mu \psi(\vb*k) = \oldint_\Omega \rd^2k'\,
-%(2\pi)^{-1} \frac{R}{\Delta{k}} J_1(R\Delta{k}) 
-%K_S(\vb*k-\vb*k')\psi(\vb*k')
-%\end{equation}
-%which by polar coordiane substitution becomes
-% \begin{equation}\label{eq:eigint-pol}
-% \mu\psi(k, \theta) =
-% \int_{q\Gamma}^\Gamma\rd{k'}\,k'
-% \int_{0}^{2\pi}\rd\theta'\,\frac{R}{2\pi}
-% \frac{J_1(R\Delta{k})}{\Delta{k}} \psi(k',\theta')
-% \end{equation}
-% We note that, by the law of cosines, 
-% $\Delta{k}=\abs{\vb*k-\vb*k'}=\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}$, 
-% where $k=\abs{\vb*k}$, $k'=\abs{\vb*k'}$ and
-% $\Delta\theta=\theta-\theta'$ is the angle between $\vb*k$ and
-% $\vb*k'$. This means that 
-% \begin{equation}\label{eq:KS-long}
-% K_S(k, k', \Delta\theta) = \frac{R}{2\pi}\,
-% \frac{J_1\qty(R\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)})}
-% {\sqrt{k^2+{k'}^2-2kk'\cos(\Delta\theta)}}
-% \end{equation}
-To get this, we note that $K_S(\vb*k-\vb*k')$
-is $2\pi$-periodic in $\Delta\theta$, and thus has a Fourier series expansion 
+The numerical method described in Appendix~\ref{apx:num} can only be
+applied to 1 dimensional integrals.
+To reduce the eigenvalue equation \eqref{eq:eigen} to this form, first
+note that $K_S(\vb*k-\vb*k')$ is $2\pi$-periodic in $\Delta\theta$,
+and thus has a Fourier series expansion  
 \begin{equation} \label{eq:KS-FS}
 K_S(k, k', \Delta\theta)  
-=\sum_{n=-\infty}^\infty b_{n}(k, k')\, \ee^{\ii n\Delta\theta}
-=\sum_{n=-\infty}^\infty \ee^{\ii n\theta}\,b_{n}(k, k')\,\ee^{-\ii n\theta'},
+=\sum_{n=-\infty}^\infty a_{n}(k, k')\, \ee^{\ii n\Delta\theta}
+=\sum_{n=-\infty}^\infty \ee^{\ii n\theta}\,a_{n}(k, k')\,\ee^{-\ii n\theta'},
 \end{equation}
 where 
 \begin{equation} \label{eq:KS-FS-coef}
-b_{n}(k, k') = \frac{1}{2\pi} \int_0^{2\pi} \rd(\Delta\theta)\; 
+a_{n}(k, k') = \frac{1}{2\pi} \int_0^{2\pi} \rd(\Delta\theta)\; 
 K_S(k, k', \Delta\theta)\ee^{-\ii n\Delta\theta}.
 \end{equation}
 Viewing \eqref{eq:eigen} as the definition of $\psi$, we also know
@@ -483,53 +431,42 @@ that the eigenfunctions, $\psi$, has to be periodic in
 $\theta$ since the kernel is periodic in $\theta$. Therefore
 $\psi(k, \theta)$ also has to have a Fourier series 
 \begin{equation}\label{eq:psi-FS}
-\psi(k, \theta) = \sum_{m=-\infty}^\infty a_m(k)\ee^{\ii m\theta}.
+\psi(k, \theta) = \sum_{m=-\infty}^\infty b_m(k)\ee^{\ii m\theta}.
 \end{equation}
-
-
-Substituting \eqref{eq:KS-FS} and \eqref{eq:psi-FS} into the
-eigenvalue equation \eqref{eq:eigen} with polar coordinates, and
-changing the order of summation and integration, yields
+Substituting \eqref{eq:KS-FS} and \eqref{eq:psi-FS} into
+\eqref{eq:eigen}, using polar coordinates and changing the order of
+summation and integration, yields
 \begin{equation}
-\begin{aligned}
-\mu\sum_{l=-\infty}^\infty a_l(k)\ee^{\ii l\theta}
-% =& \int_{q\Gamma}^\Gamma\rd{k'}\,k'
-% \int_{0}^{2\pi}\rd\theta'\,
-% \sum_{n=-\infty}^\infty b_n(k')\ee^{\ii n\theta}\ee^{-\ii n\theta'}
-% \sum_{m=-\infty}^\infty b_m(k')\ee^{\ii m\theta'}\\ 
-=& \sum_{n=-\infty}^\infty \ee^{\ii n\theta} \sum_{m=-\infty}^\infty 
-\int_{q\Gamma}^\Gamma\rd{k'}\,k' b_n(k, k') a_m(k')
+\mu\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
+= \sum_{n=-\infty}^\infty \ee^{\ii n\theta} \sum_{m=-\infty}^\infty 
+\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_m(k')
 \int_{0}^{2\pi}\rd\theta'\,
 \ee^{\ii (m-n)\theta'}.
-\end{aligned}
 \end{equation}
 The $\theta'$ integral is only non-zero when $(m-n)=0$ and
 then the integral is just $2\pi$. We now get
 \begin{equation}
-\mu\sum_{l=-\infty}^\infty a_l(k)\ee^{\ii l\theta}
+\mu\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
 = 2\pi\sum_{n=-\infty}^\infty \ee^{\ii n\theta} 
-\int_{q\Gamma}^\Gamma\rd{k'}\,k' b_n(k, k') a_n(k').
+\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_n(k').
 \end{equation}
-By the uniqueness of Fourier series expansions, for all non-zero $a_n$
-we must have 
+By the uniqueness of Fourier series expansions, for all non-zero $b_n$
+we finally obtain a one dimensional eigenvalue equation
 \begin{equation}
 \label{eq:eigen_fourier_coef}
-\mu_n b_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,k' b_n(k, k') a_n(k'),
+\mu_n b_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_n(k'),
 \end{equation}
-where $\mu$ has been denoted by $\mu_n$ since each $a_n(k)$
+where $\mu$ has been denoted by $\mu_n$ since each $b_n(k)$
 will have a different eigenvalue satisfying
 \eqref{eq:eigen_fourier_coef}.  
-%The problem of finding the largest eigenvalue to \eqref{eq:eigen} now
-%results in finding the largest of the largest eigenvalues to
-%\eqref{eq:eigen_fourier_coef} for all $n$. 
 
 There is one last thing we can do to make
 \eqref{eq:eigen_fourier_coef} more suitable for numerical solution,
-and that is to symmetrisize the kernel $k'b_n(k')$. To do that we
-make the substitution $a_n(k)=\phi_n(k)/\sqrt{k}$, which yields
+and that is to symmetrisize the kernel $k'a_n(k, k')$. To do that we
+make the substitution $b_n(k)=\phi_n(k)/\sqrt{k}$, which yields
 \begin{equation}
 \mu_n \phi_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,
-\sqrt{kk'}b_n(k, k') \phi_n(k').
+\sqrt{kk'}a_n(k, k') \phi_n(k').
 \end{equation}
 This makes the kernel $\sqrt{kk'}b_n(k, k')$ symmetric in $k$ and
 $k'$, since $b_n(k, k')=b_n(k', k)$ was already symmetric. Besides
@@ -548,9 +485,8 @@ polar coordinates. By starting from the polar wave decomposition one
 can avoid these difficulties, which is what we will do in the
 following section. 
 
-\subsection{Expanding the SPL method using Bessel decomposition}
-%Slepian's method looked at the Fourier representation of the EM-field and looked at how a function limited in the Fourier ($\vb*k$) space behaved in the $\vb*x$-space. Although we were able to extract useful information it required alot of manipulations of the formulas and also in the end some costly numerical calculations. The reason behind this is that the Fourier ($\vb*k$) space speaks of plane waves which form solutions to the wave equation in cartesian coordinates while we were interested in geometries best described by polar coordinates. In an alternative approach we therefore started in a polar description, developed a base for the EM-field and used this to maximize a quotient of the form \eqref{eq:energy_frac_final}.
 
+\subsection{Expanding the SPL method using Bessel decomposition}
 The SPL method can be expanded to also cover polar decomposition
 \eqref{eq:polar_wave_general}. The main idea of this generalization is
 that for circularly symmetric geometries in 2D, polar decomposition
@@ -575,97 +511,118 @@ A_S= \int_S \rd^2x\, \abs{E}^2 =
 \end{aligned}
 \end{equation}
 If we now rearrange the order of sumation and integration, and
-evaluate the $\theta$ integral, we see that $m=n$ and we get a factor
-of $2\pi$ like in the previous section. By introducing the kernel
+evaluate the $\theta$ integral, we see that non-vanishing terms are
+with $m=n$ and then we get a factor of $2\pi$ like in the previous
+section. By introducing the kernel 
 \begin{equation}\label{eq:KS-bessel}
-K_S^n(k, k') = \int_{0}^{R_s} \rd{r}\, r J_n(kr) J_n(k'r),
+K_S^{(n)}(k, k') = \int_{0}^{R_s} \rd{r}\, r J_n(kr) J_n(k'r),
 \end{equation}
-the energy fraction can be written as
-\begin{equation}
-\begin{aligned}
-A_S &=2\pi \sum_{n=-\infty}^{\infty} 
+the energy in $S$ can be written as
+\begin{equation}\label{eq:AS-bessel}
+A_S =2\pi \sum_{n=-\infty}^{\infty} 
 \int_{q\Gamma}^\Gamma \rd{k} \int_{q\Gamma}^\Gamma \rd{k'}\,  
-kk'\, b_n(k)b_n^*(k') K_S^n(k, k')\\
-&=2\pi \sum_{n=-\infty}^{\infty} \ip{I_S^nb_n}{b_n},
+kk'\, b_n(k)b_n^*(k') K_S^{(n)}(k, k')
+\end{equation}
+
+If we let the radius $R_S$ of the disk $S$ tend to infinity, and by
+using the asymptotic behavior of Bessel functions, the the infinte
+kernel can be witten as\todo{cite, Arfken-Weber?}
+\begin{equation}
+K_\infty^{(n)}(k,k') = \frac{\delta(k-k')}{k'}.
+\end{equation}
+This implies that the total energy
+\begin{equation}\label{eq:A-bessel}
+\begin{aligned}
+A &=2\pi \sum_{n=-\infty}^{\infty} 
+\int_{q\Gamma}^\Gamma \rd{k} \int_{q\Gamma}^\Gamma \rd{k'}\,  
+kk'\, b_n(k)b_n^*(k') \frac{\delta(k-k')}{k'} \\
+&=2\pi \sum_{n=-\infty}^{\infty} 
+\int_{q\Gamma}^\Gamma \rd{k} \, k\, b_n(k)b_n^*(k).
 \end{aligned}
 \end{equation}
-% \begin{equation} \label{eq:energy_bessel}
-% \begin{aligned}
-% \int_S \id^2x \abs{E}^2&= \int_S \int_{q\Gamma}^\Gamma \id k \sum_{n= -\infty}^{\infty} kb_n(k) J_n(kr)\ee^{\ii n \theta} \int_{q\Gamma}^\Gamma \id k' \sum_{m= -\infty}^{\infty} \frac{b_m^*(k')}{k'} J_n(k'r)\ee^{-\ii m \theta}\\
-% &=\int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k' \sum_{n= -\infty}^{\infty} \sum_{m= -\infty}^{\infty} \int_{r=0}^{R_s} \id r r J_n(kr)J_m(k'r)\underbrace{\int_{\theta=0}^{2\pi} \id \theta \ee^{\ii (n-m) \theta}}_{=2\pi \delta_{mn}}\\
-% &=2\pi \sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k'  kb_n(k) k'b_n^*(k') \underbrace{\int_{r=0}^{R_s} \id r r J_n(kr) J_n(k'r)}_{K_s^n(k,k')}\\
-% &=2\pi \sum_{n=-\infty}^{\infty} \int_{q\Gamma}^\Gamma \id k \int_{q\Gamma}^\Gamma \id k'  kb_n(k) k'b_n^*(k') K_S^n(k,k')\\
-% &=2\pi \sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle,
-% \end{aligned}
-% \end{equation}
-where we in the last step introduced the integral operator
-\begin{equation}
-  \label{eq:int_op_bessel}
-[I_S^nb_n](k'):=\int_{q\Gamma}^\Gamma \rd{k}\, k K_S^n(k,k')b_n(k),
-\end{equation}
-the inner product
-\begin{equation}
-  \label{eq:in_prod_bessel}
-\ip{u}{v} := \int_{q\Gamma}^\Gamma \rd{k}\, k\, u(k) v(k).
-\end{equation}
 
-If we let the radius $R_S$ of the disk $S$ tend to infinity the kernel $K_S$ tends to a $\delta$-function in $(k-k')$ divided by $k$;
-\begin{equation*}
-K_S(k,k')  := \int_{r=0}^{R_s} \id r r J_n(kr) J_n(k'r) \to \frac{\delta(k-k')}{k}, R_S \to \infty.
-  \end{equation*}
-This implies that the integral operator \ref{eq:int_op_bessel} tends to the identity operator $\mathbb{I}$;
-\begin{equation*}
-  \begin{aligned}
-    [I_S^nb_n](k')&:=\int_{q\Gamma}^\Gamma \id k k K_S^n(k,k')b_n(k) \to \int_{q\Gamma}^\Gamma \id k k \frac{\delta(k-k')}{k}b_n(k)
-    =b_n(k') \qc R_S \to \infty \forall b_n(k)\\
-  &\implies I_S^n \to \mathbb{I}, R_S \to \infty
-   \end{aligned}
-\end{equation*}
-
-Equation \eqref{eq:energy_bessel} now implies that the fraction of energy one can obtain in a disk of radius $R_S$ becomes the a fraction of sums
-\begin{equation}
-  \label{eq:energy_frac_bessel}
-\frac{\int_S \id^2x \abs{E}^2}{\int_{\mathbb{R}^2} \id^2x \abs{E}^2}=\frac{\sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle}{\sum_{m=-\infty}^{\infty} \langle b_m,b_m \rangle}.
+With \eqref{eq:AS-bessel} and \eqref{eq:A-bessel}, the energy fraction
+can be written as
+\begin{equation}\label{eq:E-frac-bessel}
+\frac{A_S}{A}
+=\frac{\displaystyle{\sum_{m}} \int_{q\Gamma}^\Gamma \rd{k} \int_{q\Gamma}^\Gamma \rd{k'}\,  
+kk'\, b_m(k)b_m^*(k') K_S^{(m)}(k, k')}
+{\displaystyle{\sum_{n}} \int_{q\Gamma}^\Gamma \rd{k} \, k\, b_n(k)b_n^*(k)}.
 \end{equation}
-This fraction can be proven to be maximized by the largest eigenvalue to the family of operators $\{I_n\}$, $\mu_\text{max}$.
-\todo{this method is equivalent to the previous because blabla}
-%Since a scaling of the $b_n$:s will not affect the fraction we can
-%always normalize them so that $\sum_{n=-\infty}^{\infty} \langle b_n, b_n \rangle=1$, which is equivalent to normalize the EM-field.
-%Now the maximum of \eqref{eq:energy_frac_bessel} can be proven to be the largest eigenvalue to the family of operators $\{I_n\}$;
-%\begin{equation*}
-%  \text{max}_{b_n} \sum_{n=-\infty}^{\infty} \langle [I_S^nb_n],b_n \rangle
- % \leq \sum_{n=-\infty}^{\infty} \text{max}_{b_n}\langle [I_S^nb_n],b_n \rangle,
-%  \end{equation*}
-%since $I_S$ is hermitian under the scalar product \ref{eq:in_prod_bessel} this is limited by
-%\begin{equation*}
-%  \sum_{n=-\infty}^{\infty}\mu_n \langle b_n, b_n \rangle \leq \mu_{\text{max}}\sum_{n=-\infty}^{\infty}\langle b_n, b_n\rangle=\mu_{\text{max}},
-%\end{equation*}
-%where $\mu_n$ denotes the largest eigenvalue of $I_S^n$ and $\mu_{\text{max}}$ the largest of these.
-%If we choose the $b_n$:s so that
-%\begin{equation*}
-%  b_n(k)
-%  =\begin{cases} &\phi_n \qc \mu_n=\mu_{\text{max}}  \\
-%  &0 \qc \text{otherwise}
-%  \end{cases}
-%\end{equation*}
-%we obtain an equality which proves the statement.
-  
+By similar arguments as in Section~\ref{sec:SPL-method}, the maximum
+of this fraction is given as the largest eigenvalue to
+\begin{equation}
+\mu_nb_n(k) = \int_{q\Gamma}^{\Gamma}\rd{k}\,k K_S^{(n)}(k, k')\,b_n(k').
+\end{equation}
+Note that the equation above is different for each $n$, and the
+maximum is to be taken over all $n$.
+
+Analagously to the case in the previons section, theis eigenvalue
+equation can be symmetrisized to
+\begin{equation}
+\mu_n\phi_n(k) = \int_{q\Gamma}^{\Gamma}\rd{k}\,
+\sqrt{kk'} K_S^{(n)}(k, k')\,\phi_n(k').
+\end{equation}
+\todo[inline]{Equivalence!}
 
 The advantage of this method is that this time, the kernel
 \eqref{eq:KS-bessel} can be calculated analytically
-\todo{Formula \#, and check if wrong}\cite{Gradshteyn-Ryzhik}
+\cite[Formula 5.54]{Gradshteyn-Ryzhik}
 \begin{equation}
-K_S^n(k, k') =
+K_S^{(n)}(k, k') =
 \begin{cases}
-R_S\frac{k'J_{n}(R_sk)J_{n-1}(R_sk')-kJ_{n-1}(R_sk)J_{n}(R_sk')}{k^2-k'^2}
+\frac{R_S}{k^2-k'^2}
+\qty[k'J_{n}(R_sk)J_{n-1}(R_sk')-kJ_{n-1}(R_sk)J_{n}(R_sk')]
 \qc &k\neq k'\\
-\frac{R_S^2}{2}\qty[ \Big(J_{n}(R_Sk)\Big)^2
+\frac{R_S^2}{2}\qty[ \qty(J_{n}(R_Sk))^2
 -J_{n-1}(R_sk)J_{n+1}(R_sk)]
 \qc &k= k'.
 \end{cases}
 \end{equation}
 So now, the numerical calculation of the eigenvalues are significantly
 faster than with the previous method.
+
+\section{SAR}
+
+\newtheorem{theorem}{Theorem}
+In hyperthermia treatment a good indicator for the temperature
+increase is the Specific Absorbation Rate (SAR): 
+\begin{equation*}
+\text{SAR}(\vb*x)=
+\frac{\ev{\vb*J(\vb*x,t)\vdot \vb*E(\vb*x,t)}_t}{\rho(\vb*x)},
+\end{equation*}
+where $\vb*J$ is the current density, $\vb*E$ is the
+electric field, $\rho$ is the mass density, and $\ev{\xi}_t$ denotes
+the time average of some quantity $\xi$.
+Due to Ohm's law this is simply a weighted version of the intensity
+$I=\abs{\vb*E}^2$.
+However, due to the time-averaging intereference between multiple
+frequencies vanishes. Thus
+\begin{equation}
+\text{SAR}(\vb*x)=\sum_i\text{SAR}_{\omega_i}(\vb*x),
+\end{equation}
+that is a sum over the contribution from each frequency.
+% In other words, when time-averaging there is no interference between different frequencies.
+
+Since a finite energy will always be applied, all possible solutions
+will be a convex combination of the contribution for each
+frequency. And due to the linearity over frequencies, any convex
+goalfunction $G(\text{SAR})$ will be convex in the frequencies and a
+powerful theorem from convex optimization can be applied: 
+\begin{theorem}
+ Let $f$ be a convex function defined on a convex set $X$. Then any
+ local minima of $f$ is also a global minima on $X$. 
+\end{theorem}
+This implies that the minimum of $G$ is obtained with only the
+frequency $\omega_j$ that gives the smallest contribution to $G$. 
+
+For a large family of goalfunctions the optimum is therefore obtained
+for a single frequency. In particular, any linear goalfunction is also
+convex and the main goalfunction used in this paper,
+\eqref{eq:energy_frac_final} would be optimized\footnote{the inverse
+  of it would be minimized} by a single frequency if applied to SAR.  
+
+\todo[inline]{Expression for single frequency}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
@@ -685,50 +642,11 @@ faster than with the previous method.
 \label{fig:both}
 \end{figure}
 
-% \begin{figure}\centering
-% \centerline{ % centers figures larges than 1\textwidth
-% \includegraphics[width=18cm]{ring_T-infty_L1000.eps}
-% }
-% \caption{Theoretical maximum of energy-quotient inside the tumor
-%   to all of real space, as a function of tumor size, $\RT$, measures
-%   in sortest wavelengths, $\lambda$.}
-% \label{fig:T-infty}
-% \end{figure}
-
-% \begin{figure}\centering
-% \centerline{ % centers figures larges than 1\textwidth
-% \includegraphics[width=18cm]{ring_T-H_L1000.eps}
-% }
-% \caption{Theoretical maximum of energy-quotient inside the tumor
-%   to a head around the tumor, as a function of tumor size, $\RT$,
-%   measures in sortest wavelengths, $\lambda$. Both the tumor and the
-%   head are circular discs of radius $\RT$ and $\RH$ respectively;
-%   $\RH=10RT$ was used for these graphs.}
-% \label{fig:T-H}
-% \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion and out looks}
-\label{ch:discussion}
-\subsection{SAR}
-\todo[inline]{May need some grooming to be presentable and shouldn't really be put here}
-\newtheorem{theorem}{Theorem}
-In hyperthermia treatment a good indicator for the temperature increase is the SAR-value (Specific Absorbation Rate), measured in [W/kg]:
-\begin{equation*}
-\text{SAR}(\vb*x)=\frac{\langle \vb*J(\vb*x,t)\cdot \vb*E(\vb*x,t) \rangle_t}{\rho(\vb*x)},
-\end{equation*}
-that is, a time average of the scalarproduct between the current density $\vb*J(\vb*x,t)$ and the electric field $\vb*E(\vb*x,t)$ divided by the density of the material $\rho(\vb*x)$. Due to Ohm's law this is simply a weighted version of the intensity $I=\abs{\vb*E}^2$. However, due to the time-averaging for multiple frequencies it can be shown that
-\begin{equation}
-\text{SAR}(\vb*x)=\sum_i\text{SAR}_i(\vb*x),         %\frac{1}{2}\sum_i\frac{\re[\sigma_i(\vb*x)\abs{\vb*E}^2]}{\rho(\vb*x)}
-\end{equation}
-that is a sum over the contribution from each frequency. In other words, when time-averaging there is no interference between different frequencies.
-Since a finite energy will always be applied, all possible solutions will be a convex combination of the contribution for each frequency. And due to the linearity over frequencies, any convex goalfunction $G(\text{SAR})$ will be convex in the frequencies and a powerful theorem from convex optimization can be applied:
-\begin{theorem}
- Let $f$ be a convex function defined on a convex set $X$. Then any local minima of $f$ is also a global minima on $X$.
-\end{theorem}
-This implies that the minimum of $G$ is obtained with only the frequency $\omega_j$ that gives the smallest contribution to $G$.
+\section{Discussion and outlooks}
+\label{sec:discussion}
 
-For a large family of goalfunctions the optimum is therefore obtained for a single frequency. In particular, any linear goalfunction is also convex and the main goalfunction used in this paper, \eqref{eq:energy_frac_final} would be optimized\footnote{the inverse of it would be minimized} by a single frequency if applied to SAR. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
