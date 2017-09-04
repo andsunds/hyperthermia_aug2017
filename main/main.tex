@@ -174,7 +174,7 @@ where in the last step $a_n(k)$ has been replaced with $k\,b_n(k)$ for later con
 
 
 
-\section{Localization measures}
+\section{Localization measures and limits} \label{sec:measure}
 To start talking about focusing waves, one has to be able 
 to quantify how localized it is. This is mainly done through
 different measures on the energy distribution of the wave,
@@ -200,7 +200,7 @@ The general mathematical statement of the Heisenberg uncertainty
 principle, for a function $f$ and its Fourier transfrom\footnotemark{}
 $\tf$, is \cite{Folland} 
 \footnotetext{With the Fourier transform defined as in \eqref{eq:FT}. }
-\begin{equation}
+\begin{equation} \label{eq:heisenberg}
 \Delta_{\vb*a}f \Delta_{\vb*\alpha} \tf \geq \frac{D^2}{4} \quad 
 %\forall \vb*a, \vb*\alpha, 
 \forall f \in \Lsq{\infty},%[\mathbb{R}^2],
@@ -345,21 +345,28 @@ this $\mu_0$ for bandwidth limited function in two dimensions.
 
 
 
-\section{Two dimensional application to
- signals of limited bandwidth}
+\section{Applications to bandwidth-limited fields in two dimensions}
+%Two dimensional application to signals of limited bandwidt
 %For the EM-field this gives an inequality for each component $E_i$\footnotemark{}
 %\begin{equation}
 %  \label{eq:ineq_final}
 %  \Delta_{\vb*a}E_i\geq \frac{9}{4} \frac{1}{\mathrm{Min}_\alpha\Delta_{\vb*\alpha}\tilde{E_i}}, \quad \forall \vb*a.
 %\end{equation}
-\todo[inline]{Need to rewrite! Or move?}
-Since the fourier transform of the EM field is concentrated on a sphere we achieve the minimum spread for $\alpha=0$ and using equations \eqref{eq:spread_def} one gets,
-$\min_\alpha\Delta_{\vb*\alpha}\tilde{E}=\frac{\omega^2}{v^2}$ and \eqref{eq:ineq_final} becomes
-\begin{equation}
- \Delta_{\vb*a}E\geq \frac{9v^2}{4\omega^2}=\frac{9\mu^2}{16\pi^2}=\frac{9}{16\pi^2\epsilon\mu\nu^2}.
- \end{equation}
-\todo[inline]{end}
 
+Generating an electric field with a signal with frequencies ranging from $\omega_{\min}$ to $\omega_{\max}$
+\footnotemark corresponds to only allowing nonzero amplitudes for $k$ between a corresponding
+$k_{\min}$ and $k_{\max}$ in the expressions for the $E$-field \eqref{eq:FT-inv} and \eqref{eq:polar_wave_general}.
+This implies that the plane wave representation (or Fourier transform) of the field only
+has values on a spherical shell of inner radius of $k_{\min}$ and outer radius $k_{\max}$.
+We denote $k_{\max}$ by $\Gamma$ and $k_{\min}$ as a fraction of this, $k_{\min}=q\Gamma$, with
+$q \in [0,1)$ to simplify the calculations.
+  \footnotetext{We call such a field bandwidth-limited.}
+
+For the SPL method we wish to limit the field in space to a region $S$. We will study fields in two dimensions and
+with the rotational symmetry of Helmholtz equation in mind we choose the simplest of all regions, a disk with radius $\RT$.
+\todo{Substitute all RT to RS or vice versa?}
+
+\begin{comment}
 \todo[inline]{REDO intro}
 So far we have looked at areas in the space and frequency domains
 which have the same shape, filled discs or spheres, but are scaled
@@ -376,7 +383,7 @@ we want to exclude the center part of the region.
 Therefore, we let $S$ be a filled
 circle disc of radius $R$, and $\Omega$ be the finite thickness circle
 ring with outer radius $\Gamma$ and inner radius $q\Gamma$, $0\le q<1$.
-
+\end{comment}
 
 \subsection{The SPL method using Fourier transforms}
 %\todo[inline]{Move most of the math here to appendix!}
@@ -585,7 +592,24 @@ faster than with the previous method.
 \todo[inline]{Expression for single frequency}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Numerical results}
+\section{Results}
+In this section the localization measures and limits described in section \ref{sec:measures}
+have been applied to scalar fields. These fields have been built as a sum of solutions the Helmholtz
+equation for different $k$:sin an interval $[k_{\min},k_{\max}]$ and are to be seen as representatives
+of real electric fields in a lossless media coming from a bandwidth-limited signal.
+
+
+\subsection{Heisenberg's inequality for bandwidth-limited functions}
+A bandwidth-limited field in three dimensions will have a Fourier transform that is located on a spherical
+shell. Such a distribution has a maximal variance if all of it lies on the outermost layer. The variance
+in the frequencyroom is then given by $\Delta \tf=k_{\max}^2$. Heisenberg's inequality \eqref{eq:heisenberg}
+now yields
+\begin{equation}
+\Delta f \geq \frac{9}{4k_{\max}^2}=\frac{9\lambda_{\min}^2}{16\pi^2}.
+\end{equation}
+Thus the lowest variation of is only dependent on the shortest wavelength $\lambda_{\min}$ and not on the actual bandwidth.
+
+\subsection{Energy of bandwidth-limited functions in a bounded region}
 In \figref{fig:both} the numerically calculated eigenvalues of \eqref{eq:eig-n-bessel}, with $n=0$, are shown for different values of the ratio between the tumour size and the shortest wavelength, $\RT/\lambda_{\min}=\RT\Gamma/(2\pi)$. This corresponds to the theoretical maximum of the energy focused in a circularly tumor for isotropic (angularly independent) fields in twodimensions, limited to wavelengths between $\lambda_{\min}$ and $\lambda_{\max}$.
 The reason we choose to plot for isotropic fields ($n=0$) is that this corresponded to the largest eigenvalue for most values of $\RT\Gamma$, especially the lower ones.
 The different lines correspond to different values of the longest wavelength $\lambda_{\max}=\lambda_{\min}/q$. 
