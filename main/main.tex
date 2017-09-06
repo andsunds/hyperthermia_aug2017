@@ -69,12 +69,15 @@ contradict the uncertainty principle for Fourier transforms, and this
 report addresses this apparant inconcistency. To do this a method,
 developed by Slepian et al., is applied to study the ability to focus
 two dimensional fields, limited to different frequency bands, into a
-circularly symmetric region. Also the Fourier version of Heisenberg
-inequality is applied to electric fields. 
+circularly symmetric region representing the tumor. Also the Fourier 
+version of the Heisenberg inequality is applied to electric fields. 
 %What did we find out?
-
-
-\todo[inline]{Write better abstract, change title, read through and improve language}
+The maximum concentration of a bandwidth limited field inside the tumor 
+region is calculated. It is shown that a wide band offers 
+significant improvement over a narrow band. However a narrow band can 
+still have a focusing effect.
+It is also explained that the Heisenberg inequality is not contradicted due
+to the directional freedom in two or more dimensions. 
 \end{abstract}
 \newpage
 \tableofcontents
@@ -191,12 +194,13 @@ This report will mainly deal with the fraction of energy in a bounded
 area, which was used by
 Slepian, Pollack and Landau (SPL) in a series of papers 
 \cite{PSWF-I_1961,PSWF-II_1961,PSWF-III_1962,PSWF-IV_1964,PSWF-V_1978}.
-However, to address the Heisenberg uncertainty principle, which
+However, to address the Heisenberg inequality, which
 concerns a type of variance measure, an account of both types of
 measures and how they are used will be given in this section. 
 
 
-\subsection{Heisenberg's uncertainty principle}
+\subsection{The Heisenberg inequality}
+\label{sec:Heisenberg_theory}
 The common quantum mechanical version of Heisenberg's uncertainty
 principle states that \emph{the product of the variance of
   position and momentum must be greater than some fixed value}. This
@@ -236,7 +240,7 @@ the Heisenberg inequality, i.e. using NB signals, as long as a
 significant part of the radiation intensity is located outside of the 
 head.  
 This is a consequence of the particular localization measure used in
-the Heisenberg uncertainty relation. It is still a mathematical truth,
+the Heisenberg inequality. It is still a mathematical truth,
 but it might be too blunt to be practically applicable in hyperthermia
 treatments. 
 
@@ -573,10 +577,11 @@ seen as representatives of real electric fields in a lossless media
 coming from a bandwidth-limited signal.
 
 
-\subsection{Heisenberg's inequality for bandwidth-limited functions}
+\subsection{The Heisenberg inequality for bandwidth-limited functions}
+\label{sec:Heisenberg_result}
 A bandwidth-limited field in three dimensions will have a Fourier transform that is located on a spherical
 shell. Such a distribution has a maximal variance if all of it lies on the outermost layer. The variance
-in the frequencyroom is then given by $\Delta \tf=(k_{\max})^2$. Heisenberg's inequality \eqref{eq:heisenberg}
+in the frequencyroom is then given by $\Delta \tf=(k_{\max})^2$. The Heisenberg inequality \eqref{eq:heisenberg}
 now yields
 \begin{equation}
 \Delta f \geq \frac{9}{4(k_{\max})^2}=\frac{9\lambda_{\min}^2}{16\pi^2}.
@@ -655,8 +660,19 @@ energy in the head into only 1\,\% of the \emph{area}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion and outlook}
+
 The results of this report give a theoretical limit to the
-localization, in two dimensions, of a frequency limited scalar field.
+concentration, in two dimensions, of a bandwidth limited field.
+As is shown in Section \ref{sec:Heisenberg_result} the Heisenberg 
+inequality only concerns the highest frequency in the band and not
+the bandwidth. This is due to the fact that in two or more dimensions
+there is also a \emph{directional} freedom involved for the wave 
+vector $\vb*k$. However as is noted in Section \ref{sec:Heisenberg_theory}
+the variance measure used in the Heisenberg inequality is not a 
+good measure for hyperthermia treatment and therefore the measure of
+Slepian et al. was used in this report.
+
+Due to time constraints a scalar field was studied in this report.
 The actual electric field is a vector field which has to satisfy
 \emph{all} of Maxwell's equations, and not only the wave
 equation. That imposes the constraint that the field vector has to be
