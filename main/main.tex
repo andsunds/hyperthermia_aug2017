@@ -62,8 +62,18 @@ swedish,english %% Make sure to put the main language last!
 \thispagestyle{empty} \pagestyle{empty} %% no page numbers 
 
 %% The abstract of the document
-\begin{abstract} 
-In this paper we have played around with operators and Bessel functions. It was fun. Thanks for the money Barncancerfonden.
+\begin{abstract}
+Previous hyperthermia studies have shown that single-frequency signals
+have been effective in focusing microwaves in a tumor. This seems to 
+contradict the uncertainty principle for Fourier transforms, and this
+report addresses this apparant inconcistency. To do this a method,
+developed by Slepian et al., is applied to study the ability to focus
+two dimensional fields, limited to different frequency bands, into a
+circularly symmetric region. Also the Fourier version of Heisenberg
+inequality is applied to electric fields. 
+%What did we find out?
+
+
 \todo[inline]{Write better abstract, change title, read through and improve language}
 \end{abstract}
 \newpage
@@ -237,9 +247,7 @@ treatments.
 Another localization measure was used by SPL in
 \cite{PSWF-I_1961,PSWF-II_1961,PSWF-III_1962,PSWF-IV_1964,PSWF-V_1978}. 
 In what follows we will show the broad strokes for developing this
-theory. In doing so we will prove the existance of a useful set of
-functions ${\psi_i}$ which span the room of frequency-limited
-functions. \todo[]{Remove last line?}
+theory. 
 
 A square-integrable function $f$ of $D$ variables is said to be
 $\Omega$-limited if it can be represented as a Fourier integral over
@@ -272,13 +280,13 @@ A_S%=\oldint_S\abs{f(\vb*x)}^2\id^Dx
 \oldint_\Omega \id^Dk'\,
 \tf^*(\vb*k')\ee^{-\ii\vb*k'\cdot \vb*x}\\
 &=\qty (2\pi)^{-D} \oldint_\Omega\rd^Dk\oldint_\Omega\rd^Dk'\,
-\tf(\vb*k)\tf^*(\vb*k')K_s(\vb*k-\vb*k')\\
+\tf(\vb*k)\tf^*(\vb*k')K_S(\vb*k-\vb*k')\\
 %&=\ip{I\tf}{\tf}
 \end{aligned}
 \end{equation}
 where
 \begin{equation} \label{eq:kernel}
-K_s(\vb*k-\vb*k')=(2\pi)^{-D}\oldint_S\rd^Dx\,
+K_S(\vb*k-\vb*k')=(2\pi)^{-D}\oldint_S\rd^Dx\,
 \ee^{\ii\vb*x \cdot(\vb*k-\vb*k')},
 \end{equation}
 is called an integral \emph{kernel}.
@@ -290,7 +298,7 @@ K_S(\vb*k-\vb*k')g(\vb*k).
 The fraction of energy that the $\Omega$-limited function $f$ can have
 in a region $S$ can then be written as 
 \begin{equation} \label{eq:energy_frac_final}
-\frac{A_s}{A}=
+\frac{A_S}{A}=
 \frac{\oldint_\Omega\rd^Dk\, \qty[I\tf](\vb*k)\tf^*(\vb*k)}
 {\oldint_\Omega \rd^Dk\, \abs{\tf(\vb*k)}^2}
 =\frac{\ip{I_S\tf}{\tf}}{\ip{\tf}},
@@ -306,7 +314,7 @@ self-adjoint and compact. From the Spectral theorem it now follows
 that the functions fullfilling the eigenvalue equation 
 \begin{equation}
   \label{eq:eigen}
-\qty[I_S\psi](\vb*k)=\oldint_\Omega \rd^Dk'\,K_s(\vb*k')\psi(\vb*k') 
+\qty[I_S\psi](\vb*k)=\oldint_\Omega \rd^Dk'\,K_S(\vb*k')\psi(\vb*k') 
 =\mu \psi(\vb*k)
 \end{equation}
 form an orthogonal base for the space $\Omega$. 
@@ -417,10 +425,10 @@ where $\mu$ has been denoted by $\mu_n$ since each $b_n(k)$
 will have a different eigenvalue satisfying
 \eqref{eq:eigen_fourier_coef}.  
 
-To make
-\eqref{eq:eigen_fourier_coef} more suitable for numerical solution,
-we wish to symmetrisize the kernel $k'a_n(k, k')$. To do that we
-make the substitution $b_n(k)=\phi_n(k)/\sqrt{k}$, which yields
+To make \eqref{eq:eigen_fourier_coef} more suitable for numerical
+solution, we wish to symmetrisize the kernel $k'a_n(k, k')$. To do
+that we make the substitution $b_n(k)=\phi_n(k)/\sqrt{k}$, which
+yields 
 \begin{equation}\label{eq:eig-n}
 \mu_n \phi_n(k) = 2\pi\int_{qk_{\max}}^{k_{\max}}\rd{k'}\,
 \sqrt{kk'}a_n(k, k') \phi_n(k').
@@ -457,13 +465,13 @@ To calculate the energy of the field $E$ in the disk $S$, we
 substitute \eqref{eq:polar_wave_general} into \eqref{eq:AS}: 
 \begin{equation}
 \begin{aligned}
-A_S= \int_S \rd^2x\, \abs{E}^2 = 
+A_S= \oldint_S \rd^2x\, \abs{E}^2 = 
 \int_0^{R_S} r\rd{r} \int_0^{2\pi} \rd\theta \,&
 \int_{qk_{\max}}^{k_{\max}} \rd{k}\!\!
 \sum_{n= -\infty}^{\infty}\!\! kb_n(k) J_n(kr)\ee^{\ii n \theta}\\
 &\times
 \int_{qk_{\max}}^{k_{\max}} \rd{k'}\!\!
-\sum_{m= -\infty}^{\infty}\!\! k'b_m^*(k') J_n(k'r)\ee^{-\ii m
+\sum_{m= -\infty}^{\infty}\!\! k'b_m^*(k') J_m(k'r)\ee^{-\ii m
   \theta}.
 \end{aligned}
 \end{equation}
@@ -577,105 +585,113 @@ Thus the lowest spacial variation of the field is only dependent on the shortest
 and not on the actual bandwidth, since in that solution the longer wavelengths will not be used at all.
 
 \subsection{Energy of bandwidth-limited functions in a bounded region}
-\begin{figure}\centering
-\centerline{ % centers figures larges than 1\textwidth
-\includegraphics[width=16cm]{ring_both_L1000.eps}
-}
-\caption{Theoretical maximum of energy fraction inside the tumor for isotropic 
-  fields, both compared to the total energy in real space (solid line) as well as
-  compared to a ``head'' region (dashed line). The fractions are plotted as
-  a function of tumor size, $\RT$, measured in shortest wavelengths,
-  $\lambda_{\min}$. The different values of $q\in[0, 1]$ corresponds to 
-  the width of the frequency band, where $\lambda_{\min}=2\pi/k_{\max}$ and
-  $\lambda_{\max}=\lambda_{\min}/q$, i.e. a larger $q$
-  means a narrower band. The head and tumor regions used were concentrical discs;
-  where the radius of the head region was $10\RT$. }
-\label{fig:both}
-\end{figure}
 
 In \figref{fig:both} the eigenvalues of \eqref{eq:eig-n-bessel}, with $n=0$, are shown 
-for different values of the ratio between the tumor size and the shortest wavelength, $\RT/\lambda_{\min}=\RT{k_{\max}}/(2\pi)$. For $q=1$ the analytical solution \eqref{eq:energy_single} was used while for the other $q$:s the eigenvalues where numerically calculated with the method in Appendix~\ref{apx:num}.
-This corresponds to the theoretical maximum of the energy focused in a disc-shaped tumor for isotropic (angularly independent) fields in two dimensions, limited to wavelengths between $\lambda_{\min}$ and $\lambda_{\max}$.
-The reason we chose to plot for isotropic fields ($n=0$) is that this corresponded to the largest eigenvalue for most values of $\RT k_{\max}$, especially the lower ones.
-The different curves correspond to different bandwidth with $q=\lambda_{\min}/\lambda_{\max}$. The solid curves represent the fraction of energy in the tumor region to the whole space ($A_T/A$) while the dashed curves represent the fraction of energy in the tumor to a ``head'' region ($A_T/A_H$), a ten times larger concentric disc. These dashed lines do not represent the maximum fraction in the tumor compared to the head, instead they correspond to the functions that maximized $A_T/A$ but this time ``normalized''  to the energy in the head.
+for different values of the ratio between the tumor size and the
+shortest wavelength, $\RT/\lambda_{\min}=\RT{k_{\max}}/(2\pi)$. For
+$q=1$ the analytical solution \eqref{eq:energy_single} was used while
+for the other $q$:s the eigenvalues where numerically calculated with
+the method in Appendix~\ref{apx:num}. 
+This corresponds to the theoretical maximum of the energy focused in a
+disc-shaped tumor for isotropic (angularly independent) fields in two
+dimensions, limited to wavelengths between $\lambda_{\min}$ and
+$\lambda_{\max}$. 
+The reason we chose to plot for isotropic fields ($n=0$) is that this
+corresponded to the largest eigenvalue for most values of $\RT
+k_{\max}$, especially the lower ones. 
+The different curves correspond to different bandwidth with
+$q=\lambda_{\min}/\lambda_{\max}$. The solid curves represent the
+fraction of energy in the tumor region to the whole space
+($A_\text{T}/A$) while the dashed curves represent the fraction of
+energy in the tumor to a ``head'' region ($A_\text{T}/A_\text{H}$), a
+ten times larger concentric disc. These dashed lines do not represent
+the maximum fraction in the tumor compared to the head, instead they
+correspond to the functions that maximized $A_\text{T}/A$ but this
+time ``normalized''  to the energy in the head. 
 
-For small q-values ($0$ and $0.1$) the energy fractions approach 1 quite quickly and for $\RT/\lambda_{\min} \sim 0.5$ 
-and larger it is possible to have almost all the energy located in the tumor. It is also apparant that the bandwidth plays a significant role for the localization, for $q=0.5$ only about 50\,\% of the energy is focused in a tumor with $\RT/\lambda_{\min}=0.5$ and for $q=0.9$ less than 10\,\%.
-This explains the relatively small differences between the dashed and solid curves; for small $q$-values, focusing in the tumor apparantly focuses almost all the energy in the head. Intuitively it makes sense that focusing in the head is achieved when focusing in the center of the head and from the figure it is apparant that it \emph{is} possible to focus almost all the energy in a head ten times the tumor for all but the largest $q$-values and smallest tumor radii $\RT$. For large $q$ the comparison with the head does however make a difference since these fractions does not converge as quickly to 1. 
+\begin{figure}
+\begin{center}
+\centerline{ % centers figures larges than 1\textwidth
+\includegraphics[width=15cm]{ring_both_L1000.eps}
+}
+\caption{Theoretical maximum of energy fraction inside the tumor for
+  isotropic fields, both compared to the total energy in real space
+  (solid line) as well as compared to a ``head'' region (dashed
+  line). The fractions are plotted as a function of tumor size, $\RT$,
+  measured in shortest wavelengths, $\lambda_{\min}$. The different
+  values of $q\in[0, 1]$ corresponds to the width of the frequency
+  band, where $\lambda_{\min}=2\pi/k_{\max}$ and
+  $\lambda_{\max}=\lambda_{\min}/q$, i.e. a larger $q$ means a
+  narrower band. The head and tumor regions used were concentrical
+  discs; where the radius of the head region was $10\RT$. } 
+\label{fig:both}
+\end{center}
+\end{figure}
 
-The figure also clearly shows that, when comparing to the head, it \emph{is} possible to achieve some localization even for a single frequency. For $\RT \approx \lambda_{\min}/4$ one achieves a maximum of approximately 0.15. That is one can focus roughly 15\,\% of the energy in the head to 1\,\% of the \emph{area}.
+For small q-values ($0$ and $0.1$) the energy fractions approach 1
+quite quickly and for $\RT/\lambda_{\min} \sim 0.5$ and larger it is
+possible to have almost all the energy located in the tumor. It is
+also apparant that the bandwidth plays a significant role for the
+localization, for $q=0.5$ only about 50\,\% of the energy is focused
+in a tumor with $\RT/\lambda_{\min}=0.5$ and for $q=0.9$ less than
+10\,\%. 
+This explains the relatively small differences between the dashed and
+solid curves; for small $q$-values, focusing in the tumor apparantly
+focuses almost all the energy in the head. Intuitively it makes sense
+that focusing in the head is achieved when focusing in the center of
+the head and from the figure it is apparant that it \emph{is} possible
+to focus almost all the energy in a head ten times the tumor for all
+but the largest $q$-values and smallest tumor radii $\RT$. For large
+$q$ the comparison with the head does however make a difference since
+these fractions does not converge as quickly to 1.  
 
-%the difference between the dashed and solid lines is very small which signifies that by trying to focus energy in he tumor we 
+The figure also clearly shows that, when comparing to the head, it
+\emph{is} possible to achieve some localization even for a single
+frequency. For $\RT \approx \lambda_{\min}/4$ one achieves a maximum
+of approximately 0.15. That is one can focus roughly 15\,\% of the
+energy in the head into only 1\,\% of the \emph{area}. 
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion and outlook}
+The results of this report give a theoretical limit to the
+localization, in two dimensions, of a frequency limited scalar field.
+The actual electric field is a vector field which has to satisfy
+\emph{all} of Maxwell's equations, and not only the wave
+equation. That imposes the constraint that the field vector has to be
+perpendicular to its direction of propagation. This will exclude
+isotropic fields in three dimensions \cite{Jackson}.
+However, in the two dimensional case the electric field can be thuoght
+of as pointing in a third ($\vu{z}$) direction.
 
-This report has only treated some very simplified examples, although
-the presented SPL technique can still be applied to any general
-geometry. To three dimensions it can for instance be generalized with
-the use of spherical Bessel functions and spherical harmonics. For
-even more general geometries the trade-off would however be that more
-of the calculations would have to be done numerically instead of
-analytically.  
-%The justification however for showing these examples is that they give a theoretically achievable maximum for any field, and thus gives some qualitative insight
-
-Appart from different geometries, it would also be desirable to compare the radiation inside the tumor to the head istead of compared to the total energy of the field.
-%The SPL method is based upon maximizing the energy within a bounded region $S$
-%compared to the total energy in the room. This is not really the kind of optimization
-%one wants to do for a hyperthermia treatment where we are concerned of what happens in the head.
-%Therefore a measure of the kind $A_T/A_H$ where $T$ ($H$) stands for the tumor (head) region, would be prefered.
-To generalize the measure \eqref{eq:energy_frac_final} to incorporate a head region, the denominator has to be changed to $\ip*{I_\text{H}\tf}{\tf}$, where $I_\text{H}$ is defined analogously to $I_\text{T}$. The generalized problem can be proven to have be optimized by the generlaized eigenvalue problem $I_\text{T} \psi'=\mu I_\text{H}\psi'$. 
-
-Conceptually this should be easily implemented in the numerical method used here. However when we tried to solve the generalized eigenvalue problem the numerics turned out to be badly conditioned due to the head matrices being almost singular. 
-Because of this, we instead choose to calculate $A_\text{T}/A_\text{H}$ for the regular eigenvector, $\psi$, of $I_\text{T}$. 
-
-The justification for using the regular eigenvector, instead of the generalized, is that for a head considerably larger than the tumor the regular eigenvalues are almost 1, as seen in \figref{fig:both}. This means that the head then already contains close to all of the energy in the field, which means that the generalized eigenvalue will be almost the same. This is not completely true for the low values of $\RT/\lambda_{\min}$ and high values of $q$. However, in the case with $q=0.9$ the agreement with the (true) optimum for $q=1$ indicates that using the regular eigenfuntion was not detrimental.
-%if the head is considerably larger than the tumor, then $I_\text{H}$ will almost be the identity operator. This can clearly be seen in the extreme case when the head becomes the whole space. 
-
-Another overlooked detail is the fact that \figref{fig:both} only presents the values for $n=0$, but to find the real optimum one has to find the largest eigenvalue $\mu_n$ over all $n$. Indeed, when this was investigated numerically we found regions where $n>0$ had a larger energy fraction. However $\mu_0$ was in most cases the largest eigenvalue, and it does give a good representation of what the maximum energy fraction would be.
-
-In spite of not being directly applicable to hyperthermia treatment, these examples gives a theoretically achievable maximum for any field, and can be used for some qualitative insight to how the wave-nature limits the localization of a field. For instance \figref{fig:both} shows that one can focus almost all the energy of the field into a tumor of the same size as the shortest wavelength (highest frequency) if all the longer wavelengths (lower frequencies) are also used. If however the signal is limited to a narrow band of frequencies, not containing the lowest ones, the fraction of energy one can focus in the tumor quickly falls off. For focusing electric field intensity in a bounded region it is therefore prefered to use a wide band signal. But due to an effect of time-averaging this is not true for hyperthermia treatments which will be discussed in the following section.
-
-\subsection{Further development and comparison to already 
-existing teatment planing methods}
-To further improve applicability to hyperhtermia treatment the SPL
-method could be extended to incorporate a wheight function in the
-head operator $I_\text{H}$. This wheight function could the take
-extra sentitive tissue into account by giving it a high weight, and
-thus setting a high price on intensity in that area. 
-
-The step after that would be to also incorporate the fact that tissue
-is a lossy material (electrically conducting), which this report have
-not taken into account. Mathematically a lossy material can not be
-described by simple Fourier transfoms. This is because now the
-position of the radiation source, which also becomes the origin of the
-decay in field strength, has to be accounted for. These sources could
-be put as discrete points around the head region. Mathematically the 
-lossy material can be described by using a complex wavenumber 
-$k\to\tilde{k}$, although we have not studied the mathematics 
-fully we believe that the mathematics developed here can be 
-translated to this complex wavenumber\footnotemark{}.
-
-\footnotetext{We also believ that one of the Hankel functions,
-$H_\nu^{(1, 2)}(r'\tilde{k})=J_\nu(r'\tilde{k})\pm\ii N_\nu(r'\tilde{k})$,
-centered around each source is the most effective representations 
-(in 2D) of the field eaming from the sources. This is because the 
-field then will exhibit exponential decay as it propagates from 
-its source.
-}
-
-By now, we also need to address the fact that the above description 
-would make the generalized method very similar to an already used
-method described by T. Köhler et al. \cite{Kohler2001}. Their method
-uses simulated fields from each antenna as a basis for the field inside
-the head, and then uses the generalized eigenvalue probem to optimize 
-signals from each antenna. 
+A somewhat related detail is the fact that \figref{fig:both} only
+presents the energy fractions for $n=0$. To find the
+real optimum one has to find the largest eigenvalue $\mu_n$ over all
+$n$, i.e. non-isotropic fields. Indeed, when this was investigated
+numerically we found regions where $n>0$ had a larger energy
+fraction. However $\mu_0$ was in most cases the largest eigenvalue,
+and it does give a good representation of what the maximum 
+energy fraction could be. 
 
 
-\subsection{Specific Absorption Rate compared to intensity}
+In spite of not being directly applicable to actual electric fields in
+three dimensions,
+the results can still be used to obtain 
+qualitative insights concerning the limitations imposed by the
+wave-nature. For instance, \figref{fig:both} shows that almost all the
+energy of a field can be focused into a region of the same scale as
+the shortest wavelength. If however the signal is limited to a
+\emph{narrow} band of frequencies, then the possible fraction of
+energy in the tumor quickly falls off. 
+For focusing electric field intensity in
+a bounded region it is therefore prefered to use a wide band
+signal. But due to an effect of time-averaging this is not true for
+hyperthermia treatments which will be discussed in the following
+section. 
+
+\subsection{Relation to hyperthermia -- Specific Absorption Rate}
 \label{sec:SAR}
-\todo{Rubrik, inledning?}
 In hyperthermia treatment a good indicator for the temperature
 increase is the Specific Absorption Rate (SAR): 
 \begin{equation}
@@ -683,28 +699,138 @@ increase is the Specific Absorption Rate (SAR):
 \frac{\ev{\vb*J(\vb*x,t)\vdot \vb*E(\vb*x,t)}_t}{\rho(\vb*x)},
 \end{equation}
 where $\vb*J$ is the current density, $\vb*E$ is the
-electric field, $\rho$ is the mass density, and $\ev{\xi}_t$ denotes
-the time average of some quantity $\xi$.
+electric field, $\rho$ is the mass density, and $\ev{\cdot}_t$ denotes
+time averaging. 
 Due to Ohm's law this is simply a weighted version of the intensity
-$I=\abs{\vb*E}^2$.
-However, due to the time-averaging, intereference between multiple
-frequencies vanishes \cite{Martinsson}. Thus
+$\abs{\vb*E}^2$.
+
+However, because of the time-averaging, interference between multiple
+frequencies vanish \cite{Martinsson}. Thus
 \begin{equation}
 \text{SAR}(\vb*x)=\sum_i\text{SAR}_{\omega_i}(\vb*x),
 \end{equation}
+\todo{Cite!}
 that is a sum over the contribution from each frequency.
+Due to this linearity, and since a finite energy will always be
+applied, it can be proven from the theory of convex optimization
+that a large family of of goal functions, convex ones, are optimized
+by using a single frequency only. In particular, this applies to any
+linear goalfunction such as the main goalfunction used in this paper 
+\eqref{eq:energy_frac_final}. Therefore if it was applied to SAR it
+would be maximized by a single frequency.   
 
-Due to this linearity, and since a finite enrgy will always be applied, it can be proven from the theory of convex optimization 
-that a large family of of goalfunctions, convex goalfunctions, are optimized by using a single frequency only. 
-In particular, this applies to any linear goalfunction such as the main goalfunction used in this paper
-\eqref{eq:energy_frac_final}. Therefore if it was applied to SAR it would be maximized by a single frequency.  
+
+
+\subsection{Further extensions of the SPL method}
+The results were for a rather simple special case and it would
+therefore be desirable to expand the domain of applicability for the
+SPL method. Some of the main points of improvement are to include other 
+geometries (also in higher dimensions), taking the healthy
+tissue into account, and allowing for lossy materials.
+
+\subsubsection{Optimization relative to healthy tissue}
+To generalize \eqref{eq:energy_frac_final} to
+incorporate a head region, of healthy tissue, the measure has to
+be changed to $\ip*{I_\text{T}\tf}{\tf}/\ip*{I_\text{H}\tf}{\tf}$, where 
+$I_\text{T}$ and $I_\text{H}$ are defined as in \eqref{eq:int_op} with
+$S$ replaced by the tumor and head regions respectively. 
+This new problem can be proven to be optimized by solving
+generalized eigenvalue problem $I_\text{T}\psi'=\mu'I_\text{H}\psi'$.
+
+Conceptually this should be easily implemented in the numerical method
+in Appendix~\ref{apx:num}. However when we tried to solve the
+generalized eigenvalue problem the numerics turned out to be badly
+conditioned due to the matrices corresponding to $I_\text{H}$ being
+almost singular. Because of this, we instead choose to calculate
+$A_\text{T}/A_\text{H}$ for the regular eigenvector,
+$\mu\psi=I_\text{T}\psi$. 
+
+
+For a head considerably larger than the tumor the
+regular eigenvalues are almost 1, as seen in \figref{fig:both}. This
+means that the head then already contains close to all of the energy
+in the field, which means that the values presented in
+\figref{fig:both} are not significantly different from the generalized
+eigenvalue. 
+This is not completely true for the low values of
+$\RT/\lambda_{\min}$ and high values of $q$; however, in the case with
+$q=0.9$ the agreement with the (true) optimum for $q=1$ indicates that
+using the regular eigenfuntion did not introduce any significant
+deviation from the generalized eigenvalue.
+
+
+\subsubsection{Different geometries and lossy materials}
+The SPL technique, as presented in Section~\ref{sec:measures}, is
+still valid for any general geometry, in any number of dimensions.
+The trade-off, for complicated geometries, would however be that more
+of the calculations have to be done numerically instead of analytically. 
+
+To further improve applicability to hyperhtermia treatment the SPL
+method could also be extended to incorporate a weight function in the
+head operator $I_\text{H}$. This weight function could take extra
+sentitive tissue into account by giving it a high weight, and thus
+setting a high ``price'' on intensity in that area. 
+
+Another improvement would be to also incorporate the fact that tissue
+consists of lossy (electrically conducting) materials. 
+The field will decay exponentially when propagating, thus the
+actual source of the field and its position has to be accounted
+for. Lossy material can therefore not be described by simple 
+Fourier transfom, and the SPL method cannot be applied in its current
+form. 
+
+Mathematically the lossy material can be described by using a complex
+wavenumber $k\to\tilde{k}$. Although we have not studied the mathematics 
+fully, we believe that the key concepts of the SPL method can
+still be used with e.g. a basis of discrete sources, instead of a
+basis of plane waves like earlier. 
+%\footnotemark{}.
+
+% \footnotetext{We also believ that one of the Hankel functions,
+% $H_\nu^{(1, 2)}(r'\tilde{k})=J_\nu(r'\tilde{k})\pm\ii N_\nu(r'\tilde{k})$,
+% centered around each source is the most effective representations 
+% (in 2D) of the field eaming from the sources. This is because the 
+% field then will exhibit exponential decay as it propagates away from 
+% its source.
+% }
+
+%By now, we also need to address the fact that 
+If the SPL method is generalized far enough according to the above
+description, it would become very similar to an already used method
+described by T. Köhler et al. \cite{Kohler2001}. Their method uses
+simulated fields from a given antenna system as a basis for the field
+inside the head, and then uses the generalized eigenvalue probem to
+optimize signals from each antenna. 
+However, the SPL method was never intended to be used as a substitute
+to the eigenvalue method in \cite{Kohler2001} for treatment planning. 
+Instead its purpose was to gain theoretical insight on the limitations
+imposed by the wave nature on a field. In a similar manner, a more
+generalized method could be used to study the field in more elaborate
+models. This could for instance give insight into the problem of
+choosing an optimal frequency depending on some simple parameters like
+head and tumor size.
+For a generalized SPL method to be effective, it cannot be too
+computationally heavy. In such a case one could just as well use the
+method in \cite{Kohler2001} on an even more realistic model. Therefore
+the model used has to be simple enough to still be partly solvable
+analytically. 
+
+
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
-
+In this report a mathematical framework, developed by Slepian et al.,
+has been applied to bandwidth limited function in two dimensions. It
+is shown that a wide band signal offers a significant improvement,
+over a narrow band, in the ability to focus an electric field.
+Since time averaging cancels interference
+between frequencies the improvements of a wide band signal diminishes
+in hyperthermia treatments. However as shown in this report, it is
+still possible to obtain a focusing effect even with a single
+frequency.
 
 
 
@@ -726,7 +852,7 @@ In particular, this applies to any linear goalfunction such as the main goalfunc
 \section{Numerical implementation of the 
 Landau-Pollack-Slepian Theory}
 \label{apx:num}
-In the previous section we have been occupied by integral eigenvalue
+In the report we have been occupied by integral eigenvalue
 equations of the form
 \begin{equation} %\label{eq:int-eig}
 \mu E(k) 
@@ -737,10 +863,10 @@ We have also put down some work to reduce higher-dimensional
 integrals to one-dimensional ones
 \begin{equation} \label{eq:int-eig}
 \mu \psi(k) 
-= \oldint_{I} \rd{k}\, K(k, k') \psi(k'),
+= \int_{\alpha}^\beta \rd{k}\, K(k, k') \psi(k'),
 \end{equation}
 where the integration is now over an interval 
-$I=[\alpha, \beta]$. This was done so that the numerical method
+$[\alpha, \beta]$. This was done so that the numerical method
 presented here could be applied. 
 
 
@@ -748,22 +874,21 @@ presented here could be applied.
 The integral can be discretized according to
 \begin{equation} \label{eq:inttosum}
 \begin{aligned}
-\oldint_I\rd{k} &\to \sum_{n=1}^N\Delta{k}
-=\frac{\abs{I}}{N} \sum_{n=1}^N,\\
+ \int_{\alpha}^\beta \rd{k} &\to \sum_{n=1}^N\Delta{k}
+=\frac{(\beta-\alpha)}{N} \sum_{n=1}^N,\\
 \psi(k) \to \psi_n = \psi(k_n) &\qcomma
 K(k, k') \to K_{m, n} = K(k_m, k_n),
 \end{aligned}
 \end{equation}
-where $\abs{I}=\beta-\alpha$ is the size of the interval $I$.
 With these discretizations, \eqref{eq:int-eig} discretizes to
 \begin{equation}
-\mu\Psi_m = \frac{\abs{I}}{N} \sum_{n=1}^N K_{m, n} \Psi_n
+\mu\Psi_m = \frac{(\beta-\alpha)}{N} \sum_{n=1}^N K_{m, n} \Psi_n
 \end{equation}
 which is just a matrix eigenvalue equation
 \begin{equation} \label{eq:mtx-eig}
 \mu' \Psi = \mathsf{K}\Psi,
 \end{equation}
-where $\mu'=N\mu/\abs{I}$ and $\mathsf{K}$ is the $N\times N$ matrix
+where $\mu'=N\mu/(\beta-\alpha)$ and $\mathsf{K}$ is the $N\times N$ matrix
 whose element $(m, n)$ is $K_{m, n}$. From here, there are many high
 performance linear algebra libraries to find the eigenvalues and
 eigenvector to \eqref{eq:mtx-eig} numerically. 
@@ -817,7 +942,7 @@ To verify that the method above is sound, we have here compared some calculated 
 \multicolumn{2}{|c|}{Disc, numerical ($L=5000$)}&
 \multicolumn{2}{|c|}{Ring, numerical ($L=1000$)}
 \\ \hline
-$R_Sk_{\max}$\phantom{1.}&$\mu$
+$R_Sk_{\max}$&$\mu$
 &$\hat\mu$&$(\hat\mu-\mu)/\mu$
 &$\hat\mu$&$(\hat\mu-\mu)/\mu$
 \\ \hline
