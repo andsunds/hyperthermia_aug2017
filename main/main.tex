@@ -611,7 +611,13 @@ The figure also clearly shows that, when comparing to the head, it \emph{is} pos
 %\subsection{The issue of using a wide or narrow frequency band}
 %Figure 1 clearly shows that we have faild to prove that NB is good...
 
-This report has only treated some very simplified examples, although the presented SPL technique can still be applied to any general geometry. To three dimensions it can for instance be generalized with the use of spherical Bessel functions and spherical harmonics. For more general geometries the trade-off would however be that more of the calculations would have to be done numerically instead of analytically. 
+This report has only treated some very simplified examples, although
+the presented SPL technique can still be applied to any general
+geometry. To three dimensions it can for instance be generalized with
+the use of spherical Bessel functions and spherical harmonics. For
+even more general geometries the trade-off would however be that more
+of the calculations would have to be done numerically instead of
+analytically.  
 %The justification however for showing these examples is that they give a theoretically achievable maximum for any field, and thus gives some qualitative insight
 
 Appart from different geometries, it would also be desirable to compare the radiation inside the tumor to the head istead of compared to the total energy of the field.
@@ -629,11 +635,27 @@ The justification for using the regular eigenvector, instead of the generalized,
 
 Another overlooked detail is the fact that \figref{fig:both} only presents the values for $n=0$, but to find the real optimum one has to find the largest eigenvalue $\mu_n$ over all $n$. Indeed, when this was investigated numerically we found regions where $n>0$ had a larger energy fraction. However $\mu_0$ was in most cases the largest eigenvalue, and it does give a good representation of what the maximum energy fraction would be.
 
-Despite of not being directly applicable to hyperthermia treatment, these examples gives a theoretically achievable maximum for any field, and can be used for some qualitative insight to how the wave-nature limits the localization of a field. For instance \figref{fig:both} shows that one can focus almost all the energy of the field into a tumor of the same size as the shortest wavelength (highest frequency) if all the longer wavelengths (lower frequencies) are also used. If however the signal is limited to a narrow band of frequencies, not containing the lowest ones, the fraction of energy one can focus in the tumor quickly falls off. For focusing electric field intensity in a bounded region it is therefore prefered to use a wide band signal. But due to an effect of time-averaging this is not true for hyperthermia treatments which will be discussed in the following section.
+In spite of not being directly applicable to hyperthermia treatment, these examples gives a theoretically achievable maximum for any field, and can be used for some qualitative insight to how the wave-nature limits the localization of a field. For instance \figref{fig:both} shows that one can focus almost all the energy of the field into a tumor of the same size as the shortest wavelength (highest frequency) if all the longer wavelengths (lower frequencies) are also used. If however the signal is limited to a narrow band of frequencies, not containing the lowest ones, the fraction of energy one can focus in the tumor quickly falls off. For focusing electric field intensity in a bounded region it is therefore prefered to use a wide band signal. But due to an effect of time-averaging this is not true for hyperthermia treatments which will be discussed in the following section.
+
+\subsection{Further development and comparison to already 
+existing teatment planing methods}
+To further improve applicability to hyperhtermia treatment the SPL
+method could be extended to incorporate a wheight function in the
+head operator $I_\text{H}$. This wheight function could the take
+extra sentitive tissue into account by giving it a high weight, and
+thus setting a high price on intensity in that area. 
+
+The step after that would be to also incorporate the fact that tissue
+is a lossy material (electrically conducting), which this report have
+not taken into account. Mathematically a lossy material can not be
+described by simple Fourier transfoms. This is because now the
+position of the radiation source, which also becomes the origin of the
+decay in field strength, has to be accounted for. These sources could
+be put as discrete points around which 
 
 
 
-\subsection{Specific Absorption Rate compared to ntensity}
+\subsection{Specific Absorption Rate compared to intensity}
 \label{sec:SAR}
 \todo{Rubrik, inledning?}
 In hyperthermia treatment a good indicator for the temperature
