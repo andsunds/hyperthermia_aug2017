@@ -30,7 +30,7 @@ swedish,english %% Make sure to put the main language last!
 %\renewcommand{\thesection}{...}
 \swapcommands{\Lambda}{\varLambda}
 \swapcommands{\Omega}{\varOmega}
-\swapcommands{\Gamma}{\varGamma}
+%\swapcommands{k_{\max}}{\varGamma}
 \newcommand{\Lsq}[1]{\ensuremath{\mathcal{L}^2_{#1}}}
 \newcommand{\RT}{\ensuremath{R_{\text{T}}}}
 \newcommand{\RH}{\ensuremath{R_{\text{H}}}}
@@ -83,10 +83,10 @@ The current hyperthermia treatments mainly utilizes signals consisting of narrow
 However, there exists a number of uncertainty principels stating that a function cannot be highly localized in the space and frequency domains at the same time. This would suggest the use of a wide band of frequencies, in contrast to prior studies.
 
 This project aims to shed some light on this apparent inconsistency by taking a closer look at relevant uncertainty principles and applying them to a simplified case of scalar fields satisfying the wave equation in two dimensions.
-First the Heisenberg inequality, a lower limit of the product of the field's variance in the two domains will be applied.
-Next, to get something more related to hyperthermia treatment a mathematical framework originally developed by Slepian et al., which speaks of how well a function limited in frequency can be localized in a bounded region of space. 
+First the Heisenberg inequality, a lower limit of the product of the field's variance in the two domains, will be applied.
+Next, to get something more related to hyperthermia treatment a mathematical framework originally developed by Slepian et al., which speaks of how well a function limited in frequency can be localized in a bounded region of space, will be applied.
 
-The main results show that it \emph{is} possible to obtain a localization of the E field with a single frequency but it is greatly enhanced with a WB signal. However as is discussed in Section~\ref{sec:SAR} the increased localization for WB signals does not apply to hyperthermia treatment. 
+The main results show that it \emph{is} possible to obtain a localization of the E field with a single frequency but it is greatly enhanced with a WB signal. This is due to the fact that in higher dimensions there is also a \emph{directional} freedom involved. However as is discussed in Section~\ref{sec:SAR} the increased localization for WB signals does not apply to hyperthermia treatment. 
 
 %Finally the results will be discussed from a hyperthermia treatment point of view and we will discuss some of the limitations as well as possible extensions of the theory.
 
@@ -102,7 +102,7 @@ In this space we try to focus the distribution to a simple body, a disc since we
 
 %We will also limit our attention to scalar fields, real E fields are in fact vectors with certain limitations to its directions which would produce slightly tighter bounds then what we achieved but this was unfortunately beyond the scope of this project.
 
-Finally, for a real hyperthermia treatment it is not the intensity of the E field that is of concern but rather its mean-value in time that is of interest. This has significant implications for the frequency dependence of the effectiveness of the treatment, and will be discussed at some length in Section~\ref{sec:SAR}. However, the main part of this work is concerned with the E field itself and not its time mean.
+Finally, for a real hyperthermia treatment it is not the intensity of the E field that is of concern but rather its mean-value in time that is of interest. This has significant implications for the frequency dependence of the effectiveness of the treatment, and will be discussed at some length in Section~\ref{sec:SAR}. However, the main part of this work is concerned with the intensity of the E field itself and not its time mean.
 
 
 \subsection{Theory}
@@ -111,7 +111,7 @@ For each frequency $\omega$ the electric field will have a harmonic timedependen
   \label{eq:phasor}
 \vb*E(\vb*x,t)=\Re\qty[\vb*E(\vb*x)\ee^{-\ii\omega t}]%\cos(\omega t).
 \end{equation}
-In a loss-less and source-less homogeneous media the Maxwell equations reduce to
+In a loss-less and source-less homogeneous media the Maxwell equations then reduce to
 \begin{equation}
 \begin{cases}
 \laplacian  \vb*E + k^2\vb*E=0,\\
@@ -129,26 +129,27 @@ To simplify matters however, we will limit the scope of this project to scalar f
 \subsubsection{Plane wave decomposition}
 One solution to the Helmoholtz equation \eqref{eq:Helmholtz} are the plane waves
 \begin{equation}\label{eq:plane-wave}
-E(\vb*x)=A \ee^{\ii\vb*k \cdot \vb*x},
+E(\vb*x)=\tilde{E} \ee^{\ii\vb*k \cdot \vb*x},
 \end{equation}
-were the wavevector $\vb*k$ is any vector such that $\vb*k\vdot\vb*k=k^2$, and $A$ is a constant amplitude. 
+were the wavevector $\vb*k$ is any vector such that $\vb*k\vdot\vb*k=k^2$, and $\tilde{E}$ is a constant amplitude. 
 
-The next step is to allow more for more than one frequency. The solution for each frequency will be of the form \eqref{eq:plane-wave}, each with its own amplitude $A(\vb*k)$. These solutions can then be summed up over all frequencies (magnitude as well as directions of $\vb*k$) and the final $E$ field becomes\footnotemark{}
+The next step is to allow more for more than one frequency. The solution for each frequency will be of the form \eqref{eq:plane-wave}, each with its own amplitude $\tilde{E}(\vb*k)$. These solutions can then be summed up over all frequencies (magnitude as well as directions of $\vb*k$) and the final $E$ field becomes\footnotemark{}
 \begin{equation} \label{eq:FT-inv}
 E(\vb*x)= (2\pi)^{-D} \oldint_{\vb*k} \rd^Dk\,
-A(\vb*k) \ee^{\ii\vb*k\vdot\vb*x}.
+\tilde{E}(\vb*k) \ee^{\ii\vb*k\vdot\vb*x}.
 \end{equation}
 \footnotetext{The factor of $(2\pi)^{-D}$ is just for convenience in the comparison with the $D$ dimensional Fourier transform.}
 
 We can now identify \eqref{eq:FT-inv} as an inverse Fourier transform
-of $A(\vb*k)$, and thus $A(\vb*k)$ has to be the Fourier transform of
+of $\tilde{E}(\vb*k)$, and thus $\tilde{E}(\vb*k)$ has to be the Fourier transform of
 $E(\vb*x)$:
 \begin{equation}\label{eq:FT}
-A(\vb*k) = \oldint_{\vb*x} \rd^Dx\, E(\vb*x)\ee^{-\ii \vb*k\vdot\vb*x}.
+\tilde{E}(\vb*k) = \oldint_{\vb*x} \rd^Dx\, E(\vb*x)\ee^{-\ii \vb*k\vdot\vb*x}.
 \end{equation}
 
 
 \subsubsection{Polar wave decomposition in 2 dimensions}
+If the problem exhibits some kind of circular symmetry, then polar coordiantes often simplifies the math.
 The 2 dimensional Helmholtz equation \eqref{eq:Helmholtz} in polar cooridnats is
 \begin{equation}
 \label{eq:Helmholtz_polar}
@@ -220,7 +221,7 @@ are spread out from each other and still have $\Delta_{\vb*a}{f}$
 being large. 
 For hyperthermia treatment, this means that the variation measure at
 best gives a hint on what we want. It is possilbe to achieve a very
-strong and narrow radiation peak inside the tumour without violating
+strong and narrow radiation peak inside the tumor without violating
 the Heisenberg inequality, i.e. using NB signals, as long as a
 significant part of the radiation intensity is located outside of the 
 head.  
@@ -235,11 +236,10 @@ treatments.
 \label{sec:SPL-method}
 Another localization measure was used by SPL in
 \cite{PSWF-I_1961,PSWF-II_1961,PSWF-III_1962,PSWF-IV_1964,PSWF-V_1978}. 
-\todo{Maybe change?}
 In what follows we will show the broad strokes for developing this
 theory. In doing so we will prove the existance of a useful set of
 functions ${\psi_i}$ which span the room of frequency-limited
-functions.
+functions. \todo[]{Remove last line?}
 
 A square-integrable function $f$ of $D$ variables is said to be
 $\Omega$-limited if it can be represented as a Fourier integral over
@@ -255,7 +255,7 @@ The energy of a function $f$ in a region $S$ is defined as
 \begin{equation}\label{eq:AS}
 A_S=\oldint_S\rd^Dx\,\abs{f(\vb*x)}^2.
 \end{equation}
-Using Parseval's formula, the total engergy of the $\Omega$-limited
+Using Parseval's formula, the total energy of the $\Omega$-limited
 function $f$ can be written as 
 \begin{equation}\label{eq:Atot}
 A=\oldint_{R^D}\rd^Dx\, \abs{f(\vb*x)}^2 =
@@ -323,12 +323,9 @@ this $\mu_0$ for bandwidth limited function in two dimensions.
 
 \section{An example with bandwidth-limited fields in two dimensions}
 
-Generating an electric field with a signal with frequencies ranging from $\omega_{\min}$ to $\omega_{\max}$\footnotemark{} corresponds to only allowing nonzero amplitudes for $k$ between a corresponding
-$k_{\min}$ and $k_{\max}$ in the expressions for the $E$-field \eqref{eq:FT-inv} and \eqref{eq:polar_wave_general}.
+Generating an electric field with a signal with frequencies ranging from $\omega_{\min}$ to $\omega_{\max}$\footnotemark{} corresponds to only allowing nonzero amplitudes for $k$ between $k_{\min}=\omega_{\min}/v$ and $k_{\max}=\omega_{\max}/v$ in the expressions for the $E$-field \eqref{eq:FT-inv} and \eqref{eq:polar_wave_general}.
 This implies that the plane wave representation (or Fourier transform) of the field only
 has values on a spherical shell of inner radius of $k_{\min}$ and outer radius $k_{\max}$.
-We denote $k_{\max}$ by $\Gamma$ and $k_{\min}$ as a fraction of this, $k_{\min}=q\Gamma$, with
-$q \in [0,1)$ to simplify the calculations.
   \footnotetext{We call such a field bandwidth-limited.}
 
 For the SPL method we wish to limit the field in space to a region $S$. We will study fields in two dimensions and
@@ -341,11 +338,14 @@ The methodology used here is a direct translation of the ones used in
 \cite{PSWF-I_1961} and \cite{PSWF-IV_1964} to $S$ and $\Omega$. This
 section will be somewhat short and superficial; this is due to the
 fact that the next method will be much more efficient
-numerically. Althogh there are some useful tools which will be
-developed here.
+numerically. Still some useful tools will be developed
+here.
+
+%Althogh there are some useful tools which will be
+%developed here.
 
 
-From the definition of the kernel $K_s$ in equation \eqref{eq:kernel}, we get 
+From the definition of the kernel $K_S$ in equation \eqref{eq:kernel}, we get 
 \begin{equation}
 K_S(\vb*k-\vb*k') = (2\pi)^{-2}
 \oldint_S \rd^2r \ee^{\ii\vb*r\vdot(\vb*k-\vb*k')}.
@@ -396,7 +396,7 @@ summation and integration, yields
 \begin{equation}
 \mu\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
 = \sum_{n=-\infty}^\infty \ee^{\ii n\theta} \sum_{m=-\infty}^\infty 
-\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_m(k')
+\int_{qk_{\max}}^{k_{\max}}\rd{k'}\,k' a_n(k, k') b_m(k')
 \int_{0}^{2\pi}\rd\theta'\,
 \ee^{\ii (m-n)\theta'}.
 \end{equation}
@@ -405,31 +405,31 @@ then the integral is just $2\pi$. We now get
 \begin{equation}
 \mu\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
 = 2\pi\sum_{n=-\infty}^\infty \ee^{\ii n\theta} 
-\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_n(k').
+\int_{qk_{\max}}^{k_{\max}}\rd{k'}\,k' a_n(k, k') b_n(k').
 \end{equation}
 By the uniqueness of Fourier series expansions, for all non-zero $b_n$
 we finally obtain a one dimensional eigenvalue equation
 \begin{equation}
 \label{eq:eigen_fourier_coef}
-\mu_n b_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,k' a_n(k, k') b_n(k'),
+\mu_n b_n(k) = 2\pi\int_{qk_{\max}}^{k_{\max}}\rd{k'}\,k' a_n(k, k') b_n(k'),
 \end{equation}
 where $\mu$ has been denoted by $\mu_n$ since each $b_n(k)$
 will have a different eigenvalue satisfying
 \eqref{eq:eigen_fourier_coef}.  
 
-There is one last thing we can do to make
+To make
 \eqref{eq:eigen_fourier_coef} more suitable for numerical solution,
-and that is to symmetrisize the kernel $k'a_n(k, k')$. To do that we
+we wish to symmetrisize the kernel $k'a_n(k, k')$. To do that we
 make the substitution $b_n(k)=\phi_n(k)/\sqrt{k}$, which yields
 \begin{equation}\label{eq:eig-n}
-\mu_n \phi_n(k) = 2\pi\int_{q\Gamma}^\Gamma\rd{k'}\,
+\mu_n \phi_n(k) = 2\pi\int_{qk_{\max}}^{k_{\max}}\rd{k'}\,
 \sqrt{kk'}a_n(k, k') \phi_n(k').
 \end{equation}
 This makes the kernel $\sqrt{kk'}b_n(k, k')$ symmetric in $k$ and
-$k'$, since $b_n(k, k')=b_n(k', k)$ was already symmetric. Besides
+$k'$, since $b_n(k, k')=b_n(k', k)$ is already symmetric. Besides
 making the numerical eigenvalue calculation more efficient, this also
 has some nice mathematical implications, for instance $\phi_n$
-constitutes an orthogonal base on $[q\Gamma, \Gamma]$.
+constitutes an orthogonal base on $[qk_{\max}, k_{\max}]$.
 
 However, the problem with this method is that the Fourier coefficients
 of the kernel, $b_n(k, k')$, cannot be calculated analytically by
@@ -450,8 +450,8 @@ that for circularly symmetric geometries in 2D, polar decomposition
 using Bessel function is more natural. 
 This generalization will here be illustrated through the example using
 $S$ and $\Omega$ as defined above, and the goal should be to
-circumvent the problem of evaluating \eqref{eq:KS-FS-coef} from the
-previous section.
+circumvent the problem of numerically evaluating the integral in 
+\eqref{eq:KS-FS-coef}.
 
 To calculate the energy of the field $E$ in the disk $S$, we
 substitute \eqref{eq:polar_wave_general} into \eqref{eq:AS}: 
@@ -459,10 +459,10 @@ substitute \eqref{eq:polar_wave_general} into \eqref{eq:AS}:
 \begin{aligned}
 A_S= \int_S \rd^2x\, \abs{E}^2 = 
 \int_0^{R_S} r\rd{r} \int_0^{2\pi} \rd\theta \,&
-\int_{q\Gamma}^\Gamma \rd{k}\!\!
+\int_{qk_{\max}}^{k_{\max}} \rd{k}\!\!
 \sum_{n= -\infty}^{\infty}\!\! kb_n(k) J_n(kr)\ee^{\ii n \theta}\\
 &\times
-\int_{q\Gamma}^\Gamma \rd{k'}\!\!
+\int_{qk_{\max}}^{k_{\max}} \rd{k'}\!\!
 \sum_{m= -\infty}^{\infty}\!\! k'b_m^*(k') J_n(k'r)\ee^{-\ii m
   \theta}.
 \end{aligned}
@@ -477,7 +477,7 @@ K_S^{(n)}(k, k') = \int_{0}^{R_s} \rd{r}\, r J_n(kr) J_n(k'r),
 the energy in $S$ can be written as
 \begin{equation}\label{eq:AS-bessel}
 A_S =2\pi \sum_{n=-\infty}^{\infty} 
-\int_{q\Gamma}^\Gamma \rd{k} \int_{q\Gamma}^\Gamma \rd{k'}\,  
+\int_{qk_{\max}}^{k_{\max}} \rd{k} \int_{qk_{\max}}^{k_{\max}} \rd{k'}\,  
 kk'\, b_n(k)b_n^*(k') K_S^{(n)}(k, k')
 \end{equation}
 
@@ -491,10 +491,10 @@ This implies that the total energy
 \begin{equation}\label{eq:A-bessel}
 \begin{aligned}
 A &=2\pi \sum_{n=-\infty}^{\infty} 
-\int_{q\Gamma}^\Gamma \rd{k} \int_{q\Gamma}^\Gamma \rd{k'}\,  
+\int_{qk_{\max}}^{k_{\max}} \rd{k} \int_{qk_{\max}}^{k_{\max}} \rd{k'}\,  
 kk'\, b_n(k)b_n^*(k') \frac{\delta(k-k')}{k'} \\
 &=2\pi \sum_{n=-\infty}^{\infty} 
-\int_{q\Gamma}^\Gamma \rd{k} \, k\, b_n(k)b_n^*(k).
+\int_{qk_{\max}}^{k_{\max}} \rd{k} \, k\, b_n(k)b_n^*(k).
 \end{aligned}
 \end{equation}
 
@@ -502,14 +502,14 @@ With \eqref{eq:AS-bessel} and \eqref{eq:A-bessel}, the energy fraction
 can be written as
 \begin{equation}\label{eq:E-frac-bessel}
 \frac{A_S}{A}
-=\frac{\displaystyle{\sum_{m}} \int_{q\Gamma}^\Gamma \rd{k} \int_{q\Gamma}^\Gamma \rd{k'}\,  
+=\frac{\displaystyle{\sum_{m}} \int_{qk_{\max}}^{k_{\max}} \rd{k} \int_{qk_{\max}}^{k_{\max}} \rd{k'}\,  
 kk'\, b_m(k)b_m^*(k') K_S^{(m)}(k, k')}
-{\displaystyle{\sum_{n}} \int_{q\Gamma}^\Gamma \rd{k} \, k\, b_n(k)b_n^*(k)}.
+{\displaystyle{\sum_{n}} \int_{qk_{\max}}^{k_{\max}} \rd{k} \, k\, b_n(k)b_n^*(k)}.
 \end{equation}
 By similar arguments as in Section~\ref{sec:SPL-method}, the maximum
 of this fraction is given as the largest eigenvalue to
 \begin{equation}
-\mu_nb_n(k) = \int_{q\Gamma}^{\Gamma}\rd{k}\,k K_S^{(n)}(k, k')\,b_n(k').
+\mu_nb_n(k) = \int_{qk_{\max}}^{{k_{\max}}}\rd{k}\,k K_S^{(n)}(k, k')\,b_n(k').
 \end{equation}
 Note that the equation above is different for each $n$, and the
 maximum is to be taken over all $n$.
@@ -517,10 +517,10 @@ maximum is to be taken over all $n$.
 Analagously to the case in the previons section, theis eigenvalue
 equation can be symmetrisized to
 \begin{equation}\label{eq:eig-n-bessel}
-\mu_n\phi_n(k) = \int_{q\Gamma}^{\Gamma}\rd{k}\,
+\mu_n\phi_n(k) = \int_{qk_{\max}}^{{k_{\max}}}\rd{k}\,
 \sqrt{kk'} K_S^{(n)}(k, k')\,\phi_n(k').
 \end{equation}
-This looks suspiciously similar to \eqref{eq:eig-n} from the previous section, and oin fact since both of these methods concern the same problem, \eqref{eq:eig-n-bessel} and \eqref{eq:eig-n} \emph{are} the same equations, but now we have an analytical expression for $K_S^{(n)}(k, k')$ (see below). The reason for this equivalence can easily be seen if one writes down the 2D Fourier transform, using polar coordinate, of a Fourier series. 
+This looks suspiciously similar to \eqref{eq:eig-n} from the previous section. And in fact, since both of these methods concern the same problem, \eqref{eq:eig-n-bessel} and \eqref{eq:eig-n} \emph{are} the same equations. Now however, we have an analytical expression for $K_S^{(n)}(k, k')$ (see below). The reason for this equivalence can easily be seen if one writes down the 2D Fourier transform, using polar coordinate, of a Fourier series. 
 
 The advantage of this method is that this time, the kernel
 \eqref{eq:KS-bessel} can be calculated analytically
@@ -547,8 +547,8 @@ and using similar arguments as in the previous section one arrives to the expres
 \begin{equation}
 A_S=2\pi\sum_n \abs{a_n}^2\int_0^{R_S}\rd r \, r (J_n(k_ir))^2,
 \end{equation}
-where $k_i=\frac{\omega_i}{v}$ as usual.
-The integral is recognized as the one defining the kernel $K_S$ for ($k=k'$) and from equation \eqref{eq:kernel_expr} we obtain
+where $k_i={\omega_i}/{v}$ as usual.
+The integral is recognized as the one defining the kernel $K_S$, for $k=k'$, and from equation \eqref{eq:kernel_expr} we obtain
 \begin{equation}\label{eq:energy_single}
 A_S=2\pi \sum_n \abs{a_n}^2\frac{R_S^2}{2}\qty[ \qty(J_{n}(R_Sk_i))^2
 -J_{n-1}(R_sk_i)J_{n+1}(R_sk_i)].
@@ -557,21 +557,24 @@ A_S=2\pi \sum_n \abs{a_n}^2\frac{R_S^2}{2}\qty[ \qty(J_{n}(R_Sk_i))^2
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
-In this section the localization measures and limits described in section \ref{sec:measures}
-have been applied to scalar fields. These fields have been built as a sum of solutions the Helmholtz
-equation for different $k$:s in an interval $[k_{\min},\,k_{\max}]$ and are to be seen as representatives
-of real electric fields in a lossless media coming from a bandwidth-limited signal.
+In this section the localization measures and limits described in 
+section \ref{sec:measures} have been applied to scalar fields. These 
+fields have been built as a sum of solutions the Helmholtz equation for 
+different $k$:s in the interval $[k_{\min},\,k_{\max}]$ and are to be 
+seen as representatives of real electric fields in a lossless media 
+coming from a bandwidth-limited signal.
 
 
 \subsection{Heisenberg's inequality for bandwidth-limited functions}
 A bandwidth-limited field in three dimensions will have a Fourier transform that is located on a spherical
 shell. Such a distribution has a maximal variance if all of it lies on the outermost layer. The variance
-in the frequencyroom is then given by $\Delta \tf=k_{\max}^2$. Heisenberg's inequality \eqref{eq:heisenberg}
+in the frequencyroom is then given by $\Delta \tf=(k_{\max})^2$. Heisenberg's inequality \eqref{eq:heisenberg}
 now yields
 \begin{equation}
-\Delta f \geq \frac{9}{4k_{\max}^2}=\frac{9\lambda_{\min}^2}{16\pi^2}.
+\Delta f \geq \frac{9}{4(k_{\max})^2}=\frac{9\lambda_{\min}^2}{16\pi^2}.
 \end{equation}
-Thus the lowest variation of is only dependent on the shortest wavelength $\lambda_{\min}$ and not on the actual bandwidth.
+Thus the lowest spacial variation of the field is only dependent on the shortest wavelength $\lambda_{\min}$
+and not on the actual bandwidth, since in that solution the longer wavelengths will not be used at all.
 
 \subsection{Energy of bandwidth-limited functions in a bounded region}
 \begin{figure}\centering
@@ -583,7 +586,7 @@ Thus the lowest variation of is only dependent on the shortest wavelength $\lamb
   compared to a ``head'' region (dashed line). The fractions are plotted as
   a function of tumor size, $\RT$, measured in shortest wavelengths,
   $\lambda_{\min}$. The different values of $q\in[0, 1]$ corresponds to 
-  the width of the frequency band, where $\lambda_{\min}=2\pi/\Gamma$ and
+  the width of the frequency band, where $\lambda_{\min}=2\pi/k_{\max}$ and
   $\lambda_{\max}=\lambda_{\min}/q$, i.e. a larger $q$
   means a narrower band. The head and tumor regions used were concentrical discs;
   where the radius of the head region was $10\RT$. }
@@ -591,25 +594,22 @@ Thus the lowest variation of is only dependent on the shortest wavelength $\lamb
 \end{figure}
 
 In \figref{fig:both} the eigenvalues of \eqref{eq:eig-n-bessel}, with $n=0$, are shown 
-for different values of the ratio between the tumour size and the shortest wavelength, $\RT/\lambda_{\min}=\RT\Gamma/(2\pi)$. For $q=1$ the analytical solution \eqref{eq:energy_single} was used while for the other $q$:s the eigenvalues where numerically calculated with the method in Appendix~\ref{apx:num}.
-This corresponds to the theoretical maximum of the energy focused in a circularly tumor for isotropic (angularly independent) fields in twodimensions, limited to wavelengths between $\lambda_{\min}$ and $\lambda_{\max}$.
-The reason we choose to plot for isotropic fields ($n=0$) is that this corresponded to the largest eigenvalue for most values of $\RT\Gamma$, especially the lower ones.
-The different curves correspond to different bandwidth with $q=\lambda_{\min}/\lambda_{\max}$. The solid curves represent the fraction of energy in the tumor region to the whole space ($A_T/A$) while the dashed curves the fraction of energy in the tumor to a ``head'' region ($A_T/A_H$), a ten times larger concentrical disc. These dashed lines do not represent the maximum fraction in the tumor compared to the head, instead they correspond to the functions that maximized $A_T/A$ but this time ``normalized''  to the energy in the head.
+for different values of the ratio between the tumor size and the shortest wavelength, $\RT/\lambda_{\min}=\RT{k_{\max}}/(2\pi)$. For $q=1$ the analytical solution \eqref{eq:energy_single} was used while for the other $q$:s the eigenvalues where numerically calculated with the method in Appendix~\ref{apx:num}.
+This corresponds to the theoretical maximum of the energy focused in a disc-shaped tumor for isotropic (angularly independent) fields in two dimensions, limited to wavelengths between $\lambda_{\min}$ and $\lambda_{\max}$.
+The reason we chose to plot for isotropic fields ($n=0$) is that this corresponded to the largest eigenvalue for most values of $\RT k_{\max}$, especially the lower ones.
+The different curves correspond to different bandwidth with $q=\lambda_{\min}/\lambda_{\max}$. The solid curves represent the fraction of energy in the tumor region to the whole space ($A_T/A$) while the dashed curves represent the fraction of energy in the tumor to a ``head'' region ($A_T/A_H$), a ten times larger concentric disc. These dashed lines do not represent the maximum fraction in the tumor compared to the head, instead they correspond to the functions that maximized $A_T/A$ but this time ``normalized''  to the energy in the head.
 
-For small q-values ($0$, $0,1$) the fractions approach 1 quite quickly and for $\RT$ being half the size of the shortest wavelength and larger it is possible to have almost all the energy located in the tumor. It is also apparant that also the bandwidth plays a significant role for the localization, for $q=0,5$ only about 50\,\% of the energy is focused in a tumor with $\RT=\lambda_{\min}/2$ and for $q=0,9$ less than 10\,\%.
-This also explains the relatively small differences between the dashed and solid curves; for small $q$-values focusing in the tumor places apparantly focuses almost all the energy in the head. Intuitively it makes sense that focusing in the head is achieved when focusing in the center of the head and from the figure it is apparant that it \emph{is} possible to focus almost all the energy in a head ten times the tumor for all but the largest $q$:s and smallest $R_T$:s. For large $q$ it does however make a difference by comparing with the head since these fractions does not converge as quickly to 1. 
+For small q-values ($0$ and $0.1$) the energy fractions approach 1 quite quickly and for $\RT/\lambda_{\min} \sim 0.5$ 
+and larger it is possible to have almost all the energy located in the tumor. It is also apparant that the bandwidth plays a significant role for the localization, for $q=0.5$ only about 50\,\% of the energy is focused in a tumor with $\RT/\lambda_{\min}=0.5$ and for $q=0.9$ less than 10\,\%.
+This explains the relatively small differences between the dashed and solid curves; for small $q$-values, focusing in the tumor apparantly focuses almost all the energy in the head. Intuitively it makes sense that focusing in the head is achieved when focusing in the center of the head and from the figure it is apparant that it \emph{is} possible to focus almost all the energy in a head ten times the tumor for all but the largest $q$-values and smallest tumor radii $\RT$. For large $q$ the comparison with the head does however make a difference since these fractions does not converge as quickly to 1. 
 
-The figure also clearly shows that, when comparing to the head, it \emph{is} possible to achieve some localization even for a single frequency. For $\RT \approx \lambda_{\min}/4$ one achieves a maximum of approximately 0,15. That is one can focus roughly 15\,\% of the energy in the head to 1\,\% of the area.
+The figure also clearly shows that, when comparing to the head, it \emph{is} possible to achieve some localization even for a single frequency. For $\RT \approx \lambda_{\min}/4$ one achieves a maximum of approximately 0.15. That is one can focus roughly 15\,\% of the energy in the head to 1\,\% of the \emph{area}.
 
 %the difference between the dashed and solid lines is very small which signifies that by trying to focus energy in he tumor we 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion and outlook}
-\todo[inline]{T. Köhler}
-
-%\subsection{The issue of using a wide or narrow frequency band}
-%Figure 1 clearly shows that we have faild to prove that NB is good...
 
 This report has only treated some very simplified examples, although
 the presented SPL technique can still be applied to any general
@@ -651,8 +651,26 @@ not taken into account. Mathematically a lossy material can not be
 described by simple Fourier transfoms. This is because now the
 position of the radiation source, which also becomes the origin of the
 decay in field strength, has to be accounted for. These sources could
-be put as discrete points around which 
+be put as discrete points around the head region. Mathematically the 
+lossy material can be described by using a complex wavenumber 
+$k\to\tilde{k}$, although we have not studied the mathematics 
+fully we believe that the mathematics developed here can be 
+translated to this complex wavenumber\footnotemark{}.
 
+\footnotetext{We also believ that one of the Hankel functions,
+$H_\nu^{(1, 2)}(r'\tilde{k})=J_\nu(r'\tilde{k})\pm\ii N_\nu(r'\tilde{k})$,
+centered around each source is the most effective representations 
+(in 2D) of the field eaming from the sources. This is because the 
+field then will exhibit exponential decay as it propagates from 
+its source.
+}
+
+By now, we also need to address the fact that the above description 
+would make the generalized method very similar to an already used
+method described by T. Köhler et al. \cite{Kohler2001}. Their method
+uses simulated fields from each antenna as a basis for the field inside
+the head, and then uses the generalized eigenvalue probem to optimize 
+signals from each antenna. 
 
 
 \subsection{Specific Absorption Rate compared to intensity}
@@ -779,7 +797,7 @@ beneficial to most numerical methods to find eigenvalues.
 
 
 \subsection{Verification of the numerical method}
-To verify that the method above is sound, we have here compared some calculated eigenvalues for different values of $R_S\Gamma$ to the ones given in \cite{PSWF-IV_1964}. In \tabref{tab:verification}, we see that the relative error (bold) is very small. It is therefore highly likely that the method is sound.
+To verify that the method above is sound, we have here compared some calculated eigenvalues for different values of $R_Sk_{\max}$ to the ones given in \cite{PSWF-IV_1964}. In \tabref{tab:verification}, we see that the relative error (bold) is very small. It is therefore highly likely that the method is sound.
 
 
 \begin{table}
@@ -799,7 +817,7 @@ To verify that the method above is sound, we have here compared some calculated 
 \multicolumn{2}{|c|}{Disc, numerical ($L=5000$)}&
 \multicolumn{2}{|c|}{Ring, numerical ($L=1000$)}
 \\ \hline
-$R_S\Gamma$\phantom{1.}&$\mu$
+$R_Sk_{\max}$\phantom{1.}&$\mu$
 &$\hat\mu$&$(\hat\mu-\mu)/\mu$
 &$\hat\mu$&$(\hat\mu-\mu)/\mu$
 \\ \hline
