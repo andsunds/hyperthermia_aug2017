@@ -47,7 +47,9 @@ swedish,english %% Make sure to put the main language last!
 
 %%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
 \begin{titlepage}
-\title{\tt Project lambda}
+\title{The concentration of bandwidth lmited waves
+in relation to hyperthermia treatment
+-- a mathematical framework}
 \author{Niklas Renström\footnote{\href{mailto:nikren@student.chalmers.se}{\tt nikren@student.chalmers.se}} 
 \and Andréas Sundström\footnote{\href{mailto:andsunds@student.chalmers.se}{\tt andsunds@student.chalmers.se}}
 }
@@ -92,8 +94,8 @@ to the directional freedom in two or more dimensions.
 
 \section{Introduction}
 
-The current hyperthermia treatments mainly utilizes signals consisting of narrow band (NB) signals since simulations and numerical studies have not shown an increase of efficacy by using a wide band (WB). 
-However, there exists a number of uncertainty principels stating that a function cannot be highly localized in the space and frequency domains at the same time. This would suggest the use of a wide band of frequencies, in contrast to prior studies.
+The current hyperthermia treatments mainly utilize narrow band (NB) signals since simulations and numerical studies have not shown an increase of efficacy by using a wide band (WB)\cite{Martinsson}. 
+However, there exists a number of uncertainty principles stating that a function cannot be highly localized in space and frequency at the same time. This would suggest the use of a wide band of frequencies, in contrast to prior studies.
 
 This project aims to shed some light on this apparent inconsistency by taking a closer look at relevant uncertainty principles and applying them to a simplified case of scalar fields satisfying the wave equation in two dimensions.
 First the Heisenberg inequality, a lower limit of the product of the field's variance in the two domains, will be applied.
@@ -109,29 +111,29 @@ The human body contains many different materials and therefore a real hypertherm
 
 Since this project aims to extract what limitations the \emph{wave nature} sets, we are not concerned with the actual wave propagation -- instead we ask the question, given a perfect way to create or propogate the E field, what limits does a narrow band of frequencies and the wave equation set on the optimal distribution in a bounded region?
 
-With this in mind the study is limited to a homogeneous material stretching through all space. The material is assumed loss-less. %, although the case of lossy materials and dampened E field's will be discussed briefly in Section~\ref{sec:SAR}.
-Further we limit ourselves to 2 dimensions since this suffices to capture the essential wave nature in higher dimensions whilst not overly complicating the mathematics. 
-In this space we try to focus the distribution to a simple body, a disc since we believe that most more complicated bodies would yield approximately the same results.
+With this in mind the study is limited to a homogeneous material stretching through all space. The material is assumed lossless. %, although the case of lossy materials and dampened E field's will be discussed briefly in Section~\ref{sec:SAR}.
+Further we limit ourselves to two dimensions since this suffices to capture the essential wave nature in higher dimensions whilst not overly complicating the mathematics. 
+In this space we try to focus the distribution to a simple body, a disc, since we believe that most more complicated bodies would yield approximately the same results.
 
 %We will also limit our attention to scalar fields, real E fields are in fact vectors with certain limitations to its directions which would produce slightly tighter bounds then what we achieved but this was unfortunately beyond the scope of this project.
 
-Finally, for a real hyperthermia treatment it is not the intensity of the E field that is of concern but rather its mean-value in time that is of interest. This has significant implications for the frequency dependence of the effectiveness of the treatment, and will be discussed at some length in Section~\ref{sec:SAR}. However, the main part of this work is concerned with the intensity of the E field itself and not its time mean.
+Finally, for a real hyperthermia treatment it is not the intensity of the E field that is of concern but rather its time-average. This has significant implications for the frequency dependence of the effectiveness of the treatment, and will be discussed at some length in Section~\ref{sec:SAR}. However, the main part of this work is concerned with the intensity of the E field itself and not its time-average.
 
 
 \subsection{Theory}
-For each frequency $\omega$ the electric field will have a harmonic timedependence,and can be represented by phasor notation,
+For each frequency $\omega$ the electric field will have a harmonic timedependence, and can be represented by phasor notation:
 \begin{equation}
   \label{eq:phasor}
-\vb*E(\vb*x,t)=\Re\qty[\vb*E(\vb*x)\ee^{-\ii\omega t}]%\cos(\omega t).
+\vb*E(\vb*x,t)=\Re\qty[\vb*E(\vb*x)\ee^{-\ii\omega t}].
 \end{equation}
-In a loss-less and source-less homogeneous media the Maxwell equations then reduce to
+In a lossless and sourceless homogeneous media the Maxwell equations then reduce to
 \begin{equation}
 \begin{cases}
 \laplacian  \vb*E + k^2\vb*E=0,\\
 \div\vb*E = 0,
 \end{cases}
 \end{equation} 
-where $k^2 = \omega^2/v^2$ with $v=\frac{1}{\sqrt{\mu \epsilon}}$ being the speed of propagation. 
+where $k^2 = \omega^2/v^2$, with $v=\frac{1}{\sqrt{\mu \epsilon}}$ being the speed of propagation. 
 
 To simplify matters however, we will limit the scope of this project to scalar fields only satisfying the Helmholtz equation
 \begin{equation}
@@ -161,9 +163,9 @@ $E(\vb*x)$:
 \end{equation}
 
 
-\subsubsection{Polar wave decomposition in 2 dimensions}
-If the problem exhibits some kind of circular symmetry, then polar coordiantes often simplifies the math.
-The 2 dimensional Helmholtz equation \eqref{eq:Helmholtz} in polar cooridnats is
+\subsubsection{Polar wave decomposition in two dimensions}
+If the problem exhibits some kind of circular symmetry, then polar coordinates often simplifies the math.
+The two dimensional Helmholtz equation \eqref{eq:Helmholtz} in polar coordinates is
 \begin{equation}
 \label{eq:Helmholtz_polar}
 \qty(\pdv[2]{r}+\frac{1}{r}\pdv{r}+\frac{1}{r^2}\pdv[2]{\theta})E+k^2E=0,
@@ -184,7 +186,7 @@ where in the last step $a_n(k)$ has been replaced with $k\,b_n(k)$ for later con
 
 
 
-\section{Localization measures and limits} \label{sec:measures}
+\section{Localization measures and uncertainty} \label{sec:measures}
 To start talking about focusing waves, one has to be able 
 to quantify how localized it is. This is mainly done through
 different measures on the energy distribution of the wave,
@@ -294,7 +296,7 @@ K_S(\vb*k-\vb*k')=(2\pi)^{-D}\oldint_S\rd^Dx\,
 \ee^{\ii\vb*x \cdot(\vb*k-\vb*k')},
 \end{equation}
 is called an integral \emph{kernel}.
-Define an integral operator $I_S$:
+Now define an integral operator $I_S$:
 \begin{equation} \label{eq:int_op}
 \qty[I_S g](\vb*k')=\oldint_\Omega\rd^Dk\, 
 K_S(\vb*k-\vb*k')g(\vb*k).
@@ -303,7 +305,7 @@ The fraction of energy that the $\Omega$-limited function $f$ can have
 in a region $S$ can then be written as 
 \begin{equation} \label{eq:energy_frac_final}
 \frac{A_S}{A}=
-\frac{\oldint_\Omega\rd^Dk\, \qty[I\tf](\vb*k)\tf^*(\vb*k)}
+\frac{\oldint_\Omega\rd^Dk\, \qty[I_S\tf](\vb*k)\tf^*(\vb*k)}
 {\oldint_\Omega \rd^Dk\, \abs{\tf(\vb*k)}^2}
 =\frac{\ip{I_S\tf}{\tf}}{\ip{\tf}},
 \end{equation}
@@ -314,34 +316,34 @@ where we have defined an inner product on the $\Omega$-space:
 
 
 It can be shown that the integral operator \eqref{eq:int_op} is 
-self-adjoint and compact. From the Spectral theorem it now follows
+self-adjoint and compact. From the Spectral theorem it therefore follows
 that the functions fullfilling the eigenvalue equation 
 \begin{equation}
   \label{eq:eigen}
 \qty[I_S\psi](\vb*k)=\oldint_\Omega \rd^Dk'\,K_S(\vb*k')\psi(\vb*k') 
 =\mu \psi(\vb*k)
 \end{equation}
-form an orthogonal base for the space $\Omega$. 
+form an orthogonal basis for the space $\Omega$. 
 It also follows that the maximum of equation
 \eqref{eq:energy_frac_final} is
 the largest eigenvalue $\mu_0$ of equation \eqref{eq:eigen}. In
-other word $\mu_0$ is an upper bound for the fraction of erergy
+other words $\mu_0$ is an upper bound for the fraction of energy
 in $S$ for an $\Omega$-limited function. 
 This upper bound will be dependent on the geometries of the areas
 $S$ and $\Omega$. The following section will be devoted to calculating
-this $\mu_0$ for bandwidth limited function in two dimensions. 
+this $\mu_0$ for bandwidth-limited functions in two dimensions. 
 
 
 
 \section{An example with bandwidth-limited fields in two dimensions}
 
-Generating an electric field with a signal with frequencies ranging from $\omega_{\min}$ to $\omega_{\max}$\footnotemark{} corresponds to only allowing nonzero amplitudes for $k$ between $k_{\min}=\omega_{\min}/v$ and $k_{\max}=\omega_{\max}/v$ in the expressions for the $E$-field \eqref{eq:FT-inv} and \eqref{eq:polar_wave_general}.
-This implies that the plane wave representation (or Fourier transform) of the field only
-has values on a spherical shell of inner radius of $k_{\min}$ and outer radius $k_{\max}$.
+Generating an electric field with frequencies ranging from $\omega_{\min}$ to $\omega_{\max}$\footnotemark{} corresponds to only allowing non-zero amplitudes for $k$ between $k_{\min}=\omega_{\min}/v$ and $k_{\max}=\omega_{\max}/v$ in the expressions for the $E$-field \eqref{eq:FT-inv} and \eqref{eq:polar_wave_general}.
+This implies that the plane wave representation (Fourier transform) of the field only
+has values on a circular ring of inner radius of $k_{\min}$ and outer radius $k_{\max}$; this region is denoted $\Omega$.
   \footnotetext{We call such a field bandwidth-limited.}
 
 For the SPL method we wish to limit the field in space to a region $S$. We will study fields in two dimensions and
-with the rotational symmetry of Helmholtz equation in mind we choose the simplest of all regions, a disk with radius $R_S$.
+with the rotational symmetry of the Helmholtz equation in mind we choose the simplest of all regions, a disc with radius $R_S$.
 
 
 \subsection{The SPL method using Fourier transforms}
@@ -350,7 +352,7 @@ The methodology used here is a direct translation of the ones used in
 \cite{PSWF-I_1961} and \cite{PSWF-IV_1964} to $S$ and $\Omega$. This
 section will be somewhat short and superficial; this is due to the
 fact that the next method will be much more efficient
-numerically. Still some useful tools will be developed
+numerically. Still, some useful tools will be developed
 here.
 
 %Althogh there are some useful tools which will be
@@ -381,7 +383,7 @@ $\Delta\theta=(\theta-\theta')$ is the angle between $\vb*k$ and
 $\vb*k'$.
 
 The numerical method described in Appendix~\ref{apx:num} can only be
-applied to 1 dimensional integrals.
+applied to one dimensional integrals.
 To reduce the eigenvalue equation \eqref{eq:eigen} to this form, first
 note that $K_S(\vb*k-\vb*k')$ is $2\pi$-periodic in $\Delta\theta$,
 and thus has a Fourier series expansion  
@@ -408,7 +410,7 @@ summation and integration, yields
 \begin{equation}
 \mu\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
 = \sum_{n=-\infty}^\infty \ee^{\ii n\theta} \sum_{m=-\infty}^\infty 
-\int_{qk_{\max}}^{k_{\max}}\rd{k'}\,k' a_n(k, k') b_m(k')
+\int_{k_{\min}}^{k_{\max}}\rd{k'}\,k' a_n(k, k') b_m(k')
 \int_{0}^{2\pi}\rd\theta'\,
 \ee^{\ii (m-n)\theta'}.
 \end{equation}
@@ -417,37 +419,37 @@ then the integral is just $2\pi$. We now get
 \begin{equation}
 \mu\sum_{l=-\infty}^\infty b_l(k)\ee^{\ii l\theta}
 = 2\pi\sum_{n=-\infty}^\infty \ee^{\ii n\theta} 
-\int_{qk_{\max}}^{k_{\max}}\rd{k'}\,k' a_n(k, k') b_n(k').
+\int_{k_{\min}}^{k_{\max}}\rd{k'}\,k' a_n(k, k') b_n(k').
 \end{equation}
 By the uniqueness of Fourier series expansions, for all non-zero $b_n$
 we finally obtain a one dimensional eigenvalue equation
 \begin{equation}
 \label{eq:eigen_fourier_coef}
-\mu_n b_n(k) = 2\pi\int_{qk_{\max}}^{k_{\max}}\rd{k'}\,k' a_n(k, k') b_n(k'),
+\mu_n b_n(k) = 2\pi\int_{k_{\min}}^{k_{\max}}\rd{k'}\,k' a_n(k, k') b_n(k'),
 \end{equation}
 where $\mu$ has been denoted by $\mu_n$ since each $b_n(k)$
 will have a different eigenvalue satisfying
 \eqref{eq:eigen_fourier_coef}.  
 
 To make \eqref{eq:eigen_fourier_coef} more suitable for numerical
-solution, we wish to symmetrisize the kernel $k'a_n(k, k')$. To do
+solution, we wish to symmetrize the kernel $k'a_n(k, k')$. To do
 that we make the substitution $b_n(k)=\phi_n(k)/\sqrt{k}$, which
 yields 
 \begin{equation}\label{eq:eig-n}
-\mu_n \phi_n(k) = 2\pi\int_{qk_{\max}}^{k_{\max}}\rd{k'}\,
+\mu_n \phi_n(k) = 2\pi\int_{k_{\min}}^{k_{\max}}\rd{k'}\,
 \sqrt{kk'}a_n(k, k') \phi_n(k').
 \end{equation}
-This makes the kernel $\sqrt{kk'}b_n(k, k')$ symmetric in $k$ and
-$k'$, since $b_n(k, k')=b_n(k', k)$ is already symmetric. Besides
+This makes the kernel $\sqrt{kk'}a_n(k, k')$ symmetric in $k$ and
+$k'$, since $a_n(k, k')=a_n(k', k)$ is already symmetric. Besides
 making the numerical eigenvalue calculation more efficient, this also
 has some nice mathematical implications, for instance $\phi_n$
-constitutes an orthogonal base on $[qk_{\max}, k_{\max}]$.
+constitutes an orthogonal base on $[k_{\min}, k_{\max}]$.
 
 However, the problem with this method is that the Fourier coefficients
-of the kernel, $b_n(k, k')$, cannot be calculated analytically by
-direct integration using standard methods. This results in very costly
-numerical calculations since $b_n(k, k')$ has to be calculated
-numerically for each pair of $k$ and $k'$, on top of then calculationg
+of the kernel, $a_n(k, k')$, cannot be calculated analytically by
+direct integration using standard methods. This results in costly
+numerical calculations since $a_n(k, k')$ has to be integrated
+numerically for each pair of $k$ and $k'$, on top of then calculating
 the eigenvalues. 
 This problem stems from trying to adobt a plane wave decomposition to
 polar coordinates. By starting from the polar wave decomposition one
@@ -455,7 +457,7 @@ can avoid these difficulties, which is what we will do in the
 following section. 
 
 
-\subsection{Expanding the SPL method using Bessel decomposition}
+\subsection{Reformulating the SPL method using Bessel decomposition}
 The SPL method can be expanded to also cover polar decomposition
 \eqref{eq:polar_wave_general}. The main idea of this generalization is
 that for circularly symmetric geometries in 2D, polar decomposition
@@ -471,10 +473,10 @@ substitute \eqref{eq:polar_wave_general} into \eqref{eq:AS}:
 \begin{aligned}
 A_S= \oldint_S \rd^2x\, \abs{E}^2 = 
 \int_0^{R_S} r\rd{r} \int_0^{2\pi} \rd\theta \,&
-\int_{qk_{\max}}^{k_{\max}} \rd{k}\!\!
+\int_{k_{\min}}^{k_{\max}} \rd{k}\!\!
 \sum_{n= -\infty}^{\infty}\!\! kb_n(k) J_n(kr)\ee^{\ii n \theta}\\
 &\times
-\int_{qk_{\max}}^{k_{\max}} \rd{k'}\!\!
+\int_{k_{\min}}^{k_{\max}} \rd{k'}\!\!
 \sum_{m= -\infty}^{\infty}\!\! k'b_m^*(k') J_m(k'r)\ee^{-\ii m
   \theta}.
 \end{aligned}
@@ -489,13 +491,12 @@ K_S^{(n)}(k, k') = \int_{0}^{R_s} \rd{r}\, r J_n(kr) J_n(k'r),
 the energy in $S$ can be written as
 \begin{equation}\label{eq:AS-bessel}
 A_S =2\pi \sum_{n=-\infty}^{\infty} 
-\int_{qk_{\max}}^{k_{\max}} \rd{k} \int_{qk_{\max}}^{k_{\max}} \rd{k'}\,  
+\int_{k_{\min}}^{k_{\max}} \rd{k} \int_{k_{\min}}^{k_{\max}} \rd{k'}\,  
 kk'\, b_n(k)b_n^*(k') K_S^{(n)}(k, k')
 \end{equation}
 
-If we let the radius $R_S$ of the disk $S$ tend to infinity, and by
-using the asymptotic behavior of Bessel functions, the the infinte
-kernel can be witten as
+If we let the radius $R_S$ of the disk $S$ tend to infinity, by
+using the asymptotic behavior of Bessel functions, the kernel becomes
 \begin{equation}
 K_\infty^{(n)}(k,k') = \frac{\delta(k-k')}{k'}.
 \end{equation}
@@ -503,10 +504,10 @@ This implies that the total energy
 \begin{equation}\label{eq:A-bessel}
 \begin{aligned}
 A &=2\pi \sum_{n=-\infty}^{\infty} 
-\int_{qk_{\max}}^{k_{\max}} \rd{k} \int_{qk_{\max}}^{k_{\max}} \rd{k'}\,  
+\int_{k_{\min}}^{k_{\max}} \rd{k} \int_{k_{\min}}^{k_{\max}} \rd{k'}\,  
 kk'\, b_n(k)b_n^*(k') \frac{\delta(k-k')}{k'} \\
 &=2\pi \sum_{n=-\infty}^{\infty} 
-\int_{qk_{\max}}^{k_{\max}} \rd{k} \, k\, b_n(k)b_n^*(k).
+\int_{k_{\min}}^{k_{\max}} \rd{k} \, k\, b_n(k)b_n^*(k).
 \end{aligned}
 \end{equation}
 
@@ -514,27 +515,27 @@ With \eqref{eq:AS-bessel} and \eqref{eq:A-bessel}, the energy fraction
 can be written as
 \begin{equation}\label{eq:E-frac-bessel}
 \frac{A_S}{A}
-=\frac{\displaystyle{\sum_{m}} \int_{qk_{\max}}^{k_{\max}} \rd{k} \int_{qk_{\max}}^{k_{\max}} \rd{k'}\,  
+=\frac{\displaystyle{\sum_{m}} \int_{k_{\min}}^{k_{\max}} \rd{k} \int_{k_{\min}}^{k_{\max}} \rd{k'}\,  
 kk'\, b_m(k)b_m^*(k') K_S^{(m)}(k, k')}
-{\displaystyle{\sum_{n}} \int_{qk_{\max}}^{k_{\max}} \rd{k} \, k\, b_n(k)b_n^*(k)}.
+{\displaystyle{\sum_{n}} \int_{k_{\min}}^{k_{\max}} \rd{k} \, k\, b_n(k)b_n^*(k)}.
 \end{equation}
 By similar arguments as in Section~\ref{sec:SPL-method}, the maximum
 of this fraction is given as the largest eigenvalue to
 \begin{equation}
-\mu_nb_n(k) = \int_{qk_{\max}}^{{k_{\max}}}\rd{k}\,k K_S^{(n)}(k, k')\,b_n(k').
+\mu_nb_n(k) = \int_{k_{\min}}^{{k_{\max}}}\rd{k}\,k K_S^{(n)}(k, k')\,b_n(k').
 \end{equation}
 Note that the equation above is different for each $n$, and the
 maximum is to be taken over all $n$.
 
 Analagously to the case in the previons section, theis eigenvalue
-equation can be symmetrisized to
+equation can be symmetrized to
 \begin{equation}\label{eq:eig-n-bessel}
-\mu_n\phi_n(k) = \int_{qk_{\max}}^{{k_{\max}}}\rd{k}\,
+\mu_n\phi_n(k) = \int_{k_{\min}}^{{k_{\max}}}\rd{k}\,
 \sqrt{kk'} K_S^{(n)}(k, k')\,\phi_n(k').
 \end{equation}
 This looks suspiciously similar to \eqref{eq:eig-n} from the previous section. And in fact, since both of these methods concern the same problem, \eqref{eq:eig-n-bessel} and \eqref{eq:eig-n} \emph{are} the same equations. Now however, we have an analytical expression for $K_S^{(n)}(k, k')$ (see below). The reason for this equivalence can easily be seen if one writes down the 2D Fourier transform, using polar coordinate, of a Fourier series. 
 
-The advantage of this method is that this time, the kernel
+The advantage of this method is that the kernel
 \eqref{eq:KS-bessel} can be calculated analytically
 \cite[formula 5.54]{Gradshteyn-Ryzhik}
 \begin{equation}\label{eq:kernel_expr}
@@ -554,7 +555,7 @@ faster than with the previous method.
 
 \subsection{Energy of a single frequency}
 It is also of interest to study how much energy a field limited to one frequency
-$\omega_i$ can maintain if it is limited to $S$. Starting from equation \eqref{eq:polar_wave}
+$\omega_i$ can contain in $S$. Starting from equation \eqref{eq:polar_wave}
 and using similar arguments as in the previous section one arrives to the expression
 \begin{equation}
 A_S=2\pi\sum_n \abs{a_n}^2\int_0^{R_S}\rd r \, r (J_n(k_ir))^2,
@@ -569,10 +570,10 @@ A_S=2\pi \sum_n \abs{a_n}^2\frac{R_S^2}{2}\qty[ \qty(J_{n}(R_Sk_i))^2
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
-In this section the localization measures and limits described in 
+In this section the localization measures and limitations described in 
 section \ref{sec:measures} have been applied to scalar fields. These 
-fields have been built as a sum of solutions the Helmholtz equation for 
-different $k$:s in the interval $[k_{\min},\,k_{\max}]$ and are to be 
+fields have been built as a sum of solutions to the Helmholtz equation for 
+different $k$'s in the interval $[k_{\min},\,k_{\max}]$ and are to be 
 seen as representatives of real electric fields in a lossless media 
 coming from a bandwidth-limited signal.
 
@@ -581,7 +582,7 @@ coming from a bandwidth-limited signal.
 \label{sec:Heisenberg_result}
 A bandwidth-limited field in three dimensions will have a Fourier transform that is located on a spherical
 shell. Such a distribution has a maximal variance if all of it lies on the outermost layer. The variance
-in the frequencyroom is then given by $\Delta \tf=(k_{\max})^2$. The Heisenberg inequality \eqref{eq:heisenberg}
+in the frequency domain is then given by $\Delta \tf=(k_{\max})^2$. The Heisenberg inequality \eqref{eq:heisenberg}
 now yields
 \begin{equation}
 \Delta f \geq \frac{9}{4(k_{\max})^2}=\frac{9\lambda_{\min}^2}{16\pi^2}.
@@ -589,15 +590,12 @@ now yields
 Thus the lowest spacial variation of the field is only dependent on the shortest wavelength $\lambda_{\min}$
 and not on the actual bandwidth, since in that solution the longer wavelengths will not be used at all.
 
-\subsection{Energy of bandwidth-limited functions in a bounded region}
+\subsection{Energy of bandwidth-limited fields in a bounded region}
 
 In \figref{fig:both} the eigenvalues of \eqref{eq:eig-n-bessel}, with $n=0$, are shown 
 for different values of the ratio between the tumor size and the
-shortest wavelength, $\RT/\lambda_{\min}=\RT{k_{\max}}/(2\pi)$. For
-$q=1$ the analytical solution \eqref{eq:energy_single} was used while
-for the other $q$:s the eigenvalues where numerically calculated with
-the method in Appendix~\ref{apx:num}. 
-This corresponds to the theoretical maximum of the energy focused in a
+shortest wavelength, $\RT/\lambda_{\min}=\RT{k_{\max}}/(2\pi)$. 
+These values correspond to the theoretical maximum of the energy focused in a
 disc-shaped tumor for isotropic (angularly independent) fields in two
 dimensions, limited to wavelengths between $\lambda_{\min}$ and
 $\lambda_{\max}$. 
@@ -626,7 +624,7 @@ time ``normalized''  to the energy in the head.
   measured in shortest wavelengths, $\lambda_{\min}$. The different
   values of $q\in[0, 1]$ corresponds to the width of the frequency
   band, where $\lambda_{\min}=2\pi/k_{\max}$ and
-  $\lambda_{\max}=\lambda_{\min}/q$, i.e. a larger $q$ means a
+  $q=\lambda_{\min}/\lambda_{\max}$, i.e. a larger $q$ means a
   narrower band. The head and tumor regions used were concentrical
   discs; where the radius of the head region was $10\RT$. } 
 \label{fig:both}
@@ -637,18 +635,18 @@ For small q-values ($0$ and $0.1$) the energy fractions approach 1
 quite quickly and for $\RT/\lambda_{\min} \sim 0.5$ and larger it is
 possible to have almost all the energy located in the tumor. It is
 also apparant that the bandwidth plays a significant role for the
-localization, for $q=0.5$ only about 50\,\% of the energy is focused
+localization; for $q=0.5$ only about 50\,\% of the energy is focused
 in a tumor with $\RT/\lambda_{\min}=0.5$ and for $q=0.9$ less than
 10\,\%. 
 This explains the relatively small differences between the dashed and
 solid curves; for small $q$-values, focusing in the tumor apparantly
-focuses almost all the energy in the head. Intuitively it makes sense
+concentrates almost all the energy in the head. Intuitively it makes sense
 that focusing in the head is achieved when focusing in the center of
 the head and from the figure it is apparant that it \emph{is} possible
 to focus almost all the energy in a head ten times the tumor for all
-but the largest $q$-values and smallest tumor radii $\RT$. For large
-$q$ the comparison with the head does however make a difference since
-these fractions does not converge as quickly to 1.  
+but the largest $q$-values and smallest tumor radii $\RT$. For larger
+$q$-values the comparison with the head does however make a difference since
+these fractions do not converge as quickly to 1.  
 
 The figure also clearly shows that, when comparing to the head, it
 \emph{is} possible to achieve some localization even for a single
@@ -662,7 +660,7 @@ energy in the head into only 1\,\% of the \emph{area}.
 \section{Discussion and outlook}
 
 The results of this report give a theoretical limit to the
-concentration, in two dimensions, of a bandwidth limited field.
+concentration, in two dimensions, of a bandwidth-limited field.
 As is shown in Section \ref{sec:Heisenberg_result} the Heisenberg 
 inequality only concerns the highest frequency in the band and not
 the bandwidth. This is due to the fact that in two or more dimensions
@@ -670,13 +668,13 @@ there is also a \emph{directional} freedom involved for the wave
 vector $\vb*k$. However as is noted in Section \ref{sec:Heisenberg_theory}
 the variance measure used in the Heisenberg inequality is not a 
 good measure for hyperthermia treatment and therefore the measure of
-Slepian et al. was used in this report.
+Slepian et al. was mainly studied in this report.
 
 Due to time constraints a scalar field was studied in this report.
 The actual electric field is a vector field which has to satisfy
 \emph{all} of Maxwell's equations, and not only the wave
-equation. That imposes the constraint that the field vector has to be
-perpendicular to its direction of propagation. This will exclude
+equation. This imposes the constraint that the field vector has to be
+perpendicular to its direction of propagation, which will exclude
 isotropic fields in three dimensions \cite{Jackson}.
 However, in the two dimensional case the electric field can be thuoght
 of as pointing in a third ($\vu{z}$) direction.
@@ -684,12 +682,11 @@ of as pointing in a third ($\vu{z}$) direction.
 A somewhat related detail is the fact that \figref{fig:both} only
 presents the energy fractions for $n=0$. To find the
 real optimum one has to find the largest eigenvalue $\mu_n$ over all
-$n$, i.e. non-isotropic fields. Indeed, when this was investigated
+$n$, i.e. also including non-isotropic fields. Indeed, when this was investigated
 numerically we found regions where $n>0$ had a larger energy
 fraction. However $\mu_0$ was in most cases the largest eigenvalue,
 and it does give a good representation of what the maximum 
 energy fraction could be. 
-
 
 In spite of not being directly applicable to actual electric fields in
 three dimensions,
@@ -702,11 +699,11 @@ the shortest wavelength. If however the signal is limited to a
 energy in the tumor quickly falls off. 
 For focusing electric field intensity in
 a bounded region it is therefore prefered to use a wide band
-signal. But due to an effect of time-averaging this is not true for
+signal. Due to an effect of time-averaging, this is however not true for
 hyperthermia treatments which will be discussed in the following
 section. 
 
-\subsection{Relation to hyperthermia -- Specific Absorption Rate}
+\subsection{Relation to hyperthermia tretment -- Specific Absorption Rate}
 \label{sec:SAR}
 In hyperthermia treatment a good indicator for the temperature
 increase is the Specific Absorption Rate (SAR): 
@@ -716,22 +713,21 @@ increase is the Specific Absorption Rate (SAR):
 \end{equation}
 where $\vb*J$ is the current density, $\vb*E$ is the
 electric field, $\rho$ is the mass density, and $\ev{\cdot}_t$ denotes
-time averaging. 
+time-averaging. 
 Due to Ohm's law this is simply a weighted version of the intensity
 $\abs{\vb*E}^2$.
 
 However, because of the time-averaging, interference between multiple
-frequencies vanish \cite{Martinsson}. Thus
+frequencies vanishes \cite{Martinsson}. Thus
 \begin{equation}
 \text{SAR}(\vb*x)=\sum_i\text{SAR}_{\omega_i}(\vb*x),
 \end{equation}
-\todo{Cite!}
-that is a sum over the contribution from each frequency.
+that is a sum of the contribution from each frequency.
 Due to this linearity, and since a finite energy will always be
 applied, it can be proven from the theory of convex optimization
 that a large family of of goal functions, convex ones, are optimized
-by using a single frequency only. In particular, this applies to any
-linear goalfunction such as the main goalfunction used in this paper 
+by using a single frequency only\cite{Boyd}. In particular, this applies to any
+linear goal function such as the main goal function used in this paper 
 \eqref{eq:energy_frac_final}. Therefore if it was applied to SAR it
 would be maximized by a single frequency.   
 
@@ -741,7 +737,7 @@ would be maximized by a single frequency.
 The results were for a rather simple special case and it would
 therefore be desirable to expand the domain of applicability for the
 SPL method. Some of the main points of improvement are to include other 
-geometries (also in higher dimensions), taking the healthy
+geometries, taking the healthy
 tissue into account, and allowing for lossy materials.
 
 \subsubsection{Optimization relative to healthy tissue}
@@ -750,17 +746,16 @@ incorporate a head region, of healthy tissue, the measure has to
 be changed to $\ip*{I_\text{T}\tf}{\tf}/\ip*{I_\text{H}\tf}{\tf}$, where 
 $I_\text{T}$ and $I_\text{H}$ are defined as in \eqref{eq:int_op} with
 $S$ replaced by the tumor and head regions respectively. 
-This new problem can be proven to be optimized by solving
+This new problem can be proven to be optimized by solving the
 generalized eigenvalue problem $I_\text{T}\psi'=\mu'I_\text{H}\psi'$.
 
 Conceptually this should be easily implemented in the numerical method
 in Appendix~\ref{apx:num}. However when we tried to solve the
 generalized eigenvalue problem the numerics turned out to be badly
-conditioned due to the matrices corresponding to $I_\text{H}$ being
-almost singular. Because of this, we instead choose to calculate
+conditioned due to the matrices, corresponding to $I_\text{H}$, being
+almost singular. Because of this, we instead chose to calculate
 $A_\text{T}/A_\text{H}$ for the regular eigenvector,
-$\mu\psi=I_\text{T}\psi$. 
-
+$I_\text{T}\psi=\mu\psi$. 
 
 For a head considerably larger than the tumor the
 regular eigenvalues are almost 1, as seen in \figref{fig:both}. This
@@ -779,27 +774,28 @@ deviation from the generalized eigenvalue.
 The SPL technique, as presented in Section~\ref{sec:measures}, is
 still valid for any general geometry, in any number of dimensions.
 The trade-off, for complicated geometries, would however be that more
-of the calculations have to be done numerically instead of analytically. 
+of the calculations would have to be done numerically instead of 
+analytically. 
 
 To further improve applicability to hyperhtermia treatment the SPL
 method could also be extended to incorporate a weight function in the
 head operator $I_\text{H}$. This weight function could take extra
-sentitive tissue into account by giving it a high weight, and thus
+sensitive tissue into account by giving it a high weight, and thus
 setting a high ``price'' on intensity in that area. 
 
 Another improvement would be to also incorporate the fact that tissue
 consists of lossy (electrically conducting) materials. 
-The field will decay exponentially when propagating, thus the
+The field will decay when propagating, thus the
 actual source of the field and its position has to be accounted
-for. Lossy material can therefore not be described by simple 
+for. Lossy material can therefore not be described by a simple 
 Fourier transfom, and the SPL method cannot be applied in its current
 form. 
 
-Mathematically the lossy material can be described by using a complex
+Mathematically the lossy material can be described by changing to a complex
 wavenumber $k\to\tilde{k}$. Although we have not studied the mathematics 
-fully, we believe that the key concepts of the SPL method can
-still be used with e.g. a basis of discrete sources, instead of a
-basis of plane waves like earlier. 
+fully, we believe that the key concepts of the SPL method could
+still be used with e.g. a basis of fields emanating from discrete sources, 
+instead of plane waves like earlier. 
 %\footnotemark{}.
 
 % \footnotetext{We also believ that one of the Hankel functions,
@@ -813,40 +809,32 @@ basis of plane waves like earlier.
 %By now, we also need to address the fact that 
 If the SPL method is generalized far enough according to the above
 description, it would become very similar to an already used method
-described by T. Köhler et al. \cite{Kohler2001}. Their method uses
+described by Köhler et al. \cite{Kohler2001}. Their method uses
 simulated fields from a given antenna system as a basis for the field
-inside the head, and then uses the generalized eigenvalue probem to
-optimize signals from each antenna. 
+inside the head, and then they formulate the optimization as a generalized eigenvalue problem. 
 However, the SPL method was never intended to be used as a substitute
-to the eigenvalue method in \cite{Kohler2001} for treatment planning. 
+to the method in \cite{Kohler2001} for treatment planning. 
 Instead its purpose was to gain theoretical insight on the limitations
 imposed by the wave nature on a field. In a similar manner, a more
 generalized method could be used to study the field in more elaborate
 models. This could for instance give insight into the problem of
 choosing an optimal frequency depending on some simple parameters like
 head and tumor size.
-For a generalized SPL method to be effective, it cannot be too
-computationally heavy. In such a case one could just as well use the
-method in \cite{Kohler2001} on an even more realistic model. Therefore
-the model used has to be simple enough to still be partly solvable
-analytically. 
-
-
-
+For a generalized SPL method to be effective, the governing differential 
+equations have to be analytically solvable. Otherwise one could just as well use the
+method in \cite{Kohler2001}.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 In this report a mathematical framework, developed by Slepian et al.,
-has been applied to bandwidth limited function in two dimensions. It
-is shown that a wide band signal offers a significant improvement,
-over a narrow band, in the ability to focus an electric field.
-Since time averaging cancels interference
-between frequencies the improvements of a wide band signal diminishes
-in hyperthermia treatments. However as shown in this report, it is
-still possible to obtain a focusing effect even with a single
-frequency.
+has been applied to bandwidth limited functions in two dimensions. It
+is shown that even though it is possible to focus an electric field with only
+one frequency a wide band of frequencies significantly improves the effect.
+However, since time-averaging cancels interference between frequencies 
+the improvements of a wide frequency band diminishes
+in hyperthermia treatments. 
 
 
 
@@ -866,7 +854,7 @@ frequency.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical implementation of the 
-Landau-Pollack-Slepian Theory}
+SPL Method}
 \label{apx:num}
 In the report we have been occupied by integral eigenvalue
 equations of the form
